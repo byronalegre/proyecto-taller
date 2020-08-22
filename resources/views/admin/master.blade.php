@@ -22,7 +22,7 @@
 	<script src="{{url('/static/libs/ckeditor/ckeditor.js') }}" ></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="{{ url('/static/js/admin.js?v='.time()) }}"></script>
-
+	
 	<script>
 		$(document).ready(function(){
 			  $('[data-toggle="tooltip"]').tooltip()
@@ -40,14 +40,16 @@
 		</div>
 		<div class="col2"> 	
 			<nav class="navbar navbar-expand-lg shadow">	
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a href="{{ url('/admin') }}" class="nav-link">
-								<i class="fas fa-home"></i> Inicio
-							</a>
-						</li>
-					</ul>
+				<div class="container-fluid">
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item">
+								<a href="{{ url('/admin/micuenta/edit') }}" class="nav-link">
+									<i class="fas fa-user-circle"></i> Mi cuenta
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</nav>
 			<div class="page">
@@ -66,7 +68,7 @@
 				</div>
 
 				@if(Session::has('message'))
-					<div class="container-fluid">
+					<div class="container">
 						<div class="alert alert-{{ Session::get('typealert') }} mtop16" style="display:none; margin-bottom: 16px; margin: 16px;">
 							{{ Session::get('message') }}
 							@if($errors->any())

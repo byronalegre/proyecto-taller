@@ -22,7 +22,7 @@ Route::prefix('/admin')->group(function(){
 	Route::post('/piezas/buscar','Admin\PiezaController@postPiezaBuscar')->name('piezas_buscar');
 	Route::get('/piezas/{status}','Admin\PiezaController@getHome')->name('piezas');
 	Route::post('/piezas/{id}/edit','Admin\PiezaController@postPiezaEdit')->name('piezas_editar') ;
-	
+	Route::get('pdf-piezas', 'Admin\PiezaController@pdf')->name('piezas_pdf');//ruta pdf
 
 	//Categorias
 	Route::get('/categorias/{seccion}','Admin\CategoriasController@getHome')->name('categorias') ; 
@@ -40,7 +40,24 @@ Route::prefix('/admin')->group(function(){
 	Route::post('/proveedores/{id}/edit','Admin\ProveedoresController@postProveedorEdit')->name('proveedores_editar');
 	Route::get('/proveedores/{id}/delete','Admin\ProveedoresController@getProveedorDelete')->name('proveedores_eliminar');
 	Route::get('/proveedores/{id}/restore','Admin\ProveedoresController@getProveedorRestore')->name('proveedores_eliminar');
-	
-	
+	Route::get('pdf-proveedores', 'Admin\ProveedoresController@pdf')->name('proveedores_pdf');//ruta pdf
 
+	//Mi cuenta
+
+	Route::get('/micuenta/edit','Admin\UsuariosController@getMiCuentaEdit')->name('micuenta_editar');
+	Route::post('/micuenta/edit/password','Admin\UsuariosController@postMiCuentaPassword')->name('micuenta_password');
+	Route::post('/micuenta/edit/info','Admin\UsuariosController@postMiCuentaInfo')->name('micuenta_info');	
+
+	//Compras
+	Route::get('/compras/agregar','Admin\ComprasController@getCompraAgregar')->name('compras_agregar');		
+	Route::post('/compras/agregar','Admin\ComprasController@postCompraAgregar')->name('compras_agregar');
+	Route::get('/compras/{status}','Admin\ComprasController@getHome')->name('compras');	
+	Route::get('/compras/{id}/detalle', 'Admin\ComprasController@getCompraDetalle')->name('compra_detalle');
+	Route::get('/compras/{id}/detalle/compra_pdf', 'Admin\ComprasController@pdf')->name('detalle_pdf');//ruta pdf
+	Route::get('/compras/{id}/delete','Admin\ComprasController@getComprasDelete')->name('compras_eliminar');
+	Route::get('/compras/{id}/restore','Admin\ComprasController@getComprasRestore')->name('compras_eliminar');
 }); 
+
+
+
+	

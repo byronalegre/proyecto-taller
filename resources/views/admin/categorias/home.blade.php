@@ -87,18 +87,16 @@
 									<td>{{ $cat->descripcion }}</td>
 									
 									<td>
-										<div class="opts">
 										@if(kvfj(Auth::user()->permisos, 'categorias_editar'))
-										<a href="{{url('admin/categorias/'.$cat->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
+										<a class="btn btn-primary btn-sm" href="{{url('admin/categorias/'.$cat->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
 										<i class="fas fa-edit"></i>
 										</a>
 										@endif
 										@if(kvfj(Auth::user()->permisos, 'categorias_eliminar'))
-										<a href="{{url('admin/categorias/'.$cat->id.'/delete') }}"data-toggle="tooltip" data-placement="top" title="Eliminar">
+										<a class="btn btn-danger btn-sm" href="{{url('admin/categorias/'.$cat->id.'/delete') }}"data-toggle="tooltip" data-placement="top" title="Eliminar">
 										<i class="fas fa-times"></i>
 										</a>
 										@endif
-										</div>
 									</td>
 								</tr>
 							@endforeach
