@@ -69,7 +69,7 @@ class ConnectController extends Controller
     		'password.min'=> 'Debe tener al menos 8 caracteres',
     		'cpassword.required'=> 'Confirme su contraseña',
     		'cpassword.min'=> 'La confirmacion debe tener al menos 8 caracteres',
-    		'password.same'=> 'Las contraseñas no coinciden'
+    		'cpassword.same'=> 'Las contraseñas no coinciden'
     	];
     	
     	$validator = Validator::make($request->all(), $rules, $messages);

@@ -31,7 +31,7 @@ class CategoriasController extends Controller
     	];
     	$messages = [
     		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'descripcion.required' => 'Se requiere un icono para la categoría.'
+    		'descripcion.required' => 'Se requiere una sección para la categoría.'
     	];
 
 
@@ -67,7 +67,7 @@ class CategoriasController extends Controller
     	];
     	$messages = [
     		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'descripcion.required' => 'Se requiere un icono para la categoría.'
+    		'descripcion.required' => 'Se requiere una sección para la categoría.'
     	];
 
 

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Http\Models\Proveedor;
-use Validator,Str;
+use Validator,Str,PDF;
 
 class ProveedoresController extends Controller
 {
@@ -20,7 +20,7 @@ class ProveedoresController extends Controller
 
     public function getHome($status){
     	if($status == 'all'):
-            $provs = Proveedor::orderBy('id','Asc')->paginate(5);        
+            $provs = Proveedor::orderBy('id','Desc')->paginate(5);        
         elseif($status == 'trash'): 
             $provs = Proveedor::onlyTrashed()->orderBy('id','desc')->paginate(5);  
         endif;
@@ -167,7 +167,7 @@ class ProveedoresController extends Controller
     	$c = Proveedor::findOrFail($id);
 
     	if($c->delete()):
-    		return back()->with('message','Borrado correctamente.')->with('typealert','success');
+    		return redirect('/admin/proveedores/all')->with('message','Enviado a la papelera.')->with('typealert','danger');
     	endif;
     }
        
@@ -178,5 +178,15 @@ class ProveedoresController extends Controller
         if($p->save()):
             return redirect('/admin/proveedores/'.$p->id.'/edit')->with('message','Restaurado con éxito.')->with('typealert','success');
         endif;
+    }
+     public function pdf(){
+        $today = Carbon::now()->format('d/m/Y');//fecha actual
+        
+        $provs = Proveedor::all(); 
+
+        $pdf = PDF::loadView('admin.proveedores.pdf', compact('provs'));
+
+        return $pdf->stream('reporte_proveedores-'.$today.'.pdf');
+    
     }
 }

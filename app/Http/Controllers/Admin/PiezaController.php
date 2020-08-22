@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Http\Models\Categoria, App\Http\Models\Pieza;
-use Validator,Str,Config,Image;
+use Validator,Str,Config,Image,PDF;
 
 class PiezaController extends Controller
 {
@@ -220,7 +220,7 @@ class PiezaController extends Controller
         $p= Pieza::findOrfail($id);
 
         if($p->delete()):
-            return back()->with('message','Enviado a la papelera.')->with('typealert','success');
+            return redirect('/admin/piezas/1')->with('message','Enviado a la papelera.')->with('typealert','danger');
         endif;
     }
 
@@ -231,5 +231,16 @@ class PiezaController extends Controller
         if($p->save()):
             return redirect('/admin/piezas/'.$p->id.'/edit')->with('message','Restaurado con éxito.')->with('typealert','success');
         endif;
+    }
+
+    public function pdf(){
+        $today = Carbon::now()->format('d/m/Y');//fecha actual
+        
+        $piezas = Pieza::all(); 
+
+        $pdf = PDF::loadView('admin.piezas.pdf', compact('piezas'));
+
+        return $pdf->stream('reporte_piezas-'.$today.'.pdf');
+    
     }
 }

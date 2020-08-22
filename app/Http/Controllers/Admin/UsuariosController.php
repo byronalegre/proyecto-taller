@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Validator;
+use Validator,Auth,Hash;
 class UsuariosController extends Controller
 {
      public function __construct(){
@@ -119,6 +119,68 @@ class UsuariosController extends Controller
 
             $data = ['users' => $users];
             return view('admin.usuarios.buscar', $data);
+        endif;
+    }
+
+    public function getMiCuentaEdit(){
+        return view('admin.cuenta.edit');
+    }
+
+    public function postMiCuentaPassword(Request $request){
+        $rules = [        
+            'old_password' => 'required|min:8',
+            'password' => 'required|min:8',
+            'cpassword' => 'required|min:8|same:password'
+        ];
+
+        $messages = [
+            'old_password.required'=> 'Por favor escriba su contraseña actual.',
+            'old_password.min'=> 'Debe tener al menos 8 caracteres',
+            'password.required'=> 'Por favor escriba su nueva contraseña',
+            'password.min'=> 'Debe tener al menos 8 caracteres',
+            'cpassword.required'=> 'Confirme su nueva contraseña',
+            'cpassword.min'=> 'La confirmacion debe tener al menos 8 caracteres',
+            'cpassword.same'=> 'Las contraseñas no coinciden'
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger');
+        else:     
+            $user = User::findOrFail(Auth::id());
+            if(Hash::check($request->input('old_password'), $user->password)):
+                $user->password = Hash::make($request->input('password'));
+                if($user->save()):
+                    return back()->with('message', 'Su contraseña fue cambiada con éxito.')->with('typealert', 'success');
+                endif;
+            else:
+                return back()->with('message', 'Su contraseña actual es errónea.')->with('typealert', 'danger');
+            endif;            
+        endif;
+    }
+
+    public function postMiCuentaInfo(Request $request){
+        $rules = [
+            'name'=> 'required',
+            'lastname' => 'required'
+        ];
+
+        $messages = [
+            'name.required'=> 'Su nombre es requerido',
+            'lastname.required'=> 'Su apellido es requerido'
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger');
+        else:
+            $user = User::findOrFail(Auth::id());
+            $user->name = e($request->input('name'));
+            $user->lastname = e($request->input('lastname'));
+
+            if($user->save()):
+                return back()->with('message', 'Sus datos fueron actualizados con éxito.')->with('typealert', 'success');
+            endif;
         endif;
     }
 }
