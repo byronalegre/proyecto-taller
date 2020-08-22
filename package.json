@@ -17,5 +17,9 @@
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0"
+    },
+    "dependencies": {
+        "jquery-validation": "^1.19.2",
+        "jspdf": "^2.0.0"
     }
 }
