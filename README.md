@@ -1,6 +1,10 @@
 # proyecto-taller
 
-LINK PARA DESCARGAR PROYECTO COMPLETO: https://drive.google.com/file/d/1Nq5UIayE54eMh7Ez2fvS1KTP8OANBsBT/view?usp=sharing
+LINK PARA DESCARGAR PROYECTO COMPLETO: 
+
+Al 28/08/2020 -> https://drive.google.com/file/d/1Nq5UIayE54eMh7Ez2fvS1KTP8OANBsBT/view?usp=sharing
+
+Al 31/08/2020 -> https://drive.google.com/file/d/1mngEdqC99LFFdIEC7xsajVUt2-Mv1EUg/view?usp=sharing
 
 csss + images + js van adentro de public/static
 
