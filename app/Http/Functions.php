@@ -21,10 +21,27 @@ function getSeccionArray(){
 	$a = [
 
 		'0' => 'Piezas',
-		'1' => 'Marcas'
+		'1' => 'Marcas',
+		'2' => 'Tareas'
 	];
 
 	return $a;
+}
+
+function getLocalArray($id){
+	switch($id){
+		case '0':
+		return 'Indeterminado';
+		break;
+
+		case '1':
+		return 'Depósito 1';
+		break;
+
+		case '2':
+		return 'Depósito 2';
+		break;
+	}
 }
 
 function getRoleUsuarioArray($mode, $id){

@@ -83,6 +83,7 @@ class PiezaController extends Controller
 
             $pieza= new Pieza;
             $pieza -> status ='0';
+            $pieza -> ubicacion = e($request->input('deposito'));
             $pieza -> name = e($request->input('name'));
             $pieza -> codigo = e($request->input('codigo'));
             $pieza -> slug = Str::slug($request->input('name'));
@@ -90,6 +91,7 @@ class PiezaController extends Controller
             $pieza -> file_path = date('Y-m-d');
             $pieza -> image = $filename;
             $pieza -> cantidad =  e($request->input('cantidad'));
+            $pieza -> cantidad_min =  e($request->input('cantidad-min'));            
             $pieza -> marca = $request->input('marca');
             $pieza -> content = e($request->input('content'));
 
@@ -146,6 +148,7 @@ class PiezaController extends Controller
             $imgpp= $pieza->file_path;
             $imgprev= $pieza->image;
             $pieza -> status = $request->input('status');
+            $pieza -> ubicacion = e($request->input('deposito'));
             $pieza -> codigo = e($request->input('codigo'));
             $pieza -> name = e($request->input('name'));
           //  $pieza -> slug = Str::slug($request->input('name'));
@@ -164,6 +167,7 @@ class PiezaController extends Controller
                 $pieza -> image = $filename;
             endif;
             $pieza -> cantidad = e($request->input('cantidad'));
+            $pieza -> cantidad_min = e($request->input('cantidad-min'));
             $pieza -> marca = $request->input('marca');
             $pieza -> content = e($request->input('content'));
 
@@ -179,7 +183,7 @@ class PiezaController extends Controller
                     unlink($upload_path.'/'.$imgpp.'/t_'.$imgprev);
                 endif;
 
-                return back()->with('message','Actualizado correctamente.')->with('typealert','success');
+                return redirect('/admin/piezas/all')->with('message','Actualizado correctamente.')->with('typealert','success');
             endif;
        
         endif;
@@ -209,6 +213,9 @@ class PiezaController extends Controller
                 case '2':
                     $piezas = Pieza::with(['cat','mark'])->where('codigo',$request->input('buscar'))->orderBy('id','desc')->get();
                     break;   
+                case '3':
+                    $piezas = Pieza::with(['cat','mark'])->where('ubicacion',$request->input('buscar'))->orderBy('id','desc')->get();
+                    break;  
             }
 
             $data = ['piezas' => $piezas];

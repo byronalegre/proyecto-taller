@@ -60,6 +60,7 @@ class ComprasController extends Controller
             $input -> status ='0';
             $input -> proveedor_id = e($request->input('proveedor'));
             $input -> codigo = e($request->input('codigo'));
+            $input -> descripcion = e($request->input('descripcion'));
             $productos = e($request->input('productos'));
             $productos = html_entity_decode($productos);         			 
 			$input-> productos = $productos;

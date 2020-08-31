@@ -10,9 +10,9 @@ class Compra extends Model
 {
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at','created_at'];
     protected $table = 'compras';
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['updated_at'];
 
      public function provs(){
     	return $this->hasOne(Proveedor::class, 'id', 'proveedor_id');
