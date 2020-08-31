@@ -50,7 +50,7 @@ This text you see here is *actually* written in Markdown! To get a feel for Mark
 ### Tech
 
 Dillinger uses a number of open source projects to work properly:
-* [laravel-framework] 
+* [laravel] 
 * [markdown-it] - Markdown parser done right. Fast and easy to extend.
 * [node.js] - evented I/O for the backend
 * [jQuery] - duh
