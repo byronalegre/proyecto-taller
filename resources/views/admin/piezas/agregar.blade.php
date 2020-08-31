@@ -42,49 +42,6 @@
 						    	{!!Form::text('codigo', 0, ['class' => 'form-control'] ) !!}
 						    	</div>
 					</div>
-
-					<div class="col-md-3">
-							<label for="status">Estado:</label>
-								<div class="input-group">									
-								   		<span class="input-group-text" id="basic-addon1">
-								   			<i class="fas fa-eye"></i>
-								   		</span>								   
-							    	{!!Form::select('status', ['0'=>'Invisible','1'=>'Visible'],0, ['class' =>'form-select']) !!}							    		
-								</div>
-					</div>
-
-				</div>
-
-				<div class="row mtop16">
-						<div class="col-md-3">
-							<label for="cantidad">Cantidad:</label>
-								<div class="input-group">									
-								   		<span class="input-group-text" id="basic-addon1">
-								   			<i class="fas fa-boxes"></i>
-								   		</span>								    
-						    	{!!Form::number('cantidad', 0, ['class' => 'form-control', 'min' => '0.0'] ) !!}
-						    	</div>
-						</div>
-					<div class="col-md-3">
-							<label for="title">Marca:</label>
-							<div class="input-group">								
-							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="far fa-copyright"></i>
-							   		</span>							   
-						    	{!!Form::select('marca', $marca, 0, ['class' =>'form-select']) !!}
-						    </div>
-					</div>	
-
-					<div class="col-md-3">
-						<label for="categoria">Categoría:</label>
-						<div class="input-group">							
-						   		<span class="input-group-text" id="basic-addon1">
-						   			<i class="fas fa-tag"></i>
-						   		</span>						    
-					    	{!!Form::select('categoria', $cats, 0, ['class' =>'form-select']) !!}				    		
-						</div>
-					</div>
-
 					<div class="col-md-3">
 						<label for="img">Imagen:</label>
 						<div class="form-file">
@@ -94,7 +51,72 @@
     							<span class="form-file-button">Elegir</span>
 							</label>
 						</div>
-					</div>		
+					</div>					
+
+				</div>
+
+				<div class="row mtop16">
+						<div class="col-md-3">
+							<label for="cantidad-min">Cantidad mínima:</label>
+								<div class="input-group">									
+								   		<span class="input-group-text" id="basic-addon1">
+								   			<i class="fas fa-exclamation-triangle"></i>
+								   		</span>								    
+						    	{!!Form::number('cantidad-min', 0, ['class' => 'form-control', 'min' => '0.0'] ) !!}
+						    	</div>
+						</div>
+						
+						<div class="col-md-3">
+							<label for="cantidad">Cantidad:</label>
+								<div class="input-group">									
+								   		<span class="input-group-text" id="basic-addon1">
+								   			<i class="fas fa-boxes"></i>
+								   		</span>								    
+						    	{!!Form::number('cantidad', 0, ['class' => 'form-control', 'min' => '0.0'] ) !!}
+						    	</div>
+						</div>
+						
+						<div class="col-md-3">
+								<label for="title">Marca:</label>
+								<div class="input-group">								
+								   		<span class="input-group-text" id="basic-addon1">
+								   			<i class="far fa-copyright"></i>
+								   		</span>							   
+							    	{!!Form::select('marca', $marca, 0, ['class' =>'form-select']) !!}
+							    </div>
+						</div>	
+
+					<div class="col-md-3">
+						<label for="categoria">Categoría:</label>
+						<div class="input-group">							
+						   		<span class="input-group-text" id="basic-addon1">
+						   			<i class="fas fa-tag"></i>
+						   		</span>						    
+					    	{!!Form::select('categoria', $cats, 0, ['class' =>'form-select']) !!}				    		
+						</div>
+					</div>				
+							
+				</div>
+
+				<div class="row mtop16">
+					<div class="col-md-3">
+							<label for="deposito">Ubicación:</label>
+							<div class="input-group">									
+							   		<span class="input-group-text" id="basic-addon1">
+							   			<i class="fas fa-map-marker-alt"></i>
+							   		</span>								   
+						    	{!!Form::select('deposito', ['0'=>'Indeterminado','1'=>'Depósito 1','2'=>'Depósito 2'],0, ['class' =>'form-select']) !!}							    		
+							</div>
+					</div>
+					<div class="col-md-3">
+							<label for="status">Estado:</label>
+							<div class="input-group">									
+							   		<span class="input-group-text" id="basic-addon1">
+							   			<i class="fas fa-eye"></i>
+							   		</span>								   
+						    	{!!Form::select('status', ['0'=>'Invisible','1'=>'Visible'],0, ['class' =>'form-select']) !!}							    		
+							</div>
+					</div>
 				</div>
 
 				<div class="row mtop16">

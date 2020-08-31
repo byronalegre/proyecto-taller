@@ -13,7 +13,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-4 d-flex">
 			<div class="panel shadow">
 				<div class="header">
 					<h2 class="title"><i class="fas fa-plus-circle"></i> Agregar categoria
@@ -41,7 +41,7 @@
 
 					    <label for="descripcion" class="mtop16">Descripción:</label>
 						<div class="input-group">
-						 	{!!Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
+						 	{!!Form::textarea('descripcion', null, ['class' => 'form-control', 'rows'=>4]) !!}
 					    </div>
 
 					{!!Form::submit('Guardar', ['class' => 'btn btn-success mtop16'])!!}
@@ -73,7 +73,7 @@
 					<table class="table mtop16">
 						<thead class="table-dark">
 							<tr>
-								<td>ID</td>
+								<td hidden="true">ID</td>
 								<td>Nombre</td>
 								<td>Descripción</td>
 								<td width="100px"></td>
@@ -82,7 +82,7 @@
 						<tbody>
 							@foreach($cats as $cat)
 								<tr>
-									<td>{{ $cat->id}}</td>
+									<td hidden="true">{{ $cat->id}}</td>
 									<td>{{ $cat->name}}</td>
 									<td>{{ $cat->descripcion }}</td>
 									

@@ -19,16 +19,20 @@
 						<td>Nombre</td>		
 						<td>Marca</td>						
 						<td>Categoría</td>
+						<td>Mínimo</td>
 						<td>Cantidad</td>
+						<td>Ubicación</td>
 					</tr>
-					<tbody style=" font-family: courier; background: #D7D7D7; border-top: 1px solid black;">
+					<tbody style=" font-family: courier; font-size: 14px; background: #D7D7D7; border-top: 1px solid black;">
 						@foreach($piezas as $p)
 							<tr>
 								<td>{{ $p->codigo }}</td>
 								<td>{{ $p->name }}</td>
 								<td>{{ $p->mark->name }}</td>										
 								<td>{{ $p->cat->name }}</td>
+								<td>{{ $p->cantidad_min }}</td>
 								<td>{{ $p->cantidad }}</td>
+								<td>{{ getLocalArray($p->ubicacion) }}</td>
 							</tr>
 						@endforeach	
 					</tbody>

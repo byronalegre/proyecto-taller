@@ -41,6 +41,7 @@
 					<td style="text-align: center;">Código</td>
 					<td style="text-align: center;">Proveedor</td>					
 					<td style="text-align: center;">Fecha registro</td>
+					<td>Descripción</td>
 					<td width="110"></td>
 				</thead>
 				<tbody>
@@ -49,6 +50,7 @@
 						<td style="text-align: center;">CNRO-{{ $i->codigo }} </td>						
 						<td style="text-align: center;">{{ $i->provs->name }} </td>
 						<td style="text-align: center;">{{ $i->created_at->format('d/m/Y (H:i)') }} </td>	
+						<td>{{ $i->descripcion }}</td>
 						<td>
 							@if(kvfj(Auth::user()->permisos, 'compra_detalle'))
 								@if(is_null($i->deleted_at))

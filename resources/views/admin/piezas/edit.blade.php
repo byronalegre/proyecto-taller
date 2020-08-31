@@ -47,25 +47,35 @@
 									</div>
 
 									<div class="col-md-3">
-											<label for="status">Estado:</label>
-											<div class="input-group">													
-											   		<span class="input-group-text" id="basic-addon1">
-											   			<i class="fas fa-eye"></i>
-											   		</span>												   
-										    	{!!Form::select('status', ['0'=>'Invisible','1'=>'Visible'],$p->status, ['class' =>'form-select']) !!}					    		
-											</div>
+										<label for="img">Imagen:</label>
+										<div class="form-file">
+											{!!Form::file('img', ['class' => 'form-file-input', 'id'=>'formFile', 'accept'=> 'image/*']) !!}
+											<label class="form-file-label" for="customFile">
+										    <span class="form-file-text">Selecciona una imagen</span>
+										    <span class="form-file-button">Elegir</span>
+										  	</label>
+										</div>
 									</div>
 
 								</div>
 
 								<div class="row mtop16">
 										<div class="col-md-3">
+											<label for="cantidad-min">Cantidad mínima:</label>
+											<div class="input-group">													
+											   		<span class="input-group-text" id="basic-addon1">
+											   			<i class="fas fa-exclamation-triangle"></i>
+											   		</span>												   
+									    	{!!Form::number('cantidad-min', $p->cantidad_min, ['class' => 'form-control', 'min' => '0'] ) !!}
+									    	</div>
+										</div>
+										<div class="col-md-3">
 											<label for="cantidad">Cantidad:</label>
 											<div class="input-group">													
 											   		<span class="input-group-text" id="basic-addon1">
 											   			<i class="fas fa-boxes"></i>
 											   		</span>												   
-									    	{!!Form::number('cantidad', $p->cantidad, ['class' => 'form-control', 'min' => '0.0'] ) !!}
+									    	{!!Form::number('cantidad', $p->cantidad, ['class' => 'form-control', 'min' => '0'] ) !!}
 									    	</div>
 										</div>
 										<div class="col-md-3">
@@ -86,19 +96,29 @@
 										   		</span>											   
 									    	{!!Form::select('categoria', $cats, $p->categoria_id, ['class' =>'form-select']) !!}										    		
 										</div>
-										</div>
-
-									<div class="col-md-3">
-										<label for="img">Imagen:</label>
-										<div class="form-file">
-											{!!Form::file('img', ['class' => 'form-file-input', 'id'=>'formFile', 'accept'=> 'image/*']) !!}
-											<label class="form-file-label" for="customFile">
-										    <span class="form-file-text">Selecciona una imagen</span>
-										    <span class="form-file-button">Elegir</span>
-										  	</label>
-										</div>
-									</div>
+										</div>									
 											
+								</div>
+
+								<div class="row mtop16">
+									<div class="col-md-3">
+											<label for="deposito">Ubicación:</label>
+											<div class="input-group">									
+											   		<span class="input-group-text" id="basic-addon1">
+											   			<i class="fas fa-map-marker-alt"></i>
+											   		</span>								   
+										    	{!!Form::select('deposito', ['0'=>'Indeterminado','1'=>'Depósito 1','2'=>'Depósito 2'],$p->ubicacion, ['class' =>'form-select']) !!}							    		
+											</div>
+									</div>
+									<div class="col-md-3">
+											<label for="status">Estado:</label>
+											<div class="input-group">													
+											   		<span class="input-group-text" id="basic-addon1">
+											   			<i class="fas fa-eye"></i>
+											   		</span>												   
+										    	{!!Form::select('status', ['0'=>'Invisible','1'=>'Visible'],$p->status, ['class' =>'form-select']) !!}					    		
+											</div>
+									</div>
 								</div>
 
 								<div class="row mtop16">

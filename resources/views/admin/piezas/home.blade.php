@@ -30,7 +30,7 @@
 									{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
 								</div>
 								<div class="col-md-4">
-									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código'], 0,['class'=>'form-select form-select-sm']) !!}
+									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código','3'=>'Ubicación'], 0,['class'=>'form-select form-select-sm']) !!}
 								</div>
 								<div style="padding: 0px" class="col-md-2">
 									{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
@@ -74,7 +74,9 @@
 					<td></td>
 					<td>Nombre</td>
 					<td>Código</td>
+					<td>Ubicación</td>
 					<td>Categoría</td>
+					<td>Mínimo</td>
 					<td>Cantidad</td>
 					<td>Marca</td>
 					<td width="110"></td>
@@ -96,7 +98,9 @@
 							</td>
 							<td>{{ $p->name }}</td>
 							<td>{{ $p->codigo }}</td>
+							<td>{{ getLocalArray( $p->ubicacion) }}</td>
 							<td>{{ $p->cat->name }}</td>
+							<td>{{ $p->cantidad_min }}</td>
 							<td>{{ $p->cantidad }}</td>
 							<td>{{ $p->mark->name }}</td>
 							<td>
@@ -124,7 +128,7 @@
 								
 							</td>
 							<td>
-								@if ($p->cantidad < '10')
+								@if ($p->cantidad < $p->cantidad_min)
 									<p><i data-toggle="tooltip" title="Alerta stock" class="fas fa-exclamation-triangle fa-2x"></i></p>
 								@endif
 							</td>

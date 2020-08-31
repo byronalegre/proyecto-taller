@@ -51,6 +51,12 @@
 							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Aprobado'],0, ['class' =>'form-select']) !!}	
 								</div>
 					</div>
+					<div class="col-md-12">
+						<label for="descripcion" class="mtop16">Descripción:</label>
+						<div class="input-group">
+						 	<textarea class="form-control" name="descripcion" rows="3" id="descripcion"></textarea>
+					    </div>
+					</div>
 				</div>
 				
 				<div class="panel shadow">
