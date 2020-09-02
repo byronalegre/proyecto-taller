@@ -32,7 +32,7 @@
 									{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
 								</div>
 								<div class="col-md-4">
-									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código','3'=>'Ubicación'], 0,['class'=>'form-select form-select-sm']) !!}
+									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código','3'=>'Depósito'], 0,['class'=>'form-select form-select-sm']) !!}
 								</div>
 								<div style="padding: 0px" class="col-md-2">
 									{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
@@ -77,7 +77,7 @@
 					<td></td>
 					<td>Nombre</td>
 					<td>Código</td>
-					<td>Ubicación</td>
+					<td>Depósito</td>
 					<td>Categoría</td>
 					<td>Mínimo</td>
 					<td>Cantidad</td>
@@ -101,7 +101,7 @@
 							</td>
 							<td>{{ $p->name }}</td>
 							<td>{{ $p->codigo }}</td>
-							<td>{{ getLocalArray($p->ubicacion) }}</td>
+							<td style="text-align: center">{{ $p->deposito }}</td>
 							<td>{{ $p->cat->name }}</td>
 							<td>{{ $p->cantidad_min }}</td>
 							<td>{{ $p->cantidad }}</td>

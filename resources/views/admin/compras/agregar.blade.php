@@ -5,10 +5,10 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras') }}"><i class="fas fa-cart-plus"></i> Compras</a>
+	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-cart-plus"></i> Compras</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/agregar') }}"><i class="fas fa-plus-circle"></i> Agregar compra</a>
+	<a href="{{url('/admin/compras/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva compra</a>
 </li>
 @endsection
  
@@ -18,7 +18,7 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Agregar compra</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva compra</h2>
 		</div>
 		<div class="inside">
 			{!! Form::open(['url' => '/admin/compras/agregar','files'=>true,'id'=>'formulario']) !!}	
@@ -58,7 +58,7 @@
 					    </div>
 					</div>
 				</div>
-				
+				<hr>
 				<div class="panel shadow">
 					<div class="header mtop16">
 						<h2 class="title">Agregar producto</h2>

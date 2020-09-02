@@ -40,6 +40,12 @@
 			<li>
 				<a href="{{ url('/admin/categorias/0') }} " class="lk-categorias lk-categorias_agregar lk-categorias_editar lk-categorias_eliminar"><i class="fas fa-tags"></i> Categorías</a>
 			</li>
+			@endif			
+
+			@if(kvfj(Auth::user()->permisos, 'proveedores'))
+			<li>
+				<a href="{{ url('/admin/proveedores/all') }}" class="lk-proveedores lk-proveedores_agregar lk-proveedores_editar lk-proveedores_eliminar lk-proveedores_buscar"><i class="fas fa-truck"></i> Proveedores</a>
+			</li>
 			@endif
 
 			@if(kvfj(Auth::user()->permisos, 'usuarios_list'))
@@ -48,15 +54,16 @@
 			
 			</li>
 			@endif
-
-			@if(kvfj(Auth::user()->permisos, 'proveedores'))
-			<li>
-				<a href="{{ url('/admin/proveedores/all') }}" class="lk-proveedores lk-proveedores_agregar lk-proveedores_editar lk-proveedores_eliminar lk-proveedores_buscar"><i class="fas fa-truck"></i> Proveedores</a>
-			</li>
-			@endif
+			
 			@if(kvfj(Auth::user()->permisos, 'compras'))
 			<li>
 				<a href="{{ url('/admin/compras/all') }}" class="lk-compras lk-compras_agregar lk-compra_detalle lk-compras_eliminar"><i class="fas fa-cart-plus"></i> Compras</a>
+			</li>
+			@endif
+
+			@if(kvfj(Auth::user()->permisos, 'backup'))
+			<li>
+				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> Backup</a>
 			</li>
 			@endif
 		</ul>

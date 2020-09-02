@@ -4,10 +4,10 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras') }}"><i class="fas fa-cart-plus"></i> Compras</a>
+	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-cart-plus"></i> Compras</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras') }}"><i class="fas fa-info-circle"></i> Detalle compra: {{$c->codigo}}</a>
+	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-info-circle"></i> Detalle compra: {{$c->codigo}}</a>
 </li>
 
 @endsection

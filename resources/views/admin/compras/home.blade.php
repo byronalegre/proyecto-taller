@@ -32,7 +32,7 @@
 
 			@if(kvfj(Auth::user()->permisos, 'compras_agregar'))
 			<a href="{{url('admin/compras/agregar') }}" class="btn btn-success btn-sm">
-			<i class="fas fa-plus-circle"></i> Agregar compra
+			<i class="fas fa-plus-circle"></i> Nueva compra
 			</a>
 			@endif
 

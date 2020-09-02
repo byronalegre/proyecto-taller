@@ -27,7 +27,7 @@ function getSeccionArray(){
 
 	return $a;
 }
-
+/*
 function getLocalArray($id){
 	switch($id){
 		case '0':
@@ -43,7 +43,7 @@ function getLocalArray($id){
 		break;
 	}
 }
-
+*/
 function getRoleUsuarioArray($mode, $id){
 
 	$roles = [
@@ -82,7 +82,7 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-home"></i>',
 			'title'=> 'Módulo - Panel de inicio',
 			'keys'=>[
-				'Panel_controller'=>'Ver panel de inicio.',
+				'Panel_controller'=>'Ver módulo panel de inicio.',
 				'estadisticas_rapidas'=>'Ver estadísticas globales.',
 				'facturado'=>'Ver estadísticas de facturación.'
 			]
@@ -92,7 +92,7 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-cogs"></i>',
 			'title'=> 'Módulo - Piezas',
 			'keys'=>[
-				'piezas'=>'Ver piezas.',
+				'piezas'=>'Ver módulo piezas.',
 				'piezas_agregar'=>'Agregar piezas.',
 				'piezas_editar'=>'Editar piezas.',
 				'piezas_eliminar'=>'Eliminar piezas.',
@@ -105,7 +105,7 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-tags"></i>',
 			'title'=> 'Módulo - Categorías',
 			'keys'=>[
-				'categorias'=>'Ver categorías.',
+				'categorias'=>'Ver módulo categorías.',
 				'categorias_agregar'=>'Agregar categorías.',
 				'categorias_editar'=>'Editar categorías.',
 				'categorias_eliminar'=>'Eliminar categorías.',
@@ -116,7 +116,7 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-users"></i>',
 			'title'=> 'Módulo - Usuarios',
 			'keys'=>[
-				'usuarios_list'=>'Ver usuarios.',				
+				'usuarios_list'=>'Ver módulo usuarios.',				
 				'usuarios_editar'=>'Editar usuarios.',
 				'usuarios_suspend'=>'Suspender usuarios.',
 				'usuarios_permisos'=>'Permisos usuarios.',
@@ -131,7 +131,7 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-truck"></i>',
 			'title'=> 'Módulo - Proveedores',
 			'keys'=>[
-				'proveedores'=>'Ver proveedores.',
+				'proveedores'=>'Ver módulo proveedores.',
 				'proveedores_agregar'=>'Agregar proveedores.',
 				'proveedores_editar'=>'Editar proveedores.',
 				'proveedores_eliminar'=>'Eliminar proveedores.',
@@ -144,11 +144,20 @@ function permisos_usuario(){
 			'icon'=>'<i class="fas fa-cart-plus"></i>',
 			'title'=>'Módulo - Compras',
 			'keys'=>[
-				'compras'=>'Ver compras.',
+				'compras'=>'Ver módulo compras.',
 				'compras_agregar'=>'Agregar compra.',
 				'compras_eliminar'=>'Anular compra.',
 				'compra_detalle'=>'Ver detalle de compra.',
 				'detalle_pdf'=>'Generar PDFs.'
+			]
+		],
+
+		'backup'=>[
+			'icon'=>'<i class="fas fa-database"></i>',
+			'title'=>'Módulo - Backup',
+			'keys'=>[
+				'backup'=>'Ver módulo backup.',
+				'backup_create'=>'Crear backup.'
 			]
 		]
 	];

@@ -100,12 +100,12 @@
 
 				<div class="row mtop16">
 					<div class="col-md-3">
-							<label for="deposito">Ubicación:</label>
+							<label for="deposito">Depósito N°:</label>
 							<div class="input-group">									
 							   		<span class="input-group-text" id="basic-addon1">
 							   			<i class="fas fa-map-marker-alt"></i>
 							   		</span>								   
-						    	{!!Form::select('deposito', ['0'=>'Indeterminado','1'=>'Depósito 1','2'=>'Depósito 2'],0, ['class' =>'form-select']) !!}							    		
+						    	{!!Form::select('deposito', ['1'=>'1','2'=>'2'], 1, ['class' =>'form-select']) !!}							    		
 							</div>
 					</div>
 					<div class="col-md-3">
@@ -118,7 +118,7 @@
 							</div>
 					</div>
 				</div>
-
+				<hr>
 				<div class="row mtop16">
 					<div class="col-md-12">
 						<label for="content">Descripción:</label>

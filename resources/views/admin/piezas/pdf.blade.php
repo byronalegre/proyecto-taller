@@ -21,7 +21,7 @@
 						<td>Categoría</td>
 						<td>Mínimo</td>
 						<td>Cantidad</td>
-						<td>Ubicación</td>
+						<td>Depósito</td>
 					</tr>
 					<tbody style=" font-family: courier; font-size: 14px; background: #D7D7D7; border-top: 1px solid black;">
 						@foreach($piezas as $p)
@@ -32,7 +32,7 @@
 								<td>{{ $p->cat->name }}</td>
 								<td>{{ $p->cantidad_min }}</td>
 								<td>{{ $p->cantidad }}</td>
-								<td>{{ getLocalArray($p->ubicacion) }}</td>
+								<td>{{ $p->deposito }}</td>
 							</tr>
 						@endforeach	
 					</tbody>
