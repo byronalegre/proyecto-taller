@@ -1,4 +1,4 @@
-<div class="sidebar shadow">
+<div class="sidebar shadow-lg">
 	<div class="section-top">
 			
 			<div class="icon">

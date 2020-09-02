@@ -40,7 +40,7 @@
 		<div class="col1">@include('admin.sidebar')		
 		</div>
 		<div class="col2"> 	
-			<nav class="navbar navbar-expand-lg shadow">	
+			<nav class="navbar navbar-expand-lg shadow-lg">	
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse">
 						<ul class="navbar-nav ml-auto">
@@ -55,8 +55,8 @@
 			</nav>
 			<div class="page">
 				<div class="container-fluid">
-					<nav aria-label="breadcrumb shadow">	
-						<ol class="breadcrumb">
+					<nav aria-label="breadcrumb">	
+						<ol class="breadcrumb shadow-lg">
 							<li class="breadcrumb-item">
 								<a href="{{url('/admin') }}">
 									<i class="fas fa-home"></i> Inicio
@@ -70,12 +70,12 @@
 
 				@if(Session::has('message'))
 					<div class="container">
-						<div class="alert alert-{{ Session::get('typealert') }} mtop16" style="display:none; margin-bottom: 16px; margin: 16px;">
+						<div class="alert alert-{{ Session::get('typealert') }} mtop16">
 							{{ Session::get('message') }}
 							@if($errors->any())
 								<ul>
 									@foreach($errors->all() as $error)
-									<li>
+									<li style="margin-left: 16px">
 										{{ $error }}
 									</li>
 									@endforeach

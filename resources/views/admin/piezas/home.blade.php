@@ -84,9 +84,7 @@
 				</thead>
 				<tbody>
 					@foreach($piezas as $p)
-						<tr @if($p->status == '0')
-								class="table-secondary"
-							@elseif ($p->cantidad < '10')
+						<tr @if ($p->cantidad < $p->cantidad_min)
 								class="table-warning" 
 							@endif>
 

@@ -10,14 +10,14 @@
 
 @section('content')
   <div class="container-fluid">
-  	<div class="panel shadow">
+  	<div class="panel shadow-lg">
   		<div class="header">
   			<h2 class="title"><i class="fas fa-database"></i> Backup</h2>
   		</div>	
 
-  		<div class="inside"  style="text-align: center">	
+  		<div class="inside" style="text-align: center">	
 
-          <a href="{{ url('admin/backup/create') }}" class="btn btn-warning btn-lg">
+          <a href="{{ url('admin/backup/create') }}" class="btn btn-danger btn-lg">
             <i class="fas fa-plus"></i> Nuevo
           </a>
 
