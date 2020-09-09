@@ -14,7 +14,7 @@
 		<div class="inside">
 			<div class="row">
 				<div class="col-md-3 d-flex">
-					<a href="{{url('/admin/usuarios/0')}}" type="button" class="btn btn-primary shadow">
+					<a href="{{url('/admin/usuarios/0')}}" type="button" class="btn btn-primary shadow info">
 						<i class="fas fa-users fa-2x mtop16"></i>
 							Usuarios registrados 
 						<span class="big-count badge rounded-pill bg-dark mtop16">
@@ -23,7 +23,7 @@
 					</a>
 				</div>
 				<div class="col-md-3 d-flex">
-					<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-success shadow">
+					<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-success shadow info">
 						<i class="fas fa-cogs fa-2x mtop16"></i>
 							Piezas activas 
 						<span class="big-count badge rounded-pill bg-dark mtop16">
@@ -34,7 +34,7 @@
 				@if(kvfj(Auth::user()->permisos, 'facturado'))
 				
 					<div class="col-md-3 d-flex">
-						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow">
+						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info">
 							<i class="fas fa-receipt fa-2x mtop16"></i>
 								Compras realizadas 
 							<span class="big-count badge rounded-pill bg-dark mtop16">
@@ -44,7 +44,7 @@
 					</div>
 
 					<div class="col-md-3 d-flex">
-						<a type="button" class="btn btn-danger active shadow ">
+						<a type="button" class="btn btn-danger active shadow info">
 							<i class="fas fa-dollar-sign fa-2x mtop16"></i>
 								Gastos del último mes 
 							<span class="big-count badge rounded-pill bg-dark mtop16">
@@ -140,7 +140,7 @@
 							        chart.draw(data3, options3);
 							      }
 							    </script>
-							    <div id="compra_anual" style="width: 1000px; height: 300px;"></div>
+							    <div id="compra_anual" style="width: 1000px; height: 300px; min-width: 250px"></div>
 							    <div id="piechart" style="width: 500px; height: 250px;"></div>
 							    <div id="piechart2" style="width: 500px; height: 250px;"></div>					    	
 						<!--HASTA ACA-->

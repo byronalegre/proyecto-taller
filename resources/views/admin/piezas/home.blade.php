@@ -19,29 +19,28 @@
 							
 			<div class="inside">
 
-			<div class="nav justify-content-end">
-						@if(kvfj(Auth::user()->permisos, 'piezas_buscar'))
-						<div class="form-inline">
-					
-							{!! Form::open(['url' => '/admin/piezas/buscar']) !!}
+				<div class="nav justify-content-end">
+							@if(kvfj(Auth::user()->permisos, 'piezas_buscar'))
+							<div class="form-inline">					
+								{!! Form::open(['url' => '/admin/piezas/buscar']) !!}
+								
+								<div class="row">
+									<div style="padding: 0px" class="col-md-5">
+										{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
+									</div>
+									<div class="col-md-4">
+										{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código','3'=>'Depósito'], 0,['class'=>'form-select form-select-sm']) !!}
+									</div>
+									<div style="padding: 0px" class="col-md-2">
+										{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
+									</div>
+								</div>
+								{!! Form::close() !!}
 							
-							<div class="row">
-								<div style="padding: 0px" class="col-md-5">
-									{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
-								</div>
-								<div class="col-md-4">
-									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Código','3'=>'Depósito'], 0,['class'=>'form-select form-select-sm']) !!}
-								</div>
-								<div style="padding: 0px" class="col-md-2">
-									{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
-								</div>
 							</div>
-							{!! Form::close() !!}
-						
-						</div>
-						@endif
-							
-							<div class="dropdown ">
+							@endif
+								
+							<div class="dropdown">
 								  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 								  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -53,19 +52,19 @@
 								  </div>
 							</div>
 				</div>		
-			
-			<div class="btns">	
-				@if(kvfj(Auth::user()->permisos, 'piezas_agregar'))
-					<a href="{{url('admin/piezas/agregar') }}" class="btn btn-success btn-sm">
-						<i class="fas fa-plus-circle"></i> Agregar pieza
-					</a>
-				@endif
-				@if(kvfj(Auth::user()->permisos, 'piezas_pdf'))
-				<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('piezas_pdf') }}" class="btn btn-sm btn-danger">PDF 
-           			<i data-toggle="tooltip" data-placement="top" title="Generar PDF" class="far fa-file-pdf"></i>
-       			</a>
-       			@endif
-			</div> 
+				
+				<div class="btns">	
+					@if(kvfj(Auth::user()->permisos, 'piezas_agregar'))
+						<a href="{{url('admin/piezas/agregar') }}" class="btn btn-success btn-sm">
+							<i class="fas fa-plus-circle"></i> Agregar pieza
+						</a>
+					@endif
+					@if(kvfj(Auth::user()->permisos, 'piezas_pdf'))
+					<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('piezas_pdf') }}" class="btn btn-sm btn-danger">PDF 
+	           			<i data-toggle="tooltip" data-placement="top" title="Generar PDF" class="far fa-file-pdf"></i>
+	       			</a>
+	       			@endif
+				</div> 
 				
 			
 			<table class="table table-striped mtop16">
@@ -133,7 +132,7 @@
 						</tr>
 					@endforeach
 					<tr>
-						<td colspan="9"> {!! $piezas->render() !!}</td>
+						<td colspan="11"> {!! $piezas->render() !!}</td>
 					</tr>
 						
 				</tbody>

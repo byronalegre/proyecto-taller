@@ -6,6 +6,7 @@
 	<title>@yield('title')</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="routeName" content="{{ Route::currentRouteName() }}">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shirnk-to-fit=no">-->
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
 	
@@ -28,14 +29,10 @@
 		    <a class="navbar-brand" href="{{url('/')}}" ><img src="{{url('static/images/logo.png')}}" width="200" height="60" alt="" loading="lazy">
 		    </a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+			≡
 			</button>
-			<div class="collapse navbar-collapse">
+			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
-					<!--<li class="nav-item">
-						<a href="{{ url('/') }}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
-					</li>-->
-					
 					@if(Auth::guest())
 					<li class="nav-item">
 						<a href="{{ url('https://www.bionogoya.com.ar/#empresa') }}" class="nav-link"><i class="fas fa-info-circle"></i> Sobre nosotros</a>

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Admin | @yield('title')</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="routeName" content="{{ Route::currentRouteName() }}">
 	<link rel="icon" type="image/png" href="{{ url('/static/images/mini.ico')}}"/>
@@ -35,22 +36,23 @@
 <body>
 
 
-	<div class="wrapper">	
-
-		<div class="col1">@include('admin.sidebar')		
+	<div class="wrapper">
+		<div class="col1" id="sidebar">					
+			  @include('admin.sidebar')							
 		</div>
-		<div class="col2"> 	
+		<div class="col2" id="cuerpo"> 	
 			<nav class="navbar navbar-expand-lg shadow-lg">	
-				<div class="container-fluid">
-					<div class="collapse navbar-collapse">
-						<ul class="navbar-nav ml-auto">
-							<li class="nav-item">
-								<a href="{{ url('/admin/micuenta/edit') }}" class="nav-link">
-									<i class="fas fa-user-circle"></i> Mi cuenta
-								</a>
-							</li>
-						</ul>
-					</div>
+				<div class="container-fluid">	
+					<button class="navbar-toggler" onclick="abrir()" data-toggle="tooltip" data-placement="top" title="Menú">
+					≡
+					</button>				
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a href="{{ url('/admin/micuenta/edit') }}" class="nav-link">
+								<i class="fas fa-user-circle"></i> Mi cuenta
+							</a>
+						</li>
+					</ul>					
 				</div>
 			</nav>
 			<div class="page">

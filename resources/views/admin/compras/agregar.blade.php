@@ -100,6 +100,7 @@
 								</button>
 							</div>	
 						</div>
+						<hr>
 						<table class="table table-bordered mtop16">
 							<thead class="table-secondary">
 								<tr>

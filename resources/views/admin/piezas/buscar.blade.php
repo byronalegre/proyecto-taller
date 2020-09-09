@@ -17,14 +17,10 @@
 			<div class="header">
 				<h2 class="title"><i class="fas fa-cogs"></i> Piezas</h2>
 			</div>
-		
-							
-							
 		<div class="inside">
 				<div class="nav justify-content-end">
 							@if(kvfj(Auth::user()->permisos, 'piezas_buscar'))
-							<div class="form-inline">
-						
+							<div class="form-inline">						
 								{!! Form::open(['url' => '/admin/piezas/buscar']) !!}
 							
 							<div class="row">
@@ -43,17 +39,17 @@
 							</div>
 							@endif
 								
-								<div class="dropdown ">
-									  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
+							<div class="dropdown ">
+								  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
-									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									    <a class="dropdown-item" href="{{url('admin/piezas/all') }}">Todos</a>
-									    <a class="dropdown-item" href="{{url('admin/piezas/1') }}">Activos</a>
-									    <a class="dropdown-item" href="{{url('admin/piezas/0') }}">Inactivos</a>
-									    <a class="dropdown-item" href="{{url('admin/piezas/trash') }}">Papelera</a>
+								  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								    <a class="dropdown-item" href="{{url('admin/piezas/all') }}">Todos</a>
+								    <a class="dropdown-item" href="{{url('admin/piezas/1') }}">Activos</a>
+								    <a class="dropdown-item" href="{{url('admin/piezas/0') }}">Inactivos</a>
+								    <a class="dropdown-item" href="{{url('admin/piezas/trash') }}">Papelera</a>
 
-									  </div>
-								</div>
+								  </div>
+							</div>
 					</div>		
 				
 			<div class="btns">	

@@ -16,16 +16,16 @@
   		</div>	
 
   		<div class="inside" style="text-align: center">	
-
+        <hr>
           <a href="{{ url('admin/backup/create') }}" class="btn btn-danger btn-lg">
-            <i class="fas fa-plus"></i> Nuevo
+            <i class="fas fa-plus-circle"></i> Nuevo
           </a>
-
+        <hr>
           <div class="row mtop16">
-            <b>Los backups se encuentran en G:/www/cms/storage/app/backups</b> 
+            <p>Los backups se encuentran en:</p>
+            <b>G:/www/cms/storage/app/backups</b> 
           </div>
       </div>	
-
     </div>
   </div>
 @endsection

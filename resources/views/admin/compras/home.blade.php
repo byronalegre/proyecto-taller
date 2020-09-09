@@ -19,7 +19,7 @@
 
 				<div class="nav justify-content-end">				
 					
-					<div class="dropdown ">
+					<div class="dropdown">
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -75,7 +75,7 @@
 					</tr>
 					@endforeach					
 					<tr>
-						<td colspan="4"> {!! $input->render() !!}</td>
+						<td colspan="5"> {!! $input->render() !!}</td>
 					</tr>
 				</tbody>
 			</table>

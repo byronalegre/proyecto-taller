@@ -1,6 +1,9 @@
 <div class="sidebar shadow-lg">
 	<div class="section-top">
-			
+			<button type="button" class="close">
+			  <span aria-hidden="true" onclick="cerrar()">&times;</span>
+			</button>
+
 			<div class="icon">
 				<a href="{{ url('/logout') }}"><i data-toggle="tooltip" data-placement="top" title="Cerrar sesión" class="fas fa-sign-out-alt"></i></a>
 			</div>
@@ -66,6 +69,12 @@
 				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> Backup</a>
 			</li>
 			@endif
+			<li></li>
+			<li></li>
+			<li></li>
+			<li>
+				<a href= "{{url('https://github.com/byronalegre/proyecto-taller')}}" ><i class="far fa-question-circle"></i> Ayuda</a>
+			</li>
 		</ul>
 	</div>
 </div>
