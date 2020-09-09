@@ -64,7 +64,7 @@ class PiezaController extends Controller
             'img.imagen'=>'Seleccione una imagen válida.',
             'cantidad.required'=>'Ingrese una cantidad válida.',
             'marca.required'=>'Ingrese una marca',
-            'content.required'=>'Ingrese una descripcón para la pieza.'
+            'content.required'=>'Ingrese una descripción para la pieza.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -135,7 +135,7 @@ class PiezaController extends Controller
             'img.imagen'=>'Seleccione una imagen válida.',
             'cantidad.required'=>'Ingrese una cantidad válida.',
             'marca.required'=>'Ingrese una marca',
-            'content.required'=>'Ingrese una descripcón para la pieza.'
+            'content.required'=>'Ingrese una descripción para la pieza.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
