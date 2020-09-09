@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 		for(i=0; i < btn_deleted.length; i++){
 			btn_deleted[i].addEventListener('click', delete_object);
-		}
+		}		
 });
 //------------------------------------------------------------------------------------------------------------------------------
 if(route == "piezas_editar" || route == "piezas_agregar"){
@@ -38,11 +38,11 @@ function delete_object(e){
 	var text,title;
 
 	if(action == "delete"){
-		title = "Seguro que desea borrar el elemento?";
-		text = "Una vez borrado, se moverá a la 'papelera'.";
+		title = "Desea enviar el elemento a la papelera?";
+		text = "Para restaurarlo dirijase a 'Papelera'.";
 	}
 	if(action == "restore"){
-		title = "Seguro que desea restaurar el elemento?";
+		title = "Desea restaurar el elemento?";
 		text = "Una vez restaurado, volverá a estar disponible.";
 	}
 	swal({
@@ -134,30 +134,38 @@ $(function(){
 
 var acum_tot_compras = 0;
 $(document).ready(function(){
+	let today = new Date();
+	//console.log(today.getMonth())
 	var json_c = document.getElementById('all_prods').value;
 	var Obj_c = JSON.parse(json_c);
+	//console.log(Obj_c)
 	for(var item in Obj_c){
 		var aux=Obj_c[item];
-		var prods = JSON.parse(aux.productos)
-		for(var i in prods){
-		var aux2=prods[i];
-	//	console.log(parseInt(aux2.cantidad*aux2.precio))
-		acum_tot_compras += parseInt(aux2.cantidad*aux2.precio);
-		}
-	}	
+		var fecha = new Date(aux.created_at)
+		if(fecha.getFullYear() == today.getFullYear()){
+			if(fecha.getMonth() == today.getMonth()){
+		//console.log(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear())
+				var prods = JSON.parse(aux.productos)
+				for(var i in prods){
+				var aux2=prods[i];
+		//	console.log(parseInt(aux2.cantidad*aux2.precio))
+				acum_tot_compras += parseInt(aux2.cantidad*aux2.precio);
+				}
+			}
+		}	
+	}
 	$('h5').append(acum_tot_compras);
 });
 
 /*---------------------------------------------------------------------------------------------------------------------*/
-/*var acumular = 0;
-$(function(){
-	var json_home = $('#total_home').val();
-	var Obj_home = JSON.parse(json_home);
-	console.log(Obj_home)
-	for(var items in Obj_home){
-		var aux=Obj_home[items];		
-	//	console.log(aux.producto)
-		acumular+=parseInt(aux.cantidad * aux.precio);
-	}	
-	$('h6').append(acumular);
-});*/
+// SIDEBAR OCULTO
+function abrir(){
+	document.getElementById('sidebar').style.display = "block";
+	document.getElementById('cuerpo').style.display = "none";
+}
+
+function cerrar(){
+	document.getElementById('sidebar').style.display = "none";
+	document.getElementById('cuerpo').style.display = "block";
+}
+/*---------------------------------------------------------------------------------------------------------------------*/
