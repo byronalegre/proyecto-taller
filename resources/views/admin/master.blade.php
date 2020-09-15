@@ -43,7 +43,7 @@
 		<div class="col2" id="cuerpo"> 	
 			<nav class="navbar navbar-expand-lg shadow-lg">	
 				<div class="container-fluid">	
-					<button class="navbar-toggler" onclick="abrir()" data-toggle="tooltip" data-placement="top" title="Menú">
+					<button class="navbar-toggler" onclick="abrir()">
 					≡
 					</button>				
 					<ul class="navbar-nav ml-auto">

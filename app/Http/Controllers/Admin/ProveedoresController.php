@@ -74,8 +74,6 @@ class ProveedoresController extends Controller
             endif;
 
         endif;
-       
-       
     }
 
     public function getProveedorEdit($id){

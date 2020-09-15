@@ -35,7 +35,7 @@
 				
 					<div class="col-md-3 d-flex">
 						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info">
-							<i class="fas fa-receipt fa-2x mtop16"></i>
+							<i class="fas fa-cart-plus fa-2x mtop16"></i>
 								Compras realizadas 
 							<span class="big-count badge rounded-pill bg-dark mtop16">
 								{{count($compras)}}
@@ -48,7 +48,6 @@
 							<i class="fas fa-dollar-sign fa-2x mtop16"></i>
 								Gastos del último mes 
 							<span class="big-count badge rounded-pill bg-dark mtop16">
-
 								<input type="hidden" id="all_prods" value="{{$compras}}"> 						
 								<h5>$ </h5>								
 							</span>

@@ -1,14 +1,14 @@
 @extends ('admin.master')
 
-@section ('title','Nueva compra')
+@section ('title','Nueva tarea')
 
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-cart-plus"></i> Compras</a>
+	<a href="{{url('/admin/tareas/all') }}"><i class="fas fa-tasks"></i> Tareas</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva compra</a>
+	<a href="{{url('/admin/tareas/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva tarea</a>
 </li>
 @endsection
  
@@ -18,18 +18,18 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva compra</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva tarea</h2>
 		</div>
 		<div class="inside">
-			{!! Form::open(['url' => '/admin/compras/agregar','files'=>true,'id'=>'formulario']) !!}	
+			{!! Form::open(['url' => '/admin/tareas/agregar','files'=>true,'id'=>'formulario']) !!}	
 				<div class="row">
 					<div class="col-md-4">
-							<label for="proveedor">Proveedor:</label>
+							<label for="tarea">Tarea:</label>
 							<div class="input-group">								
 							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-truck"></i>
+							   			<i class="fas fa-tasks"></i>
 							   		</span>							   
-						    	{!!Form::select('proveedor', $provs, null, ['class' =>'form-select']) !!}
+						    	{!!Form::select('tarea', $tarea, null, ['class' =>'form-select']) !!}
 						    </div>
 					</div>
 					<div class="col-md-4">
@@ -41,18 +41,30 @@
 						    	{!!Form::text('codigo', null, ['class' => 'form-control'] ) !!}
 						    	</div>
 					</div>
-
 					<div class="col-md-4">
 							<label for="status">Estado:</label>
 								<div class="input-group">									
 								   		<span class="input-group-text" id="basic-addon1">
 								   			<i class="fas fa-hand-paper"></i>
 								   		</span>								   
-							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Aprobado'],0, ['class' =>'form-select']) !!}	
+							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Completada'],0, ['class' =>'form-select']) !!}	
 								</div>
 					</div>
+				</div>
+				<div class="row mtop16">
+					<div class="col-md-4">
+							<label for="fecha_programada">Fecha programada:</label>
+								<div class="input-group">									
+							   		<span class="input-group-text" id="basic-addon1">
+							   			<i class="fas fa-calendar-day"></i>
+							   		</span>								    
+						    	{!!Form::date('fecha_programada', now(), ['class' => 'form-control'] ) !!}
+						    	</div>
+					</div>
+				</div>
+				<div class="row mtop16">
 					<div class="col-md-12">
-						<label for="descripcion" class="mtop16">Descripción:</label>
+						<label for="descripcion">Descripción:</label>
 						<div class="input-group">
 						 	<textarea class="form-control" name="descripcion" rows="3" id="descripcion"></textarea>
 					    </div>

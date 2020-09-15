@@ -47,7 +47,7 @@ class ComprasController extends Controller
 
         $messages =[
             'proveedor.required'=>'El nombre del proveedor es requerido.',
-            'codigo.required'=>'El código es requerido.'            
+            'codigo.required'=>'El código es requerido.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -63,16 +63,22 @@ class ComprasController extends Controller
             $input -> descripcion = e($request->input('descripcion'));
             $productos = e($request->input('productos'));
             $productos = html_entity_decode($productos);         			 
-			$input-> productos = $productos;
-			
-			$p = Pieza::findOrFail($request->input('producto'));
-			$p-> cantidad += $request->input('cantidad');
+			$input-> productos = $productos;  
+			//aumenta stock
+            $aux = json_decode($productos,true);    
 
             if($input-> productos == '0'):
-            	return back()->withErrors($validator)->with('message','Debe agregar al menos un item al listado.')->with('typealert','danger')->withInput();
+                return back()->withErrors($validator)->with('message','Debe agregar al menos un item al listado.')->with('typealert','danger')->withInput();
+            else:
+                foreach ($aux as $value) {
+                    $p = Pieza::findOrFail($value['id_p']);
+                    $p-> cantidad += $value['cantidad'];
+                    $p->save();
+                }   
             endif;
-
-     		if(($input->save()) && ($p->save())):
+            //------------------ 
+            
+     		if($input->save()):
             	return redirect('/admin/compras/all')->with('message','Compra guardada.')->with('typealert','success');
             endif;
 

@@ -152,6 +152,19 @@ function permisos_usuario(){
 			]
 		],
 
+		'tareas'=>[
+			'icon'=>'<i class="fas fa-tasks"></i>',
+			'title'=>'Módulo - Tareas',
+			'keys'=>[
+				'tareas'=>'Ver módulo tareas.',
+				'tareas_agregar'=>'Agregar tarea.',
+				'tareas_editar'=>'Editar tarea.',
+				'tareas_eliminar'=>'Anular tarea.',
+				'tarea_detalle'=>'Ver detalle de tarea.',
+				'detalle_pdf'=>'Generar PDFs.'
+			]
+		],
+
 		'backup'=>[
 			'icon'=>'<i class="fas fa-database"></i>',
 			'title'=>'Módulo - Backup',
@@ -160,6 +173,7 @@ function permisos_usuario(){
 				'backup_create'=>'Crear backup.'
 			]
 		]
+		
 	];
 
 	return $p;

@@ -56,6 +56,22 @@ Route::prefix('/admin')->group(function(){
 	Route::get('/compras/{id}/detalle/compra_pdf', 'Admin\ComprasController@pdf')->name('detalle_pdf');//ruta pdf
 	Route::get('/compras/{id}/delete','Admin\ComprasController@getComprasDelete')->name('compras_eliminar');
 	Route::get('/compras/{id}/restore','Admin\ComprasController@getComprasRestore')->name('compras_eliminar');
+
+	//Tareas
+	Route::get('/tareas/agregar','Admin\TareasController@getTareaAgregar')->name('tareas_agregar');		
+	Route::post('/tareas/agregar','Admin\TareasController@postTareaAgregar')->name('tareas_agregar');
+	Route::get('/tareas/{id}/edit','Admin\TareasController@getTareaEdit')->name('tareas_editar');
+	Route::post('/tareas/{id}/edit','Admin\TareasController@postTareaEdit')->name('tareas_editar');
+	Route::get('/tareas/{status}','Admin\TareasController@getHome')->name('tareas');	
+	Route::get('/tareas/{id}/detalle', 'Admin\TareasController@getTareaDetalle')->name('tarea_detalle');
+	Route::get('/tareas/{id}/detalle/tarea_pdf', 'Admin\TareasController@pdf')->name('detalle_pdf');//ruta pdf
+	Route::get('/tareas/{id}/delete','Admin\TareasController@getTareasDelete')->name('tareas_eliminar');
+	Route::get('/tareas/{id}/restore','Admin\TareasController@getTareasRestore')->name('tareas_eliminar');
+
+
+	//BackUp
+	Route::get('/backup', 'Admin\BackUpController@index')->name('backup');
+	Route::get('/backup/create', 'Admin\BackUpController@create')->name('backup_create');
 }); 
 
 

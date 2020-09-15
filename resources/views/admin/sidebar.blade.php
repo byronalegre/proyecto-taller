@@ -64,6 +64,12 @@
 			</li>
 			@endif
 
+			@if(kvfj(Auth::user()->permisos, 'tareas'))
+			<li>
+				<a href="{{ url('/admin/tareas/all') }}" class="lk-tareas"><i class="fas fa-tasks"></i> Tareas</a>
+			</li>
+			@endif
+
 			@if(kvfj(Auth::user()->permisos, 'backup'))
 			<li>
 				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> Backup</a>
