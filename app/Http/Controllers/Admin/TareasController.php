@@ -24,6 +24,12 @@ class TareasController extends Controller
             case 'all':
                 $input = Tarea::with(['prods','work'])->orderBy('id','desc')->paginate(5); ;
                 break;
+            case '1':
+                $input = Tarea::with(['prods','work'])->where('status','1')->orderBy('id','desc')->paginate(5); ;
+                break;
+            case '0':
+                $input = Tarea::with(['prods','work'])->where('status','0')->orderBy('id','desc')->paginate(5); ;
+                break;  
             case 'trash':
                 $input = Tarea::with(['prods','work'])->onlyTrashed()->orderBy('id','desc')->paginate(5); 
                 break;            

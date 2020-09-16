@@ -5,19 +5,19 @@
 			</button>
 
 			<div class="icon">
-				<a href="{{ url('/logout') }}"><i data-toggle="tooltip" data-placement="top" title="Cerrar sesión" class="fas fa-sign-out-alt"></i></a>
+				<a href="{{ url('/logout') }}"><i data-toggle="tooltip" data-placement="top" title="Cerrar sesión" class="fas fa-sign-out-alt"></i>
+				</a>
 			</div>
 
-			<div class="logo">
-				
-				<img src="{{url('static/images/logo1.png') }}" alt="img-fluid">
-			
+			<div class="logo">				
+				<img src="{{url('static/images/logo1.png') }}" alt="img-fluid">			
 			</div>	
 	
 			<div class="user">
-				<span class="subtitle" style="font-weight:bold;">Hola: {{Auth::user()->name }} {{ Auth::user()->lastname }} 
-				<i class="fas fa-laugh"></i></span>
-				
+				<h6><span class="big-count badge bg-dark">Hola: {{Auth::user()->name }} {{ Auth::user()->lastname }}
+					<i class="fas fa-laugh"></i>
+				</span>
+				</h6>
 				<div class="email">
 					{{ Auth::user()->email }}
 				</div>
@@ -66,7 +66,7 @@
 
 			@if(kvfj(Auth::user()->permisos, 'tareas'))
 			<li>
-				<a href="{{ url('/admin/tareas/all') }}" class="lk-tareas"><i class="fas fa-tasks"></i> Tareas</a>
+				<a href="{{ url('/admin/tareas/all') }}" class="lk-tareas lk-tareas_agregar lk-tareas_eliminar lk-tarea_detalle lk-tareas_editar"><i class="fas fa-tasks"></i> Tareas</a>
 			</li>
 			@endif
 
@@ -75,9 +75,6 @@
 				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> Backup</a>
 			</li>
 			@endif
-			<li></li>
-			<li></li>
-			<li></li>
 			<li>
 				<a href= "{{url('https://github.com/byronalegre/proyecto-taller')}}" ><i class="far fa-question-circle"></i> Ayuda</a>
 			</li>

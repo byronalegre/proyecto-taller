@@ -35,7 +35,7 @@
 			</div>
 			<div>
 				<b>CODIGO:</b>
-				<a>{{$c->codigo}}</a>
+				<a>ODC-{{$c->codigo}}</a>
 			</div>
 			<div>
 				<b>PROVEEDOR:</b>

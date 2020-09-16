@@ -15,7 +15,7 @@
 						<h2 style="font-size: 20px; text-align: center; font-family: courier;">	
 							Orden de compra 
 							<br> 
-							CNRO-{{$c->codigo}}<br>
+							ODC-{{$c->codigo}}<br>
 							{{date("d/m/Y ", time()) }}
 						</h2>
 					</td>
@@ -29,7 +29,7 @@
 				<tr>
 					<td>
 						<b>NRO DE ORDEN:</b>
-						<a>CNRO-{{$c->codigo}}</a>
+						<a>ODC-{{$c->codigo}}</a>
 					</td>
 					<td>
 						<b>PROVEEDOR:</b>

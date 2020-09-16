@@ -168,4 +168,62 @@ function cerrar(){
 	document.getElementById('sidebar').style.display = "none";
 	document.getElementById('cuerpo').style.display = "block";
 }
+
 /*---------------------------------------------------------------------------------------------------------------------*/
+//FUNCION PARA CREAR TABLA AGREGAR PRODUCTOS A TAREA
+var contar = 0;
+var lista_t = {
+			 'tarea' :[]
+			};
+$(function(){	
+	//agrega fila a tabla compra
+	$('#agregar_tarea').click(function(e){
+		e.preventDefault();		
+		var seleccion = document.getElementById("producto");
+		var selected = seleccion.options[seleccion.selectedIndex].text;//nombre 
+		var cant = document.getElementById("cantidad").value;
+ 		var id_prod = seleccion.options[seleccion.selectedIndex].value;
+
+ 		if(cant>0){//esto valida que no se ingresen valores 0
+		var tr = '<tr><td hidden="true">'+contar+'</td><td>'+selected+'</td><td>'+cant+'</td><td><input type="button" class="borrar_t btn btn-danger btn-sm" value="Eliminar"></td></tr>';
+		
+		$('tbody').append(tr); 
+	    lista_t.tarea.push({
+	    "id":contar,
+	    "id_p": id_prod,
+	    "producto": selected,
+	    "cantidad": cant
+	  	});
+		
+		var json = JSON.stringify(lista_t.tarea); // aqui tienes la lista de objetos en Json
+	//	var Obj = JSON.parse(json); //Parsea el Json al objeto anterior.
+		contar++;
+
+		$("#productos").val(json);	
+    
+		}
+	})		
+
+//BORRA FILA, ACTUALIZA ARRAY DE PRODUCTOS y TOTAL $
+	$('body').on('click', 'input.borrar_t', function(e) {		
+	   e.preventDefault();
+	   var index = $(this).closest("tr").index();
+       var id = $(this).parents("tr").find("td")[0].innerHTML; 
+
+       for(var item in lista_t.tarea){     	
+        	if(lista_t.tarea[item].id == id){
+       			lista_t.tarea.splice(index,1);
+       		}
+       }
+
+		if(lista_t.tarea.length == 0){			
+			location.reload();
+		}
+		
+        var json = JSON.stringify(lista_t.tarea);
+		$("#productos").val(json);
+   		$(this).parents('tr').remove(); 
+   	});    
+})
+
+//------------------------------------------------------------------------------------------------------------------------------

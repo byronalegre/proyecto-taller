@@ -47,7 +47,7 @@
 				<tbody>
 					@foreach($input as $i)
 					<tr>
-						<td style="text-align: center;">CNRO-{{ $i->codigo }} </td>						
+						<td style="text-align: center;">ODC-{{ $i->codigo }} </td>						
 						<td style="text-align: center;">{{ $i->provs->name }} </td>
 						<td style="text-align: center;">{{ $i->created_at->format('d/m/Y (H:i)') }} </td>	
 						<td>{{ $i->descripcion }}</td>

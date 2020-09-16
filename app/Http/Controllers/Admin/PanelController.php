@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User, App\Http\Models\Pieza, App\Http\Models\Compra;
+use App\User, App\Http\Models\Pieza, App\Http\Models\Compra, App\Http\Models\Tarea;
 class PanelController extends Controller
 {
     public function __construct(){
@@ -64,9 +64,13 @@ class PanelController extends Controller
                 $compra_22++;
             }
         }
+
+        $tareas = Tarea::all();
+
     	$data = ['users'=>$users, 'u_reg'=>$u_reg, 'u_susp'=>$u_susp,
                  'piezas'=>$piezas,'piezas_act'=> $piezas_act,'piezas_inact'=> $piezas_inact,
-                 'compras'=>$compras, 'compra_19'=>$compra_19, 'compra_20'=>$compra_20, 'compra_21'=>$compra_21, 'compra_22'=>$compra_22
+                 'compras'=>$compras, 'compra_19'=>$compra_19, 'compra_20'=>$compra_20, 'compra_21'=>$compra_21, 'compra_22'=>$compra_22,
+                 'tareas'=>$tareas
                 ];
 
     	return view('admin.panel', $data);

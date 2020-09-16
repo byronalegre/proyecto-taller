@@ -84,7 +84,7 @@ class CategoriasController extends Controller
     	$c->descripcion = e($request->input('descripcion'));
 
     	if($c->save()):
-    		return back()->with('message','Actualizada correctamente.')->with('typealert','success');
+    		return redirect('admin/categorias/0')->with('message','Actualizada correctamente.')->with('typealert','success');
     	endif;
     endif;
     }

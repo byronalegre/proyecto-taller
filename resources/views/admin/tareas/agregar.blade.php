@@ -21,7 +21,7 @@
 			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva tarea</h2>
 		</div>
 		<div class="inside">
-			{!! Form::open(['url' => '/admin/tareas/agregar','files'=>true,'id'=>'formulario']) !!}	
+			{!! Form::open(['url' => '/admin/tareas/agregar','files'=>true]) !!}	
 				<div class="row">
 					<div class="col-md-4">
 							<label for="tarea">Tarea:</label>
@@ -97,17 +97,8 @@
 								   		<input type="number" class="form-control" min="1" name="cantidad" id="cantidad" required="true"> 
 							    	</div>
 							</div>
-							<div class="col-md-3">
-								<label for="precio">Precio unitario:</label>
-									<div class="input-group">									
-								   		<span class="input-group-text">
-								   			<i class="fas fa-dollar-sign"></i>
-								   		</span>								    
-							    		<input type="number" class="form-control" min="1" name="precio" id="precio" required="true">
-							    	</div>
-							</div>
 							<div class="col-md-2">	
-								<button style="border-radius: 20px" id="agregar" class="btn btn-warning mtop16 shadow" data-toggle="tooltip" data-placement="top" title="Agregar">
+								<button style="border-radius: 20px" id="agregar_tarea" class="btn btn-warning mtop16 shadow" data-toggle="tooltip" data-placement="top" title="Agregar">
 									<i class="fas fa-plus"></i>
 								</button>
 							</div>	
@@ -118,17 +109,11 @@
 								<tr>
 									<td>Producto</td>
 									<td>Cantidad</td>
-									<td>Precio unitario ($)</td>
-									<td>Importe ($)</td>
 									<td width="100"></td>
 								</tr>
 							</thead>
 							<tbody>
 							</tbody>
-							<caption>
-								<h6>								
-								</h6>
-							</caption>
 						{!! Form::text('productos', 0 ,['class' => 'form-control', 'id'=>'productos', 'hidden'] ) !!}
 						</table>						
 					</div>				

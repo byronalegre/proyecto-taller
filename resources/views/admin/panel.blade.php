@@ -12,51 +12,46 @@
 			<h2 class="title"><i class="fas fa-chart-line"></i> Estadísticas rápidas</h2>
 		</div>
 		<div class="inside">
-			<div class="row">
-				<div class="col-md-3 d-flex">
-					<a href="{{url('/admin/usuarios/0')}}" type="button" class="btn btn-primary shadow info">
-						<i class="fas fa-users fa-2x mtop16"></i>
-							Usuarios registrados 
+			<div class="btn-group btn-group-lg" role="group">				
+					<a href="{{url('/admin/usuarios/all')}}" type="button" class="btn btn-primary shadow info" data-toggle="tooltip" data-placement="top" title="Usuarios">
+						<i class="fas fa-users fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Usuarios"></i>
 						<span class="big-count badge rounded-pill bg-dark mtop16">
 							{{count($users)}}							    
 						</span>
-					</a>
-				</div>
-				<div class="col-md-3 d-flex">
-					<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-success shadow info">
-						<i class="fas fa-cogs fa-2x mtop16"></i>
-							Piezas activas 
+					</a>				
+					<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-success shadow info" data-toggle="tooltip" data-placement="top" title="Piezas activas">
+						<i class="fas fa-cogs fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Piezas activas"></i>
 						<span class="big-count badge rounded-pill bg-dark mtop16">
 							{{$piezas_act}}
 						</span>
 					</a>
-				</div>
+					<a href="{{url('/admin/tareas/0')}}" type="button" class="btn btn-secondary shadow info" data-toggle="tooltip" data-placement="top" title="Tareas pendientes">
+						<i class="fas fa-clipboard-list fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Tareas pendientes"></i>
+						<span class="big-count badge rounded-pill bg-dark mtop16">
+							{{count($tareas)}}
+						</span>
+					</a>
+
 				@if(kvfj(Auth::user()->permisos, 'facturado'))
 				
-					<div class="col-md-3 d-flex">
-						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info">
-							<i class="fas fa-cart-plus fa-2x mtop16"></i>
-								Compras realizadas 
-							<span class="big-count badge rounded-pill bg-dark mtop16">
-								{{count($compras)}}
-							</span>
-						</a>
-					</div>
+					<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info" data-toggle="tooltip" data-placement="top" title="Compras realizadas">
+						<i class="fas fa-cart-plus fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Compras realizadas"></i>
+						<span class="big-count badge rounded-pill bg-dark mtop16">
+							{{count($compras)}}
+						</span>
+					</a>
 
-					<div class="col-md-3 d-flex">
-						<a type="button" class="btn btn-danger active shadow info">
-							<i class="fas fa-dollar-sign fa-2x mtop16"></i>
-								Gastos del último mes 
-							<span class="big-count badge rounded-pill bg-dark mtop16">
-								<input type="hidden" id="all_prods" value="{{$compras}}"> 						
-								<h5>$ </h5>								
-							</span>
-						</a>
-					</div>
+					<a type="button" class="btn btn-danger active shadow info" data-toggle="tooltip" data-placement="top" title="Gastos del último mes">
+						<i class="fas fa-dollar-sign fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Gastos del último mes"></i>
+						<span class="big-count badge rounded-pill bg-dark mtop16">
+							<input type="hidden" id="all_prods" value="{{$compras}}"> 						
+							<h5>$ </h5>								
+						</span>
+					</a>
 				@endif
 			</div>
-			</div>
 		</div>
+	</div>
 			<div class="panel shadow mtop16">
 				<div class="header">
 					<h2 class="title"><i class="fas fa-chart-pie"></i> Gráficos</h2>

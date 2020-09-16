@@ -23,6 +23,8 @@
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						    <a class="dropdown-item" href="{{url('admin/tareas/all') }}">Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/tareas/1') }}">Completadas</a>
+						    <a class="dropdown-item" href="{{url('admin/tareas/0') }}">Pendientes</a>
 						    <a class="dropdown-item" href="{{url('admin/tareas/trash') }}">Papelera</a>
 						  </div>
 					</div>
