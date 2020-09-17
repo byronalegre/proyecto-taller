@@ -67,7 +67,7 @@
 				</div> 
 				
 			
-			<table class="table table-striped mtop16">
+			<table class="table table-hover mtop16">
 				<thead class="table-dark">
 					<td>ID</td>
 					<td></td>

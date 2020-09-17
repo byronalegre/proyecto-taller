@@ -16,15 +16,20 @@
   		</div>	
 
   		<div class="inside" style="text-align: center">	
-        <hr>
-          <a href="{{ url('admin/backup/create') }}" class="btn btn-danger btn-lg">
-            <i class="fas fa-plus-circle"></i> Nuevo
-          </a>
-        <hr>
-          <div class="row mtop16">
-            <p>Los backups se encuentran en:</p>
-            <b>G:/www/cms/storage/app/backups</b> 
+        <div class="card text-center">
+          <div class="card-header text-muted">
+           <b>Copia de seguridad</b>
           </div>
+          <div class="card-body">        
+            <a href="{{ url('admin/backup/create') }}" class="btn btn-danger btn-lg">
+              <i class="fas fa-plus-circle"></i> Nuevo
+            </a>
+          </div>
+          <div class="card-footer text-muted">
+            <p class="card-text">Los backups se encuentran en:</p>
+            <b class="card-text">G:/www/cms/storage/app/backups</b>
+          </div>
+        </div>        
       </div>	
     </div>
   </div>

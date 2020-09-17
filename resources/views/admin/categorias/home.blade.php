@@ -62,15 +62,18 @@
 
 				<div class="inside">
 					
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<div class="nav">
 						@foreach(getSeccionArray() as $m => $k)				
-							<a href="{{url('/admin/categorias/'.$m) }}" class="btn btn-outline-secondary btn-sm">
-							{{ $k }}
-							</a>
+							<li class="breadcrumb-item">
+								<a href="{{url('/admin/categorias/'.$m) }}">
+									{{ $k }}
+									<i class="fas fa-caret-down"></i>
+								</a>
+							</li>							
 						@endforeach
 					</div>
 
-					<table class="table mtop16">
+					<table class="table table-hover mtop16">
 						<thead class="table-dark">
 							<tr>
 								<td hidden="true">ID</td>

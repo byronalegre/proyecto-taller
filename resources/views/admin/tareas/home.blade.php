@@ -37,7 +37,7 @@
 			</a>
 			@endif
 
-			<table class="table table-striped mtop16">
+			<table class="table table-hover mtop16">
 				<thead class="table-dark">
 					<td style="text-align: center;">Código</td>
 					<td style="text-align: center;">Tarea</td>					
@@ -49,7 +49,7 @@
 				<tbody>
 					@foreach($input as $i)
 					<tr>
-						<td style="text-align: center;">CNRO-{{ $i->codigo }} </td>						
+						<td style="text-align: center;">ODT-{{ $i->codigo }} </td>						
 						<td style="text-align: center;">{{ $i->work->name }} </td>
 						<td style="text-align: center;">{{ $i->created_at->format('d/m/Y (H:i)') }} </td>
 						<td style="text-align: center;">{{ date('d/m/Y',strtotime($i->fecha_prog))}} </td>

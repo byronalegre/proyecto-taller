@@ -28,7 +28,7 @@
 					<a href="{{url('/admin/tareas/0')}}" type="button" class="btn btn-secondary shadow info" data-toggle="tooltip" data-placement="top" title="Tareas pendientes">
 						<i class="fas fa-clipboard-list fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Tareas pendientes"></i>
 						<span class="big-count badge rounded-pill bg-dark mtop16">
-							{{count($tareas)}}
+							{{$pendiente}}
 						</span>
 					</a>
 
@@ -52,94 +52,99 @@
 			</div>
 		</div>
 	</div>
-			<div class="panel shadow mtop16">
+		<div class="panel shadow mtop16">
 				<div class="header">
 					<h2 class="title"><i class="fas fa-chart-pie"></i> Gráficos</h2>
 				</div>
 			<div class="inside">
 				<div class="row">
-						<!--DESDE ACA LOS GRAFICOS-->
-								<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-							    <script type="text/javascript">
-							      google.charts.load('current', {'packages':['corechart']});
-							      google.charts.setOnLoadCallback(drawChart);
+					<!--DESDE ACA LOS GRAFICOS-->
+							<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+						    <script type="text/javascript">
+						      google.charts.load('current', {'packages':['corechart']});
+						      google.charts.setOnLoadCallback(drawChart);
 
-							     function drawChart() {
+						     function drawChart() {
 
-							         var data = google.visualization.arrayToDataTable([
-							          ['Tipo', 'Cantidad'],
-							          ['Usuarios registrados',    {{$u_reg}} ],
-							          ['Usuarios suspendidos',    {{$u_susp}} ],
-							        ]);
+						         var data = google.visualization.arrayToDataTable([
+						          ['Tipo', 'Cantidad'],
+						          ['Usuarios registrados',    {{$u_reg}} ],
+						          ['Usuarios suspendidos',    {{$u_susp}} ],
+						        ]);
 
-							        var options = {
-							          title: 'Usuarios total: {{count($users)}}',
-							          slices: {
-									            0: { color: '#21856d', offset: 0.1},
-									            1: { color: '#212121' }
-									          },
-									  is3D: true
-							        };
+						        var options = {
+						          title: 'Usuarios total: {{count($users)}}',
+						          slices: {
+								            0: { color: '#21856d', offset: 0.1},
+								            1: { color: '#212121' }
+								          },
+								  is3D: true
+						        };
 
-							        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+						        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-							        chart.draw(data, options);
-							      
-							        var data2 = google.visualization.arrayToDataTable([
-							          ['Piezas', 'Cantidad'],
-							          ['Piezas activas',     {{$piezas_act}}],
-							          ['Piezas inactivas',     {{$piezas_inact}}],
-							        ]);
+						        chart.draw(data, options);
+						      
+						        var data2 = google.visualization.arrayToDataTable([
+						          ['Piezas', 'Cantidad'],
+						          ['Piezas activas',     {{$piezas_act}}],
+						          ['Piezas inactivas',     {{$piezas_inact}}],
+						        ]);
 
-							        var options2 = {
-							          title: 'Piezas total: {{count($piezas)}}',
-							          slices: {
-									            0: { color: '#21856d', offset: 0.1},
-									            1: { color: '#212121' }
-									          },
-									  is3D: true
-							        };
+						        var options2 = {
+						          title: 'Piezas total: {{count($piezas)}}',
+						          slices: {
+								            0: { color: '#21856d', offset: 0.1},
+								            1: { color: '#212121' }
+								          },
+								  is3D: true
+						        };
 
-							        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+						        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
 
-							        chart.draw(data2, options2);
+						        chart.draw(data2, options2);
 
-							        var data3 = google.visualization.arrayToDataTable([
-							          ['Compras', 'Cantidad por año'],
-							          ['2019',     {{$compra_19}}],
-							          ['2020',     {{$compra_20	}}],
-							          ['2021',     {{$compra_21}}],
-							          ['2022',     {{$compra_22}}]
-							        ]);
+						        var data3 = google.visualization.arrayToDataTable([
+						          ['Compras', 'Cantidad por año'],
+						          ['2019',     {{$compra_19}}],
+						          ['2020',     {{$compra_20	}}],
+						          ['2021',     {{$compra_21}}],
+						          ['2022',     {{$compra_22}}]
+						        ]);
 
-							        var options3 = {
-							          animation:{
-							          	startup: true,
-								        duration: 1500,
-								        easing: 'in',
-								      },
-							          title: 'Total de compras: {{count($compras)}}',
-							          vAxis: {minValue: 0},
-							          hAxis: {titleTextStyle: {color: '#21856d'}},							         
-							          colors: ['#21856d'],
-							         /* chartArea:{
-							          	backgroundColor: '212121'
-							          },*/
-							          is3D: true
-							          
-							        };
+						        var options3 = {
+						          animation:{
+						          	startup: true,
+							        duration: 1500,
+							        easing: 'in',
+							      },
+						          title: 'Total de compras: {{count($compras)}}',
+						          vAxis: {minValue: 0},
+						          hAxis: {titleTextStyle: {color: '#21856d'}},							         
+						          colors: ['#21856d'],
+						         /* chartArea:{
+						          	backgroundColor: '212121'
+						          },*/
+						          is3D: true
+						          
+						        };
 
-							        var chart = new google.visualization.AreaChart(document.getElementById('compra_anual'));
+						        var chart = new google.visualization.AreaChart(document.getElementById('compra_anual'));
 
-							        chart.draw(data3, options3);
-							      }
-							    </script>
-							    <div id="compra_anual" style="width: 1000px; height: 300px; min-width: 250px"></div>
-							    <div id="piechart" style="width: 500px; height: 250px;"></div>
-							    <div id="piechart2" style="width: 500px; height: 250px;"></div>					    	
-						<!--HASTA ACA-->
-					</div>
+						        chart.draw(data3, options3);
+						      }
+						    </script>
+
+						    <div id="compra_anual" style="width: 1000px; height: 300px; min-width: 250px"></div>
+
+						    <hr>
+
+						    <div id="piechart" style="width: 500px; height: 250px;"></div>
+						    <div id="piechart2" style="width: 500px; height: 250px;"></div>		
+
+					<!--HASTA ACA-->
 				</div>
+			</div>
 		</div>
 	
 	@endif

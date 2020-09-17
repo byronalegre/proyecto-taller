@@ -66,11 +66,18 @@ class PanelController extends Controller
         }
 
         $tareas = Tarea::all();
+        $pendiente = 0;
+
+        foreach ($tareas as $t) {
+            if($t->status == 0){
+                $pendiente++;
+            }
+        }
 
     	$data = ['users'=>$users, 'u_reg'=>$u_reg, 'u_susp'=>$u_susp,
                  'piezas'=>$piezas,'piezas_act'=> $piezas_act,'piezas_inact'=> $piezas_inact,
                  'compras'=>$compras, 'compra_19'=>$compra_19, 'compra_20'=>$compra_20, 'compra_21'=>$compra_21, 'compra_22'=>$compra_22,
-                 'tareas'=>$tareas
+                 'pendiente'=>$pendiente
                 ];
 
     	return view('admin.panel', $data);

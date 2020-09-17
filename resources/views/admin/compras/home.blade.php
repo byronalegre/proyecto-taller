@@ -36,7 +36,7 @@
 			</a>
 			@endif
 
-			<table class="table table-striped mtop16">
+			<table class="table table-hover mtop16">
 				<thead class="table-dark">
 					<td style="text-align: center;">Código</td>
 					<td style="text-align: center;">Proveedor</td>					
