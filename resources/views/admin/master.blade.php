@@ -45,14 +45,16 @@
 				<div class="container-fluid">	
 					<button class="navbar-toggler" onclick="abrir()">
 					≡
-					</button>				
+					</button>							
 					<ul class="navbar-nav ml-auto">
+						@if(kvfj(Auth::user()->permisos, 'micuenta_editar'))
 						<li class="nav-item">
 							<a href="{{ url('/admin/micuenta/edit') }}" class="nav-link">
 								<i class="fas fa-user-circle"></i> Mi cuenta
 							</a>
 						</li>
-					</ul>					
+						@endif
+					</ul>										
 				</div>
 			</nav>
 			<div class="page">

@@ -13,14 +13,14 @@
 
 <div class="container-fluid">
 	<div class="row">
+	@if(kvfj(Auth::user()->permisos, 'categorias_agregar'))
 		<div class="col-md-4 d-flex">
-			<div class="panel shadow">
+			<div class="panel shadow">				
 				<div class="header">
 					<h2 class="title"><i class="fas fa-plus-circle"></i> Agregar categoria
 					</h2>
-				</div>
-				<div class="inside">
-					@if(kvfj(Auth::user()->permisos, 'categorias_agregar'))
+				</div>				
+				<div class="inside">					
 					{!!Form::open(['url' => 'admin/categorias/agregar'])!!}
 						<label for="title">Nombre de categoría:</label>
 						<div class="input-group">							
@@ -46,13 +46,11 @@
 
 					{!!Form::submit('Guardar', ['class' => 'btn btn-success mtop16'])!!}
 
-					{!!Form::close()!!}
-					@endif
-				</div>
-			
+					{!!Form::close()!!}					
+				</div>		
 			</div>
 		</div>
-
+	@endif
 		<div class="col-md-8 d-flex">
 			<div class="panel shadow">
 				<div class="header">

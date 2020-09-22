@@ -22,7 +22,7 @@
 		<div class="inside">
 
 			<div style="text-align: right">
-			@if(kvfj(Auth::user()->permisos, 'detalle_pdf'))
+			@if(kvfj(Auth::user()->permisos, 'detalle_compra_pdf'))
 				<a href="{{url('admin/compras/'.$c->id.'/detalle/compra_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm">
 					PDF <i class="far fa-file-pdf"></i>
 				</a>

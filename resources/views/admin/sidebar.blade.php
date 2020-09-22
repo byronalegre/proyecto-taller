@@ -29,9 +29,9 @@
 	
 	<div class="main">
 		<ul>
-			@if(kvfj(Auth::user()->permisos, 'Panel_controller'))
+			@if(kvfj(Auth::user()->permisos, 'inicio'))
 			<li>
-				<a href="{{ url('/admin') }} " class="lk-Panel_controller"><i class="fas fa-home"></i> Inicio</a>
+				<a href="{{ url('/admin') }} " class="lk-inicio"><i class="fas fa-home"></i> Inicio</a>
 			</li>
 			@endif
 			

@@ -21,7 +21,7 @@ class PanelController extends Controller
         $u_susp = 0;
 
         foreach($users as $u){
-            if($u->status == 0){
+            if($u->status == 1){
                 $u_reg ++;
             }
             if($u->status == 100){

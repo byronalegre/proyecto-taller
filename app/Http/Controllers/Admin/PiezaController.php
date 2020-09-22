@@ -215,7 +215,7 @@ class PiezaController extends Controller
                     break;   
                 case '3':
                     $piezas = Pieza::with(['cat','mark'])->where('deposito',$request->input('buscar'))->orderBy('id','desc')->get();
-                    break;  
+                    break; 
             }
 
             $data = ['piezas' => $piezas];

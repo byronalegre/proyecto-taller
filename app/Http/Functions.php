@@ -64,7 +64,7 @@ endif;
 function getStatusUsuarioArray($mode, $id){	
 
 	$estado = [
-	'0'=>'Registrado',
+//	'0'=>'Registrado',
 	'1'=>'Activo',
 	'100'=>'Suspendido'
 	];
@@ -78,13 +78,16 @@ endif;
 
 function permisos_usuario(){
 	$p = [
-		'Panel_controller'=>[
+		'inicio'=>[
 			'icon'=> '<i class="fas fa-home"></i>',
-			'title'=> 'Módulo - Panel de inicio',
+			'title'=> 'Módulo - Inicio',
 			'keys'=>[
-				'Panel_controller'=>'Ver módulo panel de inicio.',
-				'estadisticas_rapidas'=>'Ver estadísticas globales.',
-				'facturado'=>'Ver estadísticas de facturación.'
+				'inicio'=>'Ver módulo de inicio. (¡No destildar! No le permitirá acceso a la pantalla de administración).',
+				'estadisticas_rapidas'=>'Ver estadísticas.',
+				'e_admin'=>'Ver estadísticas de administración.',
+				'e_tareas'=>'Ver estadísticas de tareas.',	
+				'e_compras'=>'Ver estadísticas de facturación.',
+				'graficos'=>'Ver gráficos estadísticos.'
 			]
 		],
 
@@ -120,7 +123,14 @@ function permisos_usuario(){
 				'usuarios_editar'=>'Editar usuarios.',
 				'usuarios_suspend'=>'Suspender usuarios.',
 				'usuarios_permisos'=>'Permisos usuarios.',
-				'usuarios_buscar'=>'Buscar usuarios.',
+				'usuarios_buscar'=>'Buscar usuarios.'
+			]
+		],
+
+		'micuenta'=>[
+			'icon'=> '<i class="fas fa-user-circle"></i>',
+			'title'=> 'Módulo - Mi cuenta',
+			'keys'=>[				
 				'micuenta_editar'=>'Editar Mi cuenta.',
 				'micuenta_password' => 'Cambiar contraseña.',
 				'micuenta_info' => 'Cambiar datos personales.'
@@ -148,7 +158,7 @@ function permisos_usuario(){
 				'compras_agregar'=>'Agregar compra.',
 				'compras_eliminar'=>'Anular compra.',
 				'compra_detalle'=>'Ver detalle de compra.',
-				'detalle_pdf'=>'Generar PDFs.'
+				'detalle_compra_pdf'=>'Generar PDFs.'
 			]
 		],
 
@@ -161,7 +171,7 @@ function permisos_usuario(){
 				'tareas_editar'=>'Editar tarea.',
 				'tareas_eliminar'=>'Anular tarea.',
 				'tarea_detalle'=>'Ver detalle de tarea.',
-				'detalle_pdf'=>'Generar PDFs.'
+				'detalle_tarea_pdf'=>'Generar PDFs.'
 			]
 		],
 

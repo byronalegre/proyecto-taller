@@ -10,7 +10,7 @@
 		<header>	
 			<table width="100%" style="border: 2px solid black;border-bottom: 0px ">
 				<tr>
-					<td style="border-right: 2px solid black "><img style="width: aut;" src="{{url('/static/images/logo.png')}}"></td>
+					<td style="border-right: 2px solid black"><img style="width: 250px;" src="{{url('/static/images/logo.png')}}"></td>
 					<td>
 						<h2 style="font-size: 20px; text-align: center; font-family: courier;">	
 							Orden de compra 

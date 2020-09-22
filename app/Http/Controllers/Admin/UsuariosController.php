@@ -37,23 +37,80 @@ class UsuariosController extends Controller
         $u = User::findOrFail($id);
         $u->role = $request->input('rol_user');
 
-        if($request->input('rol_user') == "1"):
-            if(is_null($u->permisos)):
-                $permisos = [
-                    'Panel_controller' => true
-                ];
+        //Se encuentran predeterminados los permisos por ROL.
+        //Si es 1 (ADMIN)- tendra permiso a todo
+        //Si es 2 (E. DEPOSITO)- solo podra realizar acciones relacionadas a piezas(A-M), categorias(A-M), tareas(A-M), backup
+        //Si es 3 (E. COMPRAS)- solo podra realizar acciones relacionadas a proveedores(A-M), compras(A-M), backup 
 
+            if($request->input('rol_user') == "1"):  
+                $u->permisos = null;         
+                if(is_null($u->permisos)):
+                    $permisos = [
+                        "inicio"=>true,
+                        "estadisticas_rapidas"=>true,
+                        "e_admin"=>true, "e_tareas"=>true, "e_compras"=>true,                    
+                        "graficos"=>true,
+                        "piezas"=>true, "piezas_agregar"=>true, "piezas_editar"=>true, "piezas_eliminar"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
+                        "categorias"=>true, "categorias_agregar"=>true,"categorias_editar"=>true,"categorias_eliminar"=>true, 
+                        "usuarios_list"=>true, "usuarios_editar"=>true, "usuarios_suspend"=>true, "usuarios_permisos"=>true, "usuarios_buscar"=>true,
+                        "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
+                        "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_eliminar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
+                        "compras"=>true, "compras_agregar"=>true, "compras_eliminar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
+                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,
+                        "backup"=>true, "backup_create"=>true
+                    ];
+                $permisos = json_encode($permisos);
+                $u->permisos = $permisos;   
+                endif;          
+            endif;
+
+            if ($request->input('rol_user') == "2"):
+                $u->permisos = null;
+                if(is_null($u->permisos)):
+                    $permisos = [
+                        "inicio"=>true,
+                        "estadisticas_rapidas"=>true,
+                        "e_tareas"=>true,                    
+                        "graficos"=>true,
+                        "piezas"=>true, "piezas_agregar"=>true, "piezas_editar"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
+                        "categorias"=>true, "categorias_agregar"=>true,"categorias_editar"=>true,                         
+                        "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
+                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,
+                        "backup"=>true, "backup_create"=>true
+                    ];
                 $permisos = json_encode($permisos);
                 $u->permisos = $permisos;
-            endif;
-        else:
-            $u->permisos = null;
-        endif;
+                endif;
+            endif;            
+
+            if ($request->input('rol_user') == "3"):
+                $u->permisos = null;
+                if(is_null($u->permisos)):
+                    $permisos = [
+                        "inicio"=>true,
+                        "estadisticas_rapidas"=>true,
+                        "e_compras"=>true,                    
+                        "graficos"=>true,
+                        "piezas"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
+                        "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
+                        "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
+                        "compras"=>true, "compras_agregar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
+                       "backup"=>true, "backup_create"=>true
+                    ];
+                $permisos = json_encode($permisos);
+                $u->permisos = $permisos;
+                endif;                  
+            endif;   
+
+            if ($request->input('rol_user') == "0"):
+                $u->permisos = null;
+            endif;  
+
         if($u->save()):
-            if(($request->input('rol_user') == "1") || ($request->input('rol_user') == "2") || ($request->input('rol_user') =="3")):  //luego de cambiar el rol te dirige a los permisos. se agrego desde || ($request->input('rol_user') == "2") || ($request->input('rol_user') =="3")
-                return redirect('admin/usuarios/'.$u->id.'/permisos')->with('message', 'El rol del usuario se actualizo con éxito.')->with('typealert', 'success');
-            else:
+            if($request->input('rol_user') == "0"): 
                 return back()->with('message', 'El rol del usuario se actualizo con éxito.')->with('typealert', 'success');
+            else:               
+                return redirect('admin/usuarios/'.$u->id.'/permisos')->with('message', 'El rol del usuario se actualizo con éxito.')->with('typealert', 'success');
             endif;
         endif;
     }
@@ -83,11 +140,11 @@ class UsuariosController extends Controller
     }
 
     public function postUsuarioPermisos(Request $request, $id){
-
+        
     	$u = User::findOrFail($id);
     	$u->permisos = $request->except(['_token']);
     	if($u->save()):
-    		return back()->with('message', 'Los permisos del usuario fueron actualizados.')->with('typealert', 'success');
+    		return back()->with('message', 'Los permisos fueron actualizados.')->with('typealert', 'success');
     	endif;
     }
 

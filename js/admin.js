@@ -227,7 +227,7 @@ $(function(){
 })
 
 //------------------------------------------------------------------------------------------------------------------------------
-/*
+/*ORDENAR
 $('th').click(function() {
     var table = $(this).parents('table').eq(0)
     var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
@@ -264,3 +264,21 @@ $('th').click(function() {
     else element.addClass("desc");
   }
   */
+
+/*------------------------------------------------------------------------------------------------------------*/
+
+/*BUSQUEDA INSTANTANEA - Solo por pagina
+$(document).ready(function(){
+	 $("#searchTerm").keyup(function(){
+	 _this = this;
+	 // Show only matching TR, hide rest of them
+	 $.each($("#datos tbody tr"), function() {
+	 if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+	 $(this).hide();
+	 else
+	 $(this).show();
+	 });
+	 });
+});
+*/
+

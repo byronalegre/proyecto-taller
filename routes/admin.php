@@ -2,7 +2,7 @@
 
 Route::prefix('/admin')->group(function(){
 	//Panel
-	Route::get('/','Admin\PanelController@getPanel')->name('Panel_controller');
+	Route::get('/','Admin\PanelController@getPanel')->name('inicio');
 
 	//Usuarios
 	Route::get('/usuarios/{status}','Admin\UsuariosController@getUsuarios')->name('usuarios_list') ;
@@ -53,7 +53,7 @@ Route::prefix('/admin')->group(function(){
 	Route::post('/compras/agregar','Admin\ComprasController@postCompraAgregar')->name('compras_agregar');
 	Route::get('/compras/{status}','Admin\ComprasController@getHome')->name('compras');	
 	Route::get('/compras/{id}/detalle', 'Admin\ComprasController@getCompraDetalle')->name('compra_detalle');
-	Route::get('/compras/{id}/detalle/compra_pdf', 'Admin\ComprasController@pdf')->name('detalle_pdf');//ruta pdf
+	Route::get('/compras/{id}/detalle/compra_pdf', 'Admin\ComprasController@pdf')->name('detalle_compra_pdf');//ruta pdf
 	Route::get('/compras/{id}/delete','Admin\ComprasController@getComprasDelete')->name('compras_eliminar');
 	Route::get('/compras/{id}/restore','Admin\ComprasController@getComprasRestore')->name('compras_eliminar');
 
@@ -64,7 +64,7 @@ Route::prefix('/admin')->group(function(){
 	Route::post('/tareas/{id}/edit','Admin\TareasController@postTareaEdit')->name('tareas_editar');
 	Route::get('/tareas/{status}','Admin\TareasController@getHome')->name('tareas');	
 	Route::get('/tareas/{id}/detalle', 'Admin\TareasController@getTareaDetalle')->name('tarea_detalle');
-	Route::get('/tareas/{id}/detalle/tarea_pdf', 'Admin\TareasController@pdf')->name('detalle_pdf');//ruta pdf
+	Route::get('/tareas/{id}/detalle/tarea_pdf', 'Admin\TareasController@pdf')->name('detalle_tarea_pdf');//ruta pdf
 	Route::get('/tareas/{id}/delete','Admin\TareasController@getTareasDelete')->name('tareas_eliminar');
 	Route::get('/tareas/{id}/restore','Admin\TareasController@getTareasRestore')->name('tareas_eliminar');
 

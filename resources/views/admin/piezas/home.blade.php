@@ -15,10 +15,8 @@
 	<div class="panel shadow">
 			<div class="header">
 				<h2 class="title"><i class="fas fa-cogs"></i> Piezas</h2>
-			</div>			
-							
+			</div>										
 			<div class="inside">
-
 				<div class="nav justify-content-end">
 							@if(kvfj(Auth::user()->permisos, 'piezas_buscar'))
 							<div class="form-inline">					
