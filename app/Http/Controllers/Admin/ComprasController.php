@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Models\Compra, App\Http\Models\Proveedor, App\Http\Models\Pieza;
-use Validator,PDF;
+use Validator,PDF,Auth;
 class ComprasController extends Controller
 {
     public function __construct(){
@@ -57,6 +57,7 @@ class ComprasController extends Controller
         else:
            
             $input= new Compra;
+            $input -> responsable = '['. Auth::user()->id .'] ' . Auth::user()->name .' '. Auth::user()->lastname;
             $input -> status ='0';
             $input -> proveedor_id = e($request->input('proveedor'));
             $input -> codigo = e($request->input('codigo'));

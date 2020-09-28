@@ -39,9 +39,10 @@ class PiezaController extends Controller
     }
 
     public function getPiezaAgregar(){
+        $all = Pieza::all();
         $cats = Categoria::where('seccion','0')->pluck('name','id');
     	$marca = Categoria::where('seccion','1')->pluck('name','id');
-        $data = ['cats' => $cats,'marca' => $marca];
+        $data = ['cats' => $cats,'marca' => $marca, 'all'=>$all];
         return view('admin.piezas.agregar', $data);
 
     }
