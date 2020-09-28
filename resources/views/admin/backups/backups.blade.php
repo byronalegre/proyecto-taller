@@ -20,8 +20,12 @@
           <div class="card-header text-muted">
            <b>Copia de seguridad</b>
           </div>
-          <div class="card-body">        
-            <a href="{{ url('admin/backup/create') }}" class="btn btn-danger btn-lg">
+          <div class="card-body">  
+          <button class="btn btn-secondary" type="button" disabled id="cargando" style="display: none;">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creando...
+          </button>      
+            <a href="{{ url('admin/backup/create') }}" class="btn btn-danger" id="create_b">
               <i class="fas fa-plus-circle"></i> Nuevo
             </a>
           </div>

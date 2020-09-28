@@ -35,7 +35,7 @@
 
 								<div class="inside">
 									@foreach($value['keys'] as $k=>$v)
-									<div class="form-check">
+									<div class="form-check form-switch">
 										<input class="form-check-input" type="checkbox" id="flexCheckDefault" value="true" name="{{$k}}" @if(kvfj($u->permisos, $k )) checked @endif>
 										<label class="form-check-label" for="flexCheckDefault"> {{$v}} </label>
 									</div>

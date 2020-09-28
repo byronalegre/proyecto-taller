@@ -28,7 +28,7 @@
 						</a>
 					@endif
 				@endif
-				@if(kvfj(Auth::user()->permisos, 'detalle_pdf'))
+				@if(kvfj(Auth::user()->permisos, 'detalle_tarea_pdf'))
 					<a href="{{url('admin/tareas/'.$t->id.'/detalle/tarea_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm">
 						PDF <i class="far fa-file-pdf"></i>
 					</a>

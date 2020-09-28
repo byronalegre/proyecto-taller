@@ -24,7 +24,7 @@
 					</div>
 					<div class="inside">
 						<div class="info">
-							<span class="title"><i class="fas fa-id-card"></i> Nombre:</span>
+							<span class="title"><i class="fas fa-id-card"></i> Nombre y apellido:</span>
 							<span class="text">{{ $u->name }} {{ $u->lastname}}</span>
 							<span class="title"><i class="far fa-envelope"></i> Correo Electrónico:</span>
 							<span class="text">{{ $u->email}}</span>
@@ -38,13 +38,13 @@
 
 						<div>	
 							@if(kvfj(Auth::user()->permisos, 'usuarios_suspend'))
-							@if($u->status == "100")
-								<a href="{{ url('admin/usuarios/'.$u->id.'/suspend')}}" class="btn btn-success btn-sm mtop16"> Activar usuario
-								</a>
-							@else	
-								<a href="{{ url('admin/usuarios/'.$u->id.'/suspend')}}" class="btn btn-danger btn-sm mtop16"> Suspender usuario
-								</a>
-							@endif
+								@if($u->status == "100")
+									<a href="{{ url('admin/usuarios/'.$u->id.'/suspend')}}" class="btn btn-success"> Activar usuario
+									</a>
+								@else	
+									<a href="{{ url('admin/usuarios/'.$u->id.'/suspend')}}" class="btn btn-danger"> Suspender usuario
+									</a>
+								@endif
 							@endif
 						</div>
 					</div>
@@ -62,13 +62,11 @@
 							{!! Form::open(['url'=>'/admin/usuarios/'.$u->id.'/edit']) !!}
 								
 								<div class="col-md-6">
-									
-									<label for="rol_user">Rol de usuario:</label>
 									<div class="input-group">
 									   		<span class="input-group-text" id="basic-addon1">
 									   			<i class="fas fa-tag"></i>
 									   		</span>
-								    	{!!Form::select('rol_user', getRoleUsuarioArray('list', null), $u->role, ['class' =>'form-select form-select-sm']) !!}	
+								    	{!!Form::select('rol_user', getRoleUsuarioArray('list', null), $u->role, ['class' =>'form-select']) !!}	
 									</div>
 								</div>
 

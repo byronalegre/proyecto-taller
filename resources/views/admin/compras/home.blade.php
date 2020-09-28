@@ -39,7 +39,8 @@
 			<table class="table table-hover mtop16">
 				<thead class="table-dark">
 					<td style="text-align: center;">Código</td>
-					<td style="text-align: center;">Proveedor</td>					
+					<td style="text-align: center;">Proveedor</td>	
+					<td style="text-align: center;">Responsable</td>				
 					<td style="text-align: center;">Fecha registro</td>
 					<td>Descripción</td>
 					<td width="110"></td>
@@ -49,6 +50,7 @@
 					<tr>
 						<td style="text-align: center;">ODC-{{ $i->codigo }} </td>						
 						<td style="text-align: center;">{{ $i->provs->name }} </td>
+						<td style="text-align: center;">{{substr($i->responsable,4)}} </td>
 						<td style="text-align: center;">{{ $i->created_at->format('d/m/Y (H:i)') }} </td>	
 						<td>{{ $i->descripcion }}</td>
 						<td>

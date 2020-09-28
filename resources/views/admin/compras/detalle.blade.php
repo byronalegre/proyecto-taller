@@ -30,6 +30,11 @@
 			</div>
 			
 			<div class="mtop16">
+				<b>RESPONSABLE:</b>
+				<a>{{substr($c->responsable,4)}}</a>
+			</div>
+
+			<div>
 				<b>FECHA:</b>
 				<a>{{$c->created_at->format('d/m/Y')}}</a>
 			</div>

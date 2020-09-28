@@ -48,7 +48,10 @@
 					</td>					
 				</tr>
 				<tr>
-					<td></td>
+					<td>
+						<b>RESPONSABLE:</b>
+						<a>{{substr($c->responsable,4)}}</a>
+					</td>
 					<td>
 						<b>DOMICILIO:</b>
 						<a>{{$c->provs->direccion}}</a>

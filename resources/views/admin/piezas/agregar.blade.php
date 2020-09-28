@@ -39,7 +39,7 @@
 							   		<span class="input-group-text" id="basic-addon1">
 							   			<i class="fas fa-barcode"></i>
 							   		</span>								    
-						    	{!!Form::text('codigo', 0, ['class' => 'form-control'] ) !!}
+						    	{!!Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'XXX-XXXX'] ) !!}
 						    	</div>
 					</div>
 					<div class="col-md-3">
@@ -105,9 +105,10 @@
 							   		<span class="input-group-text" id="basic-addon1">
 							   			<i class="fas fa-map-marker-alt"></i>
 							   		</span>								   
-						    	{!!Form::select('deposito', ['1'=>'1','2'=>'2'], 1, ['class' =>'form-select']) !!}							    		
+						    	{!!Form::select('deposito', ['1'=>'1','2'=>'2'], 1, ['class' =>'form-select']) !!}
 							</div>
-					</div>
+					</div>	
+
 					<div class="col-md-3">
 							<label for="status">Estado:</label>
 							<div class="input-group">									
@@ -118,6 +119,21 @@
 							</div>
 					</div>
 				</div>
+				<!--
+				<div class="row mtop16">
+					<div class="col-md-12">
+							<label>Composición:</label>
+							<div class="input-group">
+								@foreach($all as $p)
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="flexCheckDefault" value="true">
+										<label class="form-check-label" for="flexCheckDefault">{{$p->name}}</label>
+									</div>
+								@endforeach
+							</div>
+					</div>
+				</div>
+				-->
 				<hr>
 				<div class="row mtop16">
 					<div class="col-md-12">

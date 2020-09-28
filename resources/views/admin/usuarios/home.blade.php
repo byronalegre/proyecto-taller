@@ -19,43 +19,31 @@
 
 		
 		<div class="inside">
-			<ul class="nav justify-content-end">
-				@if(kvfj(Auth::user()->permisos, 'usuarios_buscar'))
-						<div class="form-inline">
-					
-							{!! Form::open(['url' => '/admin/usuarios/buscar']) !!}
-							
-							<div class="row">
-								<div style="padding: 0px" class="col-md-5">
-									{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
-								</div>	
-								<div class="col-md-4">
-									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Apellido'], 0,['class'=>'form-select form-select-sm']) !!}
-								</div>
-								<div style="padding: 0px" class="col-md-2">
-									{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
-								</div>
+			<div class="nav justify-content-end">
+					@if(kvfj(Auth::user()->permisos, 'usuarios_buscar'))					
+						{!! Form::open(['url' => '/admin/usuarios/buscar']) !!}
+							<div class="input-group mb-3">
+								  {!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Buscar por']) !!}
+								  {!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'Apellido'], 0,['class'=>'form-select form-select-sm']) !!}
+								  {!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
 							</div>
-							{!! Form::close() !!}
-						
-						</div>
-				@endif
+						{!! Form::close() !!}
+					@endif				
 				
-					<div class="dropdown">
+					<div class="dropdown pl-3">
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						    <a class="dropdown-item" href="{{url('admin/usuarios/all') }}">Todos</a>
-						    <a class="dropdown-item" href="{{url('admin/usuarios/0') }}">Registrados</a>
 						    <a class="dropdown-item" href="{{url('admin/usuarios/1') }}">Activos</a>
 						    <a class="dropdown-item" href="{{url('admin/usuarios/100') }}">Suspendidos</a>
 
 						  </div>
 					</div>
 				
-			</ul>
+			</div>
 
-			<table class="table mtop16">
+			<table class="table table-hover">
 				<thead class="table-dark">
 					<tr>
 						<td>ID</td>

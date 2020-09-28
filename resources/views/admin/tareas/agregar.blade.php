@@ -38,7 +38,7 @@
 							   		<span class="input-group-text" id="basic-addon1">
 							   			<i class="fas fa-barcode"></i>
 							   		</span>								    
-						    	{!!Form::text('codigo', null, ['class' => 'form-control'] ) !!}
+						    	{!!Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'ODT-XXXX'] ) !!}
 						    	</div>
 					</div>
 					<div class="col-md-4">

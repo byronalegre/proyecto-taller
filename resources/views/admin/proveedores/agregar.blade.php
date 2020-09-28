@@ -41,7 +41,7 @@
 								   		<span class="input-group-text" id="basic-addon1">
 								   			<i class="far fa-id-card"></i>
 								   		</span>
-						    	{!!Form::number('cuit', null, ['class' => 'form-control'] ) !!}
+						    	{!!Form::number('cuit', null, ['class' => 'form-control', 'placeholder'=>'XX-XXXXXXXX-X'] ) !!}
 						    	</div>
 					</div>
 

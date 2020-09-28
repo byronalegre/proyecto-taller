@@ -18,39 +18,26 @@
 		
 		<div class="inside">
 			<div class="nav justify-content-end">
-						@if(kvfj(Auth::user()->permisos, 'proveedores_buscar'))
-						<div class="form-inline">
-					
-							{!! Form::open(['url' => '/admin/proveedores/buscar']) !!}
-							
-							<div class="row">
-								<div style="padding: 0px" class="col-md-5">
-									{!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Ingrese su búsqueda']) !!}
-								</div>	
-								<div class="col-md-4">
-									{!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'CUIT','3'=>'Dirección','4'=>'Teléfono'], 0,['class'=>'form-select form-select-sm']) !!}
-								</div>
-								<div style="padding: 0px" class="col-md-2">
-									{!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
-								</div>
+					@if(kvfj(Auth::user()->permisos, 'proveedores_buscar'))					
+						{!! Form::open(['url' => '/admin/proveedores/buscar']) !!}
+							<div class="input-group mb-3">
+								  {!! Form::text('buscar', null, ['class' => 'form-control form-control-sm','placeholder' => 'Buscar por']) !!}
+								  {!! Form::select('filtro',['0'=>'ID','1'=>'Nombre','2'=>'CUIT','3'=>'Dirección','4'=>'Teléfono'], 0,['class'=>'form-select form-select-sm']) !!}
+								  {!! Form::submit('Buscar', ['class'=> 'btn btn-outline-dark btn-sm']) !!}
 							</div>
-							{!! Form::close() !!}
-						
-						</div>
-						@endif
-		
+						{!! Form::close() !!}
+					@endif	
 							
-						
-						<div class="dropdown">
-							  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
+					<div class="dropdown pl-3">
+						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							    <a class="dropdown-item" href="{{url('admin/proveedores/all') }}">Todos</a>
-							    <a class="dropdown-item" href="{{url('admin/proveedores/trash') }}">Papelera</a>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						    <a class="dropdown-item" href="{{url('admin/proveedores/all') }}">Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/proveedores/trash') }}">Papelera</a>
 
-							  </div>
-						</div>
-		</div>	
+						  </div>
+					</div>
+			</div>	
 
 			<div class="btns">
 				@if(kvfj(Auth::user()->permisos, 'proveedores_agregar'))
@@ -59,7 +46,7 @@
 					</a>
 				@endif
 				@if(kvfj(Auth::user()->permisos, 'proveedores_pdf'))
-					<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('proveedores_pdf') }}" class="btn btn-sm btn-danger">
+					<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('proveedores_pdf') }}" class="btn btn-sm btn-danger">PDF
 	           			<i data-toggle="tooltip" data-placement="top" title="Generar PDF" class="far fa-file-pdf"></i>
 	       			</a>
 	       		@endif
