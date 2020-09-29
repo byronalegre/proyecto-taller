@@ -6,6 +6,7 @@
 	<title>@yield('title')</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="routeName" content="{{ Route::currentRouteName() }}">
+	<link rel="icon" type="image/png" href="{{ url('/static/images/mini.ico')}}"/>
 	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shirnk-to-fit=no">-->
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -26,7 +27,7 @@
 
 	<nav class="navbar navbar-expand-lg shadow">
 	 	<div class="container-fluid">
-		    <a class="navbar-brand" href="{{url('/')}}" ><img src="{{url('static/images/logo.png')}}" width="200" height="60" alt="" loading="lazy">
+		    <a class="navbar-brand" href="{{url('/')}}" ><img src="{{url('static/images/logo.png')}}" width="230" height="60" alt="" loading="lazy">
 		    </a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			≡
@@ -87,8 +88,16 @@
 				
 				@section('content')
 				@show
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+	<nav class="navbar fixed-bottom navbar-dark bg-dark">
+	  <div class="container-fluid">
+	    <a style="font-size: 10px;" class="navbar-brand">Desarrollado por Agustin Alegre & Mariano Wasinger ©</a>
+	  </div>
+	</nav>	
 
 </body>
+
 </html>

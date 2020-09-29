@@ -66,7 +66,7 @@
 					<td>Mínimo</td>
 					<td>Cantidad</td>
 					<td>Marca</td>
-					<td width="110"></td>
+					<td width="90"></td>
 					<td width="auto"></td>
 				</thead>
 				<tbody>

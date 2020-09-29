@@ -44,7 +44,7 @@
 					<td style="text-align: center;">Fecha solicitud</td>
 					<td style="text-align: center;">Fecha programada</td>
 					<td style="text-align: center;">Estado</td>
-					<td width="110"></td>
+					<td width="90"></td>
 				</thead>
 				<tbody>
 					@foreach($input as $i)

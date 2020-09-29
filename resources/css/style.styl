@@ -1,0 +1,63 @@
+color1 = #21856d//#00ad27a6
+
+body
+	background-image url('/static/images/fondo.jpg') 
+	background-position center top
+	background-repeat no-repeat
+	background-color #beeac896
+	background-size cover
+	font-size 16px
+	font-family 'Roboto',san-seriff;	
+nav
+	background-color #fff
+	padding-top 0px !important
+	padding-bottom 0px !important
+	.navbar-nav
+		li.nav-item
+			a.nav-link
+				border 1px solid #fff
+				border-radius 4px
+				color black
+				font-size .9em
+				font-weight bold
+				margin-right 4px
+				padding 5px 16px !important
+				&:hover
+					color color1
+			a.btn
+				font-size .9em
+				background-color color1
+				font-weight bold
+				&:hover
+					background-color black
+					color white
+				&:first-child
+					border-radius 4px 0px 0px 4px
+				&:last-child
+					border-radius 0px 4px 4px 0px
+		    ul.dropdown-menu
+				top 150%
+				right -12px
+				border-bottom 2px solid color1
+				border-radius 0px 0px 4px 4px
+				padding-top 0em !important		
+				padding-bottom 0em !important		
+				li
+					a.dropdown-item
+						font-size 14px						
+						&:hover
+							background-color #00ad27a6
+							color white
+
+@media only screen and (max-width 992px)
+	body
+		background-repeat repeat
+	.navbar-nav
+		font-size 20px
+		flex-direction inherit
+		justify-content flex-end
+	.navbar-toggler
+		font-size 50px
+		&:focus
+			outline none
+			box-shadow none

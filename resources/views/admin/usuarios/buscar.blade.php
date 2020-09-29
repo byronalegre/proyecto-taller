@@ -52,7 +52,7 @@
 						<td>Email</td>
 						<td>Rol</td>
 						<td>Estado</td>
-						<td width="110"></td>
+						<td width="90"></td>
 					</tr>
 				</thead>
 				<tbody>

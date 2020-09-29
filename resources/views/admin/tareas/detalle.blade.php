@@ -20,12 +20,14 @@
 			<h2 class="title"><i class="fas fa-info-circle"></i> Detalle</h2>
 		</div>
 		<div class="inside">
-			<div style="text-align: right">			
-				@if(kvfj(Auth::user()->permisos, 'tareas_editar'))
-					@if(is_null($t->deleted_at))
-						<a class="btn btn-primary btn-sm" href="{{url('admin/tareas/'.$t->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
-						<i class="fas fa-edit"></i>
-						</a>
+			<div style="text-align: right">	
+				@if($t->status != '1')		
+					@if(kvfj(Auth::user()->permisos, 'tareas_editar'))
+						@if(is_null($t->deleted_at))
+							<a class="btn btn-primary btn-sm" href="{{url('admin/tareas/'.$t->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
+							<i class="fas fa-edit"></i>
+							</a>
+						@endif
 					@endif
 				@endif
 				@if(kvfj(Auth::user()->permisos, 'detalle_tarea_pdf'))

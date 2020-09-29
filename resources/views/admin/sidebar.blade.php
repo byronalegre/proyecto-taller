@@ -14,12 +14,12 @@
 			</div>	
 	
 			<div class="user">
-				<h6><span class="big-count badge bg-dark" style="width: 100%">
+				<h6><span class="badge bg-dark" style="width: 100%">
 					Hola: {{Auth::user()->name }} {{ Auth::user()->lastname }}
 					<i class="fas fa-laugh"></i>
 				</span>
 				</h6>
-				<h6><span class="big-count badge bg-secondary" style="width: 100%">
+				<h6><span class="badge bg-secondary" style="width: 100%">
 					{{ getRoleUsuarioArray(null, Auth::user()->role) }}
 				</span>
 				</h6>

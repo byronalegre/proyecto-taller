@@ -43,7 +43,7 @@
 					<td style="text-align: center;">Responsable</td>				
 					<td style="text-align: center;">Fecha registro</td>
 					<td>Descripción</td>
-					<td width="110"></td>
+					<td width="90"></td>
 				</thead>
 				<tbody>
 					@foreach($input as $i)

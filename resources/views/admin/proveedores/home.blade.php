@@ -60,7 +60,7 @@
 					<td>Dirección</td>
 					<td>Teléfono</td>
 					<td>Correo Electrónico</td>
-					<td width="110"></td>
+					<td width="90"></td>
 				</thead>
 				<tbody>
 					
