@@ -2,7 +2,9 @@
 
 LINK PARA DESCARGAR PROYECTO COMPLETO: 
 
-Al 21/11/2020 -> https://drive.google.com/file/d/1d6znC0pRvJW5dqV8-NeN3WduNkRs-Vxw/view?usp=sharing
+Al 26/11/2020 -> https://drive.google.com/file/d/1L7xxK_Z3G50cXdnAc_Vo5ibvDi6NyEJ1/view?usp=sharing (novedad: Modulo configuraciones)
+
+Al 21/11/2020 -> https://drive.google.com/file/d/1d6znC0pRvJW5dqV8-NeN3WduNkRs-Vxw/view?usp=sharing (novedad: Modulo backup con Alta y Baja)
 
 Al 23/09/2020 -> https://drive.google.com/file/d/1yMciR_iJjdlstoU0l8LhZ4ZsmwGCgW4j/view?usp=sharing
 
