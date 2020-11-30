@@ -14,6 +14,8 @@ Al 31/08/2020 -> https://drive.google.com/file/d/1mngEdqC99LFFdIEC7xsajVUt2-Mv1E
 
 Al 28/08/2020 -> https://drive.google.com/file/d/1Nq5UIayE54eMh7Ez2fvS1KTP8OANBsBT/view?usp=sharing
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 csss + images + js van adentro de public/static
 
 uploads va dentro de public/
