@@ -5,7 +5,7 @@ LINK PARA DESCARGAR PROYECTO COMPLETO:
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //NOVIEMBRE
 
-Al 30/11/2020 -> https://drive.google.com/file/d/1mngEdqC99LFFdIEC7xsajVUt2-Mv1EUg/view?usp=sharing 
+Al 30/11/2020 -> https://drive.google.com/file/d/17m9POS61GgsDu6ysNm8TRAvHRdDplig7/view?usp=sharing
 
 Al 26/11/2020 -> https://drive.google.com/file/d/1L7xxK_Z3G50cXdnAc_Vo5ibvDi6NyEJ1/view?usp=sharing (novedad: Modulo configuraciones)
 
