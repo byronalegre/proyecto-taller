@@ -2,6 +2,10 @@
 
 LINK PARA DESCARGAR PROYECTO COMPLETO: 
 
+//DICIEMBRE
+
+Al 8/12/2020 -> https://drive.google.com/file/d/1MMULgOkxkiW2WQpcuoG7HlGBYcMgl1UV/view?usp=sharing (novedad: Modulo Ordenes de Compra)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //NOVIEMBRE
 
