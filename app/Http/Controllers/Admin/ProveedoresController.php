@@ -20,9 +20,9 @@ class ProveedoresController extends Controller
 
     public function getHome($status){
     	if($status == 'all'):
-            $provs = Proveedor::orderBy('id','Desc')->paginate(5);        
+            $provs = Proveedor::orderBy('id','Desc')->paginate(config('settings.pag'));    
         elseif($status == 'trash'): 
-            $provs = Proveedor::onlyTrashed()->orderBy('id','desc')->paginate(5);  
+            $provs = Proveedor::onlyTrashed()->orderBy('id','desc')->paginate(config('settings.pag'));
         endif;
     	
     	$data = ['provs'=> $provs];

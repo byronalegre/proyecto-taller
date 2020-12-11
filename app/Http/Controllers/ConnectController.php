@@ -15,9 +15,9 @@ class ConnectController extends Controller
     public function getLogin(){
     	return view('connect.login');
     }
-     public function getRegister(){
+   /*  public function getRegister(){
     	return view('connect.register');
-    }
+    }*/
 
     public function postLogin(Request $request){
     	$rules = [
@@ -50,7 +50,7 @@ class ConnectController extends Controller
     	endif;
     }
 
-    public function postRegister(Request $request){
+ /*   public function postRegister(Request $request){
     	$rules = [
     		'name'=> 'required',
     		'lastname' => 'required',
@@ -87,7 +87,7 @@ class ConnectController extends Controller
     		endif;
     	endif;
 
-    }
+    }*/
 
     public function getLogout(){
     $status = Auth::user()->status;

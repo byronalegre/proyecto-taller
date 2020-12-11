@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Validator,Auth,Hash;
+use Validator,Auth,Hash,Mail;
+use App\Mail\EnvioNuevoUsuarioyContraseña;
 class UsuariosController extends Controller
 {
      public function __construct(){
@@ -18,9 +19,9 @@ class UsuariosController extends Controller
 
     public function getUsuarios($status){
     	if($status == 'all'):
-    		$users= User::orderBy('id','Desc')->paginate(5);
+    		$users= User::orderBy('id','Desc')->paginate(config('settings.pag'));
     	else:
-    		$users= User::where('status', $status)->orderBy('id','Desc')->paginate(5);
+    		$users= User::where('status', $status)->orderBy('id','Desc')->paginate(config('settings.pag'));
     	endif;
 
     	$data= ['users'=> $users];
@@ -41,23 +42,24 @@ class UsuariosController extends Controller
         //Si es 1 (ADMIN)- tendra permiso a todo
         //Si es 2 (E. DEPOSITO)- solo podra realizar acciones relacionadas a piezas(A-M), categorias(A-M), tareas(A-M), backup
         //Si es 3 (E. COMPRAS)- solo podra realizar acciones relacionadas a proveedores(A-M), compras(A-M), backup 
-
+        //Si es 4 (E. TAREAS)-
             if($request->input('rol_user') == "1"):  
                 $u->permisos = null;         
                 if(is_null($u->permisos)):
                     $permisos = [
                         "inicio"=>true,
                         "estadisticas_rapidas"=>true,
-                        "e_admin"=>true, "e_tareas"=>true, "e_compras"=>true,                    
+                        "e_tareas"=>true, "e_compras"=>true,                    
                         "graficos"=>true,
                         "piezas"=>true, "piezas_agregar"=>true, "piezas_editar"=>true, "piezas_eliminar"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
                         "categorias"=>true, "categorias_agregar"=>true,"categorias_editar"=>true,"categorias_eliminar"=>true, 
-                        "usuarios_list"=>true, "usuarios_editar"=>true, "usuarios_suspend"=>true, "usuarios_permisos"=>true, "usuarios_buscar"=>true,
+                        "usuarios_list"=>true, "usuarios_editar"=>true, "usuarios_suspend"=>true, "usuarios_permisos"=>true, "usuarios_buscar"=>true, "usuarios_register"=>true,
                         "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
                         "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_eliminar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
                         "compras"=>true, "compras_agregar"=>true, "compras_eliminar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
-                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,
-                        "backup"=>true, "backup_create"=>true
+                        "pedidos"=>true, "pedidos_agregar"=>true, "pedidos_editar"=>true,
+                        "backup"=>true, "backup_create"=>true, "backup_dowload"=>true , "backup_delete"=>true,
+                        "config"=>true
                     ];
                 $permisos = json_encode($permisos);
                 $u->permisos = $permisos;   
@@ -95,12 +97,31 @@ class UsuariosController extends Controller
                         "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
                         "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
                         "compras"=>true, "compras_agregar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
-                       "backup"=>true, "backup_create"=>true
+                        "backup"=>true, "backup_create"=>true
                     ];
                 $permisos = json_encode($permisos);
                 $u->permisos = $permisos;
                 endif;                  
             endif;   
+
+            if ($request->input('rol_user') == "4"):
+                $u->permisos = null;
+                if(is_null($u->permisos)):
+                    $permisos = [
+                        "inicio"=>true,
+                        "estadisticas_rapidas"=>true,
+                        "piezas"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true, 
+                        "e_tareas"=>true,                    
+                        "graficos"=>true,                         
+                        "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
+                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,       
+                        "backup"=>true, "backup_create"=>true               
+                        
+                    ];
+                $permisos = json_encode($permisos);
+                $u->permisos = $permisos;
+                endif;                  
+            endif;
 
             if ($request->input('rol_user') == "0"):
                 $u->permisos = null;
@@ -239,5 +260,47 @@ class UsuariosController extends Controller
                 return back()->with('message', 'Sus datos fueron actualizados con éxito.')->with('typealert', 'success');
             endif;
         endif;
+    }
+
+    public function getRegister(){
+        return view('admin.usuarios.register');
+    }
+
+    public function postRegister(Request $request){
+        $rules = [
+            'name'=> 'required',
+            'lastname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8'
+        ];
+
+        $messages = [
+            'name.required'=> 'Su nombre es requerido',
+            'lastname.required'=> 'Su apellido es requerido',
+            'email.required'=> 'Su correo es requerido',
+            'email.email'=> 'Su correo es invalido',
+            'email.unique'=> 'Este correo ya existe',
+            'password.required'=> 'Por favor escriba una contraseña',
+            'password.min'=> 'Debe tener al menos 8 caracteres'
+        ];
+        
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()):
+            return back()->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger');
+        else:
+            $user = new user;
+            $user->name = e($request->input('name'));
+            $user->lastname = e($request->input('lastname'));
+            $user->email = e($request->input('email'));
+            $user->password = Hash::make($request->input('password'));
+
+            $data = ['name'=>$user->name, 'email'=>$user->email, 'password'=>$request->input('password') ];
+
+            if($user->save()):
+                Mail::to($user->email)->send(new EnvioNuevoUsuarioyContraseña($data));
+                return redirect('/admin/usuarios/'.$user->id.'/edit')->with('message', 'El usuario registrado con éxito. Seleccione el rol que tendrá.')->with('typealert', 'success');
+            endif;
+        endif;
+
     }
 }

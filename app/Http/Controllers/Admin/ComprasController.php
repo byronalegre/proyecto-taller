@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Http\Models\Compra, App\Http\Models\Proveedor, App\Http\Models\Pieza;
+use App\Http\Models\Compra, App\Http\Models\Proveedor, App\Http\Models\Pieza, App\Http\Models\OrdenCompra;
 use Validator,PDF,Auth;
+
 class ComprasController extends Controller
 {
     public function __construct(){
@@ -20,10 +21,10 @@ class ComprasController extends Controller
     public function getHome($status, Request $request){
         switch ($status) {
             case 'all':
-                $input = Compra::with(['provs','prods'])->orderBy('id','desc')->paginate(5); ;
+                $input = Compra::with(['provs','prods','orden'])->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             case 'trash':
-                $input = Compra::with(['provs','prods'])->onlyTrashed()->orderBy('id','desc')->paginate(5); 
+                $input = Compra::with(['provs','prods','orden'])->onlyTrashed()->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;            
         }
     	  
@@ -35,7 +36,8 @@ class ComprasController extends Controller
      public function getCompraAgregar(){
    		$provs = Proveedor::all()->pluck('name','id');
    		$prods = Pieza::where('status','1')->pluck('name','id');
-   		$data = ['provs' => $provs,'prods' => $prods];
+        $orden = OrdenCompra::where('status','1')->pluck('codigo','id');
+   		$data = ['provs' => $provs,'prods' => $prods, 'orden' => $orden];
         return view('admin.compras.agregar', $data);
     }
 
@@ -58,7 +60,8 @@ class ComprasController extends Controller
            
             $input= new Compra;
             $input -> responsable = '['. Auth::user()->id .'] ' . Auth::user()->name .' '. Auth::user()->lastname;
-            $input -> status ='0';
+           // $input -> status ='0';
+            $input -> orden_id = e($request->input('orden_id'));
             $input -> proveedor_id = e($request->input('proveedor'));
             $input -> codigo = e($request->input('codigo'));
             $input -> descripcion = e($request->input('descripcion'));
@@ -80,7 +83,7 @@ class ComprasController extends Controller
             //------------------ 
             
      		if($input->save()):
-            	return redirect('/admin/compras/all')->with('message','Compra guardada.')->with('typealert','success');
+            	return redirect('/admin/compras/all')->with('message','Remito guardado.')->with('typealert','success');
             endif;
 
         endif;
@@ -102,24 +105,39 @@ class ComprasController extends Controller
 
         $pdf = PDF::loadView('admin.compras.pdf',compact('a','c','acum'));
 
-        return $pdf->stream('Detalle_compra-'.$today.'.pdf');
+        return $pdf->stream('Detalle_remito-'.$today.'.pdf');
     
     }
 
      public function getComprasDelete($id){
         $c= Compra::findOrfail($id);
+        $p= json_decode($c->productos, true);
+
+        foreach ($p as $value) {
+            $p = Pieza::findOrFail($value['id_p']);
+            $p-> cantidad -= $value['cantidad'];
+            $p->save();
+        }
 
         if($c->delete()):
-            return back()->with('message','Enviada a la papelera.')->with('typealert','danger');
+            return back()->with('message','Enviado a la papelera.')->with('typealert','danger');
         endif;
     }
 
     public function getComprasRestore($id){
         $c= Compra::onlyTrashed()->where('id', $id)->first();
+        $p= json_decode($c->productos, true);
+
+        foreach ($p as $value) {
+            $p = Pieza::findOrFail($value['id_p']);
+            $p-> cantidad += $value['cantidad'];
+            $p->save();
+        }
+
         $c->restore();
        
         if($c->save()):
-            return redirect('/admin/compras/all')->with('message','Restaurada con éxito.')->with('typealert','success');
+            return redirect('/admin/compras/all')->with('message','Restaurado con éxito.')->with('typealert','success');
         endif;
     }
 }

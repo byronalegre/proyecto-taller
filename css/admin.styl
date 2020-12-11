@@ -32,7 +32,7 @@ a
 	min-height 120vh //Altura del sidebar
 	min-width 250px
 	.section-top
-		background-color #fff//verde-> #00ad27a6
+		background-color #21856d//verde-> #00ad27a6
 		border-bottom 2px solid #00ad27a6
 		//box-shadow 0 0.5rem 1rem rgba(0,0,0,0.15)
 	.logo
@@ -40,12 +40,12 @@ a
 		text-align center
 		margin 0px auto
 		padding-top 24px
-		width 90%
+		width 50%
 	.icon
 		a //ESTO POSICIONA EL ICONO SALIR
 			margin-right 0.5em	
 			float right 
-			color #21856d//verde #005403//#b35100
+			color #fff//#21856d//verde #005403//#b35100
 			font-size 1.5em
 			&:hover
 				color red
@@ -58,7 +58,7 @@ a
 			li
 				margin-bottom 4px
 				a
-					color #fff//#000 !important//8998ac gris clarito
+					color #fff//#000 !important
 					display block
 					font-size 1.1em
 					padding 12px 12px
@@ -74,6 +74,12 @@ a
 						box-shadow 0 0.5rem 1rem rgba(0,0,0,0.15)
 						color #fff !important
 						text-decoration none
+.btn-success
+	background-color #21856d
+	border-color #21856d
+	&:hover
+		background-color #186653
+		border-color #186653
 
 .navbar
 	border-radius 0 0 5px 0
@@ -154,6 +160,15 @@ a
 		width 100%
 
 .dropdown
+	.dropdown-menu
+		padding-bottom 0px
+		padding-top 0px
+		a.dropdown-item
+			font-size 14px
+			&:hover
+				color #fff
+				background-color #21856d
+.dropright
 	.dropdown-menu
 		padding-bottom 0px
 		padding-top 0px

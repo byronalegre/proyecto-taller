@@ -19,7 +19,7 @@ class CategoriasController extends Controller
     }
 
     public function getHome($seccion){//esto se usa para cambiar el orden que muestra las cats
-    	$cats = Categoria::where('seccion', $seccion)->orderBy('id','Asc')->paginate(5);
+    	$cats = Categoria::where('seccion', $seccion)->orderBy('id','Asc')->paginate(config('settings.pag'));
     	$data = ['cats'=> $cats];
     	return view('admin.categorias.home', $data);
     }
@@ -27,11 +27,11 @@ class CategoriasController extends Controller
     public function postCategoriaAgregar(Request $request){
     	$rules = [
     		'name' => 'required',
-    		'descripcion' => 'required'
+    		'seccion' => 'required'
     	];
     	$messages = [
     		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'descripcion.required' => 'Se requiere una sección para la categoría.'
+    		'seccion.required' => 'Se requiere una sección para la categoría.'
     	];
 
 
@@ -63,11 +63,11 @@ class CategoriasController extends Controller
      public function postCategoriaEdit(Request $request, $id){
     	$rules = [
     		'name' => 'required',
-    		'descripcion' => 'required'
+    		'seccion' => 'required'
     	];
     	$messages = [
     		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'descripcion.required' => 'Se requiere una sección para la categoría.'
+    		'seccion.required' => 'Se requiere una sección para la categoría.'
     	];
 
 

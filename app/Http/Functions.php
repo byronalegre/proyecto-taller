@@ -27,30 +27,15 @@ function getSeccionArray(){
 
 	return $a;
 }
-/*
-function getLocalArray($id){
-	switch($id){
-		case '0':
-		return 'Indeterminado';
-		break;
 
-		case '1':
-		return 'Depósito 1';
-		break;
-
-		case '2':
-		return 'Depósito 2';
-		break;
-	}
-}
-*/
 function getRoleUsuarioArray($mode, $id){
 
 	$roles = [
-	'0'=>'Usuario común',	
-	'1'=>'Administrador',
-	'2'=>'Encargado del depósito',
-	'3'=>'Encargado de compras'
+		'0'=>'Usuario común',	
+		'1'=>'Administrador',
+		'2'=>'Encargado del depósito',
+		'3'=>'Encargado de compras',
+		'4'=>'Encargado de tareas'
 	];
 
 if(!is_null($mode)):
@@ -82,9 +67,8 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-home"></i>',
 			'title'=> 'Módulo - Inicio',
 			'keys'=>[
-				'inicio'=>'Ver módulo de inicio. (¡No destildar! No le permitirá acceso a la pantalla de administración).',
-				'estadisticas_rapidas'=>'Ver estadísticas.',
-				'e_admin'=>'Ver estadísticas de administración.',
+				'inicio'=>'Ver módulo de inicio. (Destildar SOLO cuando el sistema se encuentre en Mantenimiento).',
+				'estadisticas_rapidas'=>'Ver estadísticas.',				
 				'e_tareas'=>'Ver estadísticas de tareas.',	
 				'e_compras'=>'Ver estadísticas de facturación.',
 				'graficos'=>'Ver gráficos estadísticos.'
@@ -92,7 +76,7 @@ function permisos_usuario(){
 		],
 
 		'piezas'=>[
-			'icon'=> '<i class="fas fa-cogs"></i>',
+			'icon'=> '<i class="fas fa-cog"></i>',
 			'title'=> 'Módulo - Piezas',
 			'keys'=>[
 				'piezas'=>'Ver módulo piezas.',
@@ -119,7 +103,8 @@ function permisos_usuario(){
 			'icon'=> '<i class="fas fa-users"></i>',
 			'title'=> 'Módulo - Usuarios',
 			'keys'=>[
-				'usuarios_list'=>'Ver módulo usuarios.',				
+				'usuarios_list'=>'Ver módulo usuarios.',					
+				'usuarios_register'=>'Registrar usuarios.',			
 				'usuarios_editar'=>'Editar usuarios.',
 				'usuarios_suspend'=>'Suspender usuarios.',
 				'usuarios_permisos'=>'Permisos usuarios.',
@@ -149,16 +134,41 @@ function permisos_usuario(){
 				'proveedores_pdf'=>'Generar PDFs.'
 			]
 		],
-		
 		'compras'=>[
 			'icon'=>'<i class="fas fa-cart-plus"></i>',
-			'title'=>'Módulo - Compras',
+			'title'=>'Módulo - Ordenes de Compra',
 			'keys'=>[
-				'compras'=>'Ver módulo compras.',
-				'compras_agregar'=>'Agregar compra.',
-				'compras_eliminar'=>'Anular compra.',
-				'compra_detalle'=>'Ver detalle de compra.',
+				'compras'=>'Ver módulo ordenes de compra.',
+				'compras_agregar'=>'Agregar orden de compra.',
+				'compras_editar'=>'Editar orden de compra.',
+				'compras_eliminar'=>'Anular orden de compra.',
+				'compra_detalle'=>'Ver detalle de orden de compra.',
 				'detalle_compra_pdf'=>'Generar PDFs.'
+			]
+		],
+		
+		'remitos'=>[
+			'icon'=>'<i class="fas fa-file-invoice-dollar"></i>',
+			'title'=>'Módulo - Remitos',
+			'keys'=>[
+				'remitos'=>'Ver módulo remitos.',
+				'remitos_agregar'=>'Agregar remito.',
+				'remitos_eliminar'=>'Anular remito.',
+				'remito_detalle'=>'Ver detalle de remito.',
+				'detalle_remito_pdf'=>'Generar PDFs.'
+			]
+		],
+
+		'pedidos'=>[
+			'icon'=>'<i class="fas fa-file-invoice"></i>',
+			'title'=>'Módulo - Ordenes de Pedido',
+			'keys'=>[
+				'pedidos'=>'Ver módulo ordenes de pedido.',
+				'pedidos_agregar'=>'Agregar orden de pedido.',
+				'pedidos_editar'=>'Editar orden de pedido.',
+				'pedidos_eliminar'=>'Anular orden de pedido.',
+				'pedido_detalle'=>'Ver detalle de orden de pedido.',
+				'detalle_pedido_pdf'=>'Generar PDFs.'
 			]
 		],
 
@@ -180,7 +190,17 @@ function permisos_usuario(){
 			'title'=>'Módulo - Backup',
 			'keys'=>[
 				'backup'=>'Ver módulo backup.',
-				'backup_create'=>'Crear backup.'
+				'backup_create'=>'Crear backups.',
+				'backup_dowload'=>'Descargar backups.',
+				'backup_delete'=>'Eliminar backups.',
+			]
+		],
+
+		'config'=>[
+			'icon'=>'<i class="fas fa-wrench"></i>',
+			'title'=>'Módulo - Configuración',
+			'keys'=>[
+				'config'=>'Ver módulo configuración.'
 			]
 		]
 		

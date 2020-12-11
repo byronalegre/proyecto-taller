@@ -20,5 +20,9 @@ class Compra extends Model
     public function prods(){
     	return $this->hasOne(Pieza::class,'id', 'productos');
     }
+
+    public function orden(){
+        return $this->hasOne(OrdenCompra::class,'id', 'orden_id');
+    }
    
 }

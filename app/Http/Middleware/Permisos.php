@@ -19,7 +19,7 @@ class Permisos
 
     public function handle($request, Closure $next)
     {
-        if(((Auth::user()->role == "1") || (Auth::user()->role == "2") || (Auth::user()->role == "3")) && (kvfj(Auth::user()->permisos, Route::currentRouteName()) == true)):
+        if(((Auth::user()->role == "1") || (Auth::user()->role == "2") || (Auth::user()->role == "3") || (Auth::user()->role == "4")) && (kvfj(Auth::user()->permisos, Route::currentRouteName()) == true)):
             return $next($request);
         else:
             if(Auth::user()->role == "0"):

@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => env('FILESYSTEM_CLOUD', 'google'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,12 +64,25 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
-
+//AGREGADOS
         'uploads' => [
             'driver' => 'local',
             'root' => 'G:/www/cms/public/uploads' //en caso de tener un servidor, cambiar esta ruta por la que se va a usar para guardar.
-        ]
+        ],
 
+        'backups' => [
+            'driver' => 'local',
+            'root' => 'G:/www/cms/storage/app/backups'
+        ],
+     
+        'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
+        ]
+  //----------------- 
     ],
 
     /*

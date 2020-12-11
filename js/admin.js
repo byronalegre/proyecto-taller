@@ -1,5 +1,7 @@
 var base = location.protocol+'//'+location.host;
 var route = document.getElementsByName('routeName')[0].getAttribute('content');
+var http = new XMLHttpRequest();
+var csrfToken = document.getElementsByName('csrf-token')[0].getAttribute('content');
 //------------------------------------------------------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function(){	
 	document.getElementsByClassName('lk-'+route)[0].classList.add('active');
@@ -60,87 +62,91 @@ function delete_object(e){
 
 //------------------------------------------------------------------------------------------------------------------------------
 //FUNCION PARA CREAR TABLA AGREGAR PRODUCTOS A COMPRA
-var count = 0;
-var acum = 0;
-var list = {
-			 'datos' :[]
-			};
-$(function(){	
-	//agrega fila a tabla compra
-	$('#agregar').click(function(e){
-		e.preventDefault();		
-		var combo = document.getElementById("producto");
-		var selected = combo.options[combo.selectedIndex].text;//nombre 
-		var cant = document.getElementById("cantidad").value;
- 		var price = document.getElementById("precio").value;	
- 		var id_prod = combo.options[combo.selectedIndex].value;
+if(route == "remitos_agregar" || route == "compras_agregar"){
+	var count = 0;
+	var acum = 0;
+	var list = {
+				 'datos' :[]
+				};
+	$(function(){	
+		//agrega fila a tabla compra
+		$('#agregar').click(function(e){
+			e.preventDefault();		
+			var combo = document.getElementById("producto");
+			var selected = combo.options[combo.selectedIndex].text;//nombre 
+			var cant = document.getElementById("cantidad").value;
+	 		var price = document.getElementById("precio").value;	
+	 		var id_prod = combo.options[combo.selectedIndex].value;
 
- 		if(cant>0 && price>0){//esto valida que no se ingresen valores 0
-		var tr = '<tr><td hidden="true">'+count+'</td><td>'+selected+'</td><td>'+cant+'</td><td>'+price+'</td><td>'+cant*price+'</td><td><input type="button" class="borrar btn btn-danger btn-sm" value="Eliminar"></td></tr>';
-		
-		$('tbody').append(tr); 
-	    list.datos.push({
-	    "id":count,
-	    "id_p": id_prod,
-	    "producto": selected,
-	    "cantidad": cant,
-	    "precio": price
-	  	});
-		
-		var json = JSON.stringify(list.datos); // aqui tienes la lista de objetos en Json
-	//	var Obj = JSON.parse(json); //Parsea el Json al objeto anterior.
-		count++;
+	 		if(cant>0 && price>0){//esto valida que no se ingresen valores 0
+				var tr = '<tr><td hidden="true">'+count+'</td><td>'+selected+'</td><td>'+cant+'</td><td>'+price+'</td><td>'+cant*price+'</td><td><input type="button" class="borrar btn btn-danger btn-sm" value="Eliminar"></td></tr>';
+				
+				$('tbody').append(tr); 
+			    list.datos.push({
+			    "id":count,
+			    "id_p": id_prod,
+			    "producto": selected,
+			    "cantidad": cant,
+			    "precio": price
+			  	});
+				
+				var json = JSON.stringify(list.datos); // aqui tienes la lista de objetos en Json
+			//	var Obj = JSON.parse(json); //Parsea el Json al objeto anterior.
+				count++;
 
-		$("#productos").val(json);	
-      
-//ACTUALIZA Y ACUMULA TOTAL
-		for (var item in list.datos){
-			var td = parseInt(list.datos[item].precio * list.datos[item].cantidad);
-		}
-		acum += td;
-		
-		$('h6').html("Total: $"+ acum);
-		}
-	})		
+				$("#productos").val(json);	
+		      
+		//ACTUALIZA Y ACUMULA TOTAL
+				for (var item in list.datos){
+					var td = parseInt(list.datos[item].precio * list.datos[item].cantidad);
+				}
+				acum += td;
+				
+				$('h6').html("Total: $"+ acum);
+				}
+		})		
 
-//BORRA FILA, ACTUALIZA ARRAY DE PRODUCTOS y TOTAL $
-	$('body').on('click', 'input.borrar', function(e) {		
-	   e.preventDefault();
-	   var index = $(this).closest("tr").index();
-       var id = $(this).parents("tr").find("td")[0].innerHTML; 
-       var erase = $(this).parents("tr").find("td")[4].innerHTML;
+	//BORRA FILA, ACTUALIZA ARRAY DE PRODUCTOS y TOTAL $
+		$('body').on('click', 'input.borrar', function(e) {		
+		   e.preventDefault();
+		   var index = $(this).closest("tr").index();
+	       var id = $(this).parents("tr").find("td")[0].innerHTML; 
+	       var erase = $(this).parents("tr").find("td")[4].innerHTML;
 
-       for(var item in list.datos){     	
-        	if(list.datos[item].id == id){
-       			list.datos.splice(index,1);
-       		}
-       }
+	       for(var item in list.datos){     	
+	        	if(list.datos[item].id == id){
+	       			list.datos.splice(index,1);
+	       		}
+	       }
 
-		if(list.datos.length == 0){			
-			location.reload();
-		}
-		
-        var json = JSON.stringify(list.datos);
-		$("#productos").val(json);
-   		$(this).parents('tr').remove(); 
+			if(list.datos.length == 0){			
+				location.reload();
+			}
+			
+	        var json = JSON.stringify(list.datos);
+			$("#productos").val(json);
+	   		$(this).parents('tr').remove(); 
 
-   		acum -= erase;
-   		$('h6').html("Total: $"+ acum);
-   	});    
-})
-
+	   		acum -= erase;
+	   		$('h6').html("Total: $"+ acum);
+	   	});    
+	})
+}
 //------------------------------------------------------------------------------------------------------------------------------
 //FUNCION CALCULA TOTAL PANEL INICIO
 
 var acum_tot_compras = 0;
 $(document).ready(function(){
+	//cargar_productos('inicio');
+	//var info = prods_bdd;
+	//console.log(prods_bdd)
 	let today = new Date();
 	//console.log(today.getMonth())
 	var json_c = document.getElementById('all_prods').value;
 	var Obj_c = JSON.parse(json_c);
 	//console.log(Obj_c)
 	for(var item in Obj_c){
-		var aux=Obj_c[item];
+		var aux = Obj_c[item];
 		var fecha = new Date(aux.created_at)
 		if(fecha.getFullYear() == today.getFullYear()){
 			if(fecha.getMonth() == today.getMonth()){
@@ -154,7 +160,7 @@ $(document).ready(function(){
 			}
 		}	
 	}
-	$('h5').append(acum_tot_compras);
+	$('h3').append(acum_tot_compras);
 });
 
 /*---------------------------------------------------------------------------------------------------------------------*/
@@ -171,38 +177,52 @@ function cerrar(){
 
 /*---------------------------------------------------------------------------------------------------------------------*/
 //FUNCION PARA CREAR TABLA AGREGAR PRODUCTOS A TAREA
+if(route == "tareas_agregar" || route == "pedidos_agregar"){
 var contar = 0;
 var lista_t = {
 			 'tarea' :[]
 			};
 $(function(){	
-	//agrega fila a tabla compra
+	cargar_productos('tareas');
+	//var listado_prod = document.getElementById("todos").value;
+	var info = prods_bdd;//JSON.parse(listado_prod);
+
+	//agrega fila a tabla tarea
 	$('#agregar_tarea').click(function(e){
 		e.preventDefault();		
 		var seleccion = document.getElementById("producto");
+		var id_selected = seleccion.options[seleccion.selectedIndex].value;
 		var selected = seleccion.options[seleccion.selectedIndex].text;//nombre 
 		var cant = document.getElementById("cantidad").value;
  		var id_prod = seleccion.options[seleccion.selectedIndex].value;
 
  		if(cant>0){//esto valida que no se ingresen valores 0
-		var tr = '<tr><td hidden="true">'+contar+'</td><td>'+selected+'</td><td>'+cant+'</td><td><input type="button" class="borrar_t btn btn-danger btn-sm" value="Eliminar"></td></tr>';
-		
-		$('tbody').append(tr); 
-	    lista_t.tarea.push({
-	    "id":contar,
-	    "id_p": id_prod,
-	    "producto": selected,
-	    "cantidad": cant
-	  	});
-		
-		var json = JSON.stringify(lista_t.tarea); // aqui tienes la lista de objetos en Json
-	//	var Obj = JSON.parse(json); //Parsea el Json al objeto anterior.
-		contar++;
+ 			if(cant >= info[seleccion.selectedIndex].cantidad){ 				
+				swal({
+					  title: 'Advertencia',
+					  text: 'La cantidad ingresada supera el stock.'
+					})
+ 			}
+ 			else{
+				var tr = '<tr><td hidden="true">'+contar+'</td><td>'+selected+'</td><td>'+cant+'</td><td><input type="button" class="borrar_t btn btn-danger btn-sm" value="Eliminar"></td></tr>';
 
-		$("#productos").val(json);	
-    
-		}
-	})		
+				$('tbody').append(tr); 
+			    lista_t.tarea.push({
+			    "id":contar,
+			    "id_p": id_prod,
+			    "producto": selected,
+			    "cantidad": cant
+			  	});
+				
+				var json = JSON.stringify(lista_t.tarea); // aqui tienes la lista de objetos en Json
+			//	var Obj = JSON.parse(json); //Parsea el Json al objeto anterior.
+				contar++;
+
+				$("#productos").val(json);	
+		    
+				}
+			}
+			})		
 
 //BORRA FILA, ACTUALIZA ARRAY DE PRODUCTOS y TOTAL $
 	$('body').on('click', 'input.borrar_t', function(e) {		
@@ -225,16 +245,90 @@ $(function(){
    		$(this).parents('tr').remove(); 
    	});    
 })
-
+}
 /*----------------------------------------------------------------------------------------------------------------------*/
 //FUNCION BOTON BACKUP
+if(route == "backup" || route == "backup_create"){
 $(document).ready(function(){
 	$('#create_b').click(function() {
 		$('#create_b').hide(); 
 		$('#cargando').show();
 	 });
-});
+})};
 //----------------------------------------------------------------------------------------------------------------------*/
+
+$(document).ready(function(){
+	var direccion = base + '/admin/' + route + '/';
+
+	if(window.location == direccion+'0'){
+		$('h7').append('Piezas');
+	}
+	if(window.location == direccion+'1'){
+		$('h7').append('Marcas');
+	}
+	if(window.location == direccion+'2'){
+		$('h7').append('Tareas');
+	}
+
+});
+
+//----------------------------------------------------------------------------------------------------------------------*/
+//DESACTIVA BOTONES E INSPECTOR DE NAVEGADOR
+if(route == "inicio" || route == "compras_agregar" || route == "compra_detalle" || route == "tareas_agregar" || route == "tarea_detalle"){
+document.onkeydown = function(e) {
+	if(event.keyCode == 123) {
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)){
+	return false;
+	}
+	if(e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)){
+	return false;
+	}
+	}
+}
+//----------------------------------------------------------------------------------------------------------------------*/
+//FUNCION CARGAR PIEZAS
+var prods_bdd = [];
+function cargar_productos(seccion){
+	var url = base + '/admin/' + 'md/api/load/piezas/' + seccion;
+
+	http.open('GET', url, true);
+	http.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+	http.send();
+	http.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200){
+			var data = this.responseText;
+			data = JSON.parse(data)
+			for(var item in data){
+				prods_bdd[item]=data[item];	
+			}				
+		}
+		else{}			
+	}
+//console.log(prods_bdd)
+}
+
+//----------------------------------------------------------------------------------------------------------------------*/
+
 /*ORDENAR
 $('th').click(function() {
     var table = $(this).parents('table').eq(0)

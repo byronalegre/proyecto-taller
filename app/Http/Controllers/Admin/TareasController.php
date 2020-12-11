@@ -22,16 +22,16 @@ class TareasController extends Controller
     public function getHome($status, Request $request){
         switch ($status) {
             case 'all':
-                $input = Tarea::with(['prods','work'])->orderBy('id','desc')->paginate(5); ;
+                $input = Tarea::with(['prods','work'])->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             case '1':
-                $input = Tarea::with(['prods','work'])->where('status','1')->orderBy('id','desc')->paginate(5); ;
+                $input = Tarea::with(['prods','work'])->where('status','1')->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             case '0':
-                $input = Tarea::with(['prods','work'])->where('status','0')->orderBy('id','desc')->paginate(5); ;
+                $input = Tarea::with(['prods','work'])->where('status','0')->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;  
             case 'trash':
-                $input = Tarea::with(['prods','work'])->onlyTrashed()->orderBy('id','desc')->paginate(5); 
+                $input = Tarea::with(['prods','work'])->onlyTrashed()->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;            
         }
     	  
@@ -41,9 +41,10 @@ class TareasController extends Controller
     }
 
      public function getTareaAgregar(){
+        $all = Pieza::all();
      	$prods = Pieza::where('status','1')->pluck('name','id');
      	$tarea = Categoria::where('seccion','2')->pluck('name','id');
-   		$data = ['prods' => $prods, 'tarea'=>$tarea];
+   		$data = ['prods' => $prods, 'tarea'=>$tarea, 'all'=>$all];
         return view('admin.tareas.agregar', $data);
     }
 
@@ -67,7 +68,7 @@ class TareasController extends Controller
         else:
            
             $input= new Tarea;
-            $input -> status = e($request->input('status'));;
+            $input -> status = e($request->input('status'));
             $input -> codigo = e($request->input('codigo'));
             $input -> tarea_id = e($request->input('tarea'));
             $input -> fecha_prog = e($request->input('fecha_programada'));
@@ -98,16 +99,15 @@ class TareasController extends Controller
 
     public function getTareaEdit($id){
     	$t = Tarea::findOrfail($id);
-     	$prods = Pieza::where('status','1')->pluck('name','id');
      	$tarea = Categoria::where('seccion','2')->pluck('name','id');
-   		$data = ['prods' => $prods, 'tarea'=>$tarea, 't'=>$t];
+   		$data = ['tarea'=>$tarea, 't'=>$t];
         return view('admin.tareas.edit', $data);
     }
 
     public function postTareaEdit($id, Request $request){
     	           
         $input= Tarea::findOrfail($id);
-        $input -> status = e($request->input('status'));;
+        $input -> status = e($request->input('status'));
         $input -> tarea_id = e($request->input('tarea'));
         $input -> descripcion = e($request->input('descripcion'));
        
@@ -138,6 +138,13 @@ class TareasController extends Controller
 
      public function getTareasDelete($id){
         $t= Tarea::findOrfail($id);
+        $p= json_decode($t->productos, true);
+
+        foreach ($p as $value) {
+            $p = Pieza::findOrFail($value['id_p']);
+            $p-> cantidad -= $value['cantidad'];
+            $p->save();
+        }
 
         if($t->delete()):
             return back()->with('message','Enviada a la papelera.')->with('typealert','danger');
@@ -146,6 +153,14 @@ class TareasController extends Controller
 
     public function getTareasRestore($id){
         $t= Tarea::onlyTrashed()->where('id', $id)->first();
+        $p= json_decode($t->productos, true);
+
+        foreach ($p as $value) {
+            $p = Pieza::findOrFail($value['id_p']);
+            $p-> cantidad += $value['cantidad'];
+            $p->save();
+        }
+
         $t->restore();
        
         if($t->save()):

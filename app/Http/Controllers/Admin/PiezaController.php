@@ -21,16 +21,16 @@ class PiezaController extends Controller
     public function getHome($status, Request $request){
         switch ($status) {
             case '0':
-                $piezas = Pieza::with(['cat','mark'])->where('status','0')->orderBy('id','desc')->paginate(5);
+                $piezas = Pieza::with(['cat','mark'])->where('status','0')->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
              case '1':
-                $piezas = Pieza::with(['cat','mark'])->where('status','1')->orderBy('id','desc')->paginate(5);
+                $piezas = Pieza::with(['cat','mark'])->where('status','1')->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             case 'all':
-                $piezas = Pieza::with(['cat','mark'])->orderBy('id','desc')->paginate(5);
+                $piezas = Pieza::with(['cat','mark'])->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             case 'trash':
-                $piezas = Pieza::with(['cat','mark'])->onlyTrashed()->orderBy('id','desc')->paginate(5);
+                $piezas = Pieza::with(['cat','mark'])->onlyTrashed()->orderBy('id','desc')->paginate(config('settings.pag'));
                 break;
             
         }

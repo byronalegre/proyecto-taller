@@ -51,6 +51,15 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            //HAY QUE AGREGAR ESTO PARA BACKUPEAR
+            'dump' => [
+                    'dump_binary_path' => 'G:\xampp\mysql\bin',
+                    'excludeTables' => [
+                    'table_to_exclude_from_backup',
+                    'another_table_to_exclude'
+                    ]
+                    ],
+            //-------------------------------------------
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
