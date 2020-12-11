@@ -1,20 +1,20 @@
 @extends ('admin.master')
 
-@section ('title','Compras')
+@section ('title','Remitos')
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-cart-plus"></i> Compras</a>
+	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-file-invoice-dollar"></i> Remitos</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-info-circle"></i> Detalle compra: {{$c->codigo}}</a>
+	<a href="{{url('/admin/compras/'.$c->id.'/detalle') }}"><i class="fas fa-info-circle"></i> Detalle remito: {{$c->codigo}}</a>
 </li>
 
 @endsection
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid" oncontextmenu="return false"><!-- ONCONTEXTMENU DESACTIVA F12-->
 	<div class="panel shadow">
 		<div class="header">
 			<h2 class="title"><i class="fas fa-info-circle"></i> Detalle</h2>
@@ -22,26 +22,33 @@
 		<div class="inside">
 
 			<div style="text-align: right">
-			@if(kvfj(Auth::user()->permisos, 'detalle_compra_pdf'))
-				<a href="{{url('admin/compras/'.$c->id.'/detalle/compra_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm">
-					PDF <i class="far fa-file-pdf"></i>
+			@if(kvfj(Auth::user()->permisos, 'detalle_remito_pdf'))
+				<a href="{{url('admin/compras/'.$c->id.'/detalle/remito_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm" target="_blank">
+					<i class="far fa-file-pdf"></i>
+					PDF
 				</a>
 			@endif
 			</div>
-			
 			<div class="mtop16">
+				<b>CORRESPONDE A ORDEN DE COMPRA:</b>
+				<a>ODC-{{$c->orden->codigo}}</a>
+			</div>
+
+			<div>
+				<b>CODIGO REMITO:</b>
+				<a>RC-{{$c->codigo}}</a>
+			</div>
+
+			<div>
 				<b>RESPONSABLE:</b>
 				<a>{{substr($c->responsable,4)}}</a>
-			</div>
+			</div>			
 
 			<div>
 				<b>FECHA:</b>
 				<a>{{$c->created_at->format('d/m/Y')}}</a>
 			</div>
-			<div>
-				<b>CODIGO:</b>
-				<a>ODC-{{$c->codigo}}</a>
-			</div>
+			
 			<div>
 				<b>PROVEEDOR:</b>
 				<a>{{$c->provs->name}}</a>

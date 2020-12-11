@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Admin | @yield('title')</title>
+	<title>{{config('settings.name')}} - @yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="routeName" content="{{ Route::currentRouteName() }}">
@@ -105,7 +105,7 @@
 
 	<nav style="position: relative;" class="navbar fixed-bottom">
 	  <div class="container-fluid">
-	    <a style="font-size: 10px;" class="navbar-brand">Desarrollado por Agustin Alegre & Mariano Wasinger ©</a>
+	    <a style="font-size: 10px;" class="navbar-brand">Desarrollado por Agustin Alegre & Mariano Wasinger con motivo académico para la carrera Lic. en Sistemas de Información | FCyT | UADER. ©</a>
 	  </div>
 	</nav>
 </body>

@@ -5,7 +5,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-tools"></i> Piezas</a>
+	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-cog"></i> Piezas</a>
 </li>
 <li class="breadcrumb-item">
 	<a href="{{url('/admin/piezas/agregar') }}"><i class="fas fa-plus-circle"></i> Agregar pieza</a>
@@ -100,7 +100,7 @@
 
 				<div class="row mtop16">
 					<div class="col-md-3">
-							<label for="deposito">Depósito N°:</label>
+							<label for="deposito">Número de depósito:</label>
 							<div class="input-group">									
 							   		<span class="input-group-text" id="basic-addon1">
 							   			<i class="fas fa-map-marker-alt"></i>
@@ -152,5 +152,4 @@
 			{!!Form::close() !!}
 		</div>
 	</div>
-</div>
 @endsection

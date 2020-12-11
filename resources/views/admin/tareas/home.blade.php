@@ -22,10 +22,10 @@
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="{{url('admin/tareas/all') }}">Todos</a>
-						    <a class="dropdown-item" href="{{url('admin/tareas/1') }}">Completadas</a>
-						    <a class="dropdown-item" href="{{url('admin/tareas/0') }}">Pendientes</a>
-						    <a class="dropdown-item" href="{{url('admin/tareas/trash') }}">Papelera</a>
+						    <a class="dropdown-item" href="{{url('admin/tareas/all') }}"><i class="fas fa-list"></i> Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/tareas/0') }}"><i class="fas fa-clock"></i> Pendientes</a>
+						    <a class="dropdown-item" href="{{url('admin/tareas/1') }}"><i class="fas fa-check-double"></i> Completadas</a>						    
+						    <a class="dropdown-item" href="{{url('admin/tareas/trash') }}"><i class="fas fa-trash-alt"></i> Papelera</a>
 						  </div>
 					</div>
 
@@ -44,6 +44,7 @@
 					<td style="text-align: center;">Fecha solicitud</td>
 					<td style="text-align: center;">Fecha programada</td>
 					<td style="text-align: center;">Estado</td>
+					<td></td>
 					<td width="90"></td>
 				</thead>
 				<tbody>
@@ -65,6 +66,11 @@
 							</div>
 							@endif
 						</td>
+
+						<td style="text-align: center;">
+							<i class="far fa-comment-dots fa-2x" data-toggle="tooltip" data-placement="top" title="{{$i->descripcion}}"></i>
+						</td>
+
 						<td>
 							@if(kvfj(Auth::user()->permisos, 'tarea_detalle'))
 								@if(is_null($i->deleted_at))

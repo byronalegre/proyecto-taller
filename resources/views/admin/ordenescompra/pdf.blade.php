@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Detalle de remito - {{$c->codigo}} </title>
+	<title>Detalle de compra - {{$c->codigo}} </title>
 	
 </head>
 	<body>
@@ -13,9 +13,9 @@
 					<td style="border-right: 2px solid black"><img style="width: 250px;" src="{{url('/static/images/logo.png')}}"></td>
 					<td>
 						<h2 style="font-size: 20px; text-align: center; font-family: courier;">	
-							Remito de compra 
+							Orden de compra 
 							<br> 
-							RC-{{$c->codigo}}<br>
+							ODC-{{$c->codigo}}<br>
 							{{date("d/m/Y ", time()) }}
 						</h2>
 					</td>

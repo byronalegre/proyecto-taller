@@ -1,14 +1,14 @@
 @extends ('admin.master')
 
-@section ('title','Nueva tarea')
+@section ('title','Nueva Orden')
 
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/all') }}"><i class="fas fa-tasks"></i> Tareas</a>
+	<a href="{{url('/admin/ordenescompra/all') }}"><i class="fas fas fa-cart-plus"></i> Ordenes de Compra</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva tarea</a>
+	<a href="{{url('/admin/ordenescompra/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva Orden</a>
 </li>
 @endsection
  
@@ -18,18 +18,18 @@
 <div class="container-fluid" oncontextmenu="return false"><!-- ONCONTEXTMENU DESACTIVA F12-->
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva tarea</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva Orden</h2>
 		</div>
-		<div class="inside">			
-			{!! Form::open(['url' => '/admin/tareas/agregar','files'=>true]) !!}	
+		<div class="inside">
+			{!! Form::open(['url' => '/admin/ordenescompra/agregar','files'=>true,'id'=>'formulario']) !!}	
 				<div class="row">
 					<div class="col-md-4">
-							<label for="tarea">Tarea:</label>
+							<label for="proveedor">Proveedor:</label>
 							<div class="input-group">								
 							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-tasks"></i>
+							   			<i class="fas fa-truck"></i>
 							   		</span>							   
-						    	{!!Form::select('tarea', $tarea, null, ['class' =>'form-select']) !!}
+						    	{!!Form::select('proveedor', $provs, null, ['class' =>'form-select']) !!}
 						    </div>
 					</div>
 					<div class="col-md-4">
@@ -41,30 +41,18 @@
 						    	{!!Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'XXXX'] ) !!}
 						    	</div>
 					</div>
+
 					<div class="col-md-4">
 							<label for="status">Estado:</label>
 								<div class="input-group">									
 								   		<span class="input-group-text" id="basic-addon1">
 								   			<i class="fas fa-hand-paper"></i>
 								   		</span>								   
-							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Completada'],0, ['class' =>'form-select']) !!}	
+							    	{!!Form::select('status', ['0'=>'Pendiente', '1'=>'Aprobada', '2'=>'Completada'], 0, ['class' =>'form-select']) !!}	
 								</div>
 					</div>
-				</div>
-				<div class="row mtop16">
-					<div class="col-md-4">
-							<label for="fecha_programada">Fecha programada:</label>
-								<div class="input-group">									
-							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-calendar-day"></i>
-							   		</span>								    
-						    	{!!Form::date('fecha_programada', now(), ['class' => 'form-control'] ) !!}
-						    	</div>
-					</div>
-				</div>
-				<div class="row mtop16">
 					<div class="col-md-12">
-						<label for="descripcion">Descripción:</label>
+						<label for="descripcion" class="mtop16">Descripción:</label>
 						<div class="input-group">
 						 	<textarea class="form-control" name="descripcion" rows="3" id="descripcion"></textarea>
 					    </div>
@@ -75,30 +63,38 @@
 					<div class="header mtop16">
 						<h2 class="title">Agregar producto</h2>
 					</div>
-					<div class="inside">
-						
+					<div class="inside">						
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<label for="producto">Producto:</label>
 									<div class="input-group">								
-								   		<span class="input-group-text">
-								   			<i class="fas fa-boxes"></i>
-								   		</span>	
-								   		{!!Form::select('producto', $prods, 0, ['class' =>'form-select','id' => 'producto'] ) !!}
+									   		<span class="input-group-text">
+									   			<i class="fas fa-boxes"></i>
+									   		</span>							   
+								  	 {!!Form::select('producto', $prods, 0, ['class' =>'form-select','id' => 'producto'] ) !!}
 								  	 </select>
 								    </div>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-3">
 								<label for="cantidad">Cantidad:</label>
 									<div class="input-group">									
 								   		<span class="input-group-text">
-								   			<i class="fas fa-minus"></i>
+								   			<i class="fas fa-plus"></i>
 								   		</span>	
 								   		<input type="number" class="form-control" min="1" name="cantidad" id="cantidad" required="true"> 
 							    	</div>
 							</div>
+							<div class="col-md-3">
+								<label for="precio">Precio unitario:</label>
+									<div class="input-group">									
+								   		<span class="input-group-text">
+								   			<i class="fas fa-dollar-sign"></i>
+								   		</span>								    
+							    		<input type="number" class="form-control" min="1" name="precio" id="precio" required="true">
+							    	</div>
+							</div>
 							<div class="col-md-2">	
-								<button style="border-radius: 20px" id="agregar_tarea" class="btn btn-warning mtop16 shadow" data-toggle="tooltip" data-placement="top" title="Agregar">
+								<button style="border-radius: 20px" id="agregar" class="btn btn-warning mtop16 shadow" data-toggle="tooltip" data-placement="top" title="Agregar">
 									<i class="fas fa-plus"></i>
 								</button>
 							</div>	
@@ -109,11 +105,17 @@
 								<tr>
 									<td>Producto</td>
 									<td>Cantidad</td>
+									<td>Precio unitario ($)</td>
+									<td>Importe ($)</td>
 									<td width="100"></td>
 								</tr>
 							</thead>
 							<tbody>
 							</tbody>
+							<caption>
+								<h6>								
+								</h6>
+							</caption>
 						{!! Form::text('productos', 0 ,['class' => 'form-control', 'id'=>'productos', 'hidden'] ) !!}
 						</table>						
 					</div>				

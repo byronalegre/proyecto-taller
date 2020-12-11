@@ -1,6 +1,6 @@
 @extends ('admin.master')
 
-@section ('title','Ver usuario')
+@section ('title','Información y Rol de usuario')
 
 
 @section('breadcrumb')

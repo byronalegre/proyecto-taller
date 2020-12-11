@@ -10,7 +10,7 @@
 			</div>
 
 			<div class="logo">				
-				<img src="{{url('static/images/logo1.png') }}" alt="img-fluid">			
+				<img src="{{url('static/images/logo1.png') }}" alt="img-fluid" width="50">			
 			</div>	
 	
 			<div class="user">
@@ -37,7 +37,7 @@
 			
 			@if(kvfj(Auth::user()->permisos, 'piezas'))
 			<li>
-				<a href="{{ url('/admin/piezas/1') }} " class="lk-piezas lk-piezas_agregar lk-piezas_editar lk-piezas_buscar lk-piezas_eliminar"><i class="fas fa-cogs"></i> Piezas</a>
+				<a href="{{ url('/admin/piezas/1') }} " class="lk-piezas lk-piezas_agregar lk-piezas_editar lk-piezas_buscar lk-piezas_eliminar"><i class="fas fa-cog"></i> Piezas</a>
 			</li>
 			@endif
 
@@ -52,17 +52,22 @@
 				<a href="{{ url('/admin/proveedores/all') }}" class="lk-proveedores lk-proveedores_agregar lk-proveedores_editar lk-proveedores_eliminar lk-proveedores_buscar"><i class="fas fa-truck"></i> Proveedores</a>
 			</li>
 			@endif
-
-			@if(kvfj(Auth::user()->permisos, 'usuarios_list'))
-			<li>
-				<a href="{{ url('/admin/usuarios/all') }} " class="lk-usuarios_list lk-usuarios_editar lk-usuarios_suspend lk-usuarios_permisos lk-usuarios_buscar"><i class="fas fa-users"></i> Usuarios</a>
-			
-			</li>
-			@endif
 			
 			@if(kvfj(Auth::user()->permisos, 'compras'))
 			<li>
-				<a href="{{ url('/admin/compras/all') }}" class="lk-compras lk-compras_agregar lk-compra_detalle lk-compras_eliminar"><i class="fas fa-cart-plus"></i> Compras</a>
+				<a href="{{ url('/admin/ordenescompra/all') }}" class="lk-compras lk-compras_agregar lk-compras_editar lk-compra_detalle lk-compras_eliminar"><i class="fas fa-cart-plus"></i> Ordenes de Compra</a>
+			</li>
+			@endif			
+
+			@if(kvfj(Auth::user()->permisos, 'pedidos'))
+			<li>
+				<a href="{{ url('/admin/ordenespedido/all') }}" class="lk-pedidos lk-pedidos_agregar lk-pedidos_editar lk-pedido_detalle lk-pedidos_eliminar"><i class="fas fa-file-invoice"></i> Ordenes de Pedido</a>
+			</li>
+			@endif
+			
+			@if(kvfj(Auth::user()->permisos, 'remitos'))
+			<li>
+				<a href="{{ url('/admin/compras/all') }}" class="lk-remitos lk-remitos_agregar lk-remito_detalle lk-remitos_eliminar"><i class="fas fa-file-invoice-dollar"></i> Remitos</a>
 			</li>
 			@endif
 
@@ -72,11 +77,24 @@
 			</li>
 			@endif
 
-			@if(kvfj(Auth::user()->permisos, 'backup'))
+			@if(kvfj(Auth::user()->permisos, 'usuarios_list'))
 			<li>
-				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> Backup</a>
+				<a href="{{ url('/admin/usuarios/all') }} " class="lk-usuarios_list lk-usuarios_editar lk-usuarios_suspend lk-usuarios_permisos lk-usuarios_buscar lk-usuarios_register"><i class="fas fa-users"></i> Usuarios</a>			
 			</li>
 			@endif
+
+			@if(kvfj(Auth::user()->permisos, 'backup'))
+			<li>
+				<a href="{{ url('/admin/backup') }}" class="lk-backup"><i class="fas fa-database"></i> BackUp's</a>
+			</li>
+			@endif
+			
+			@if(kvfj(Auth::user()->permisos, 'config'))
+			<li>
+				<a href="{{ url('/admin/config') }}" class="lk-config"><i class="fas fa-wrench"></i> Configuración</a>
+			</li>
+			@endif
+
 			<li>
 				<a href= "{{url('https://github.com/byronalegre/proyecto-taller')}}" ><i class="far fa-question-circle"></i> Ayuda</a>
 			</li>

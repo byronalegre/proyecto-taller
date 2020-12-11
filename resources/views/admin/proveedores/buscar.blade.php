@@ -32,8 +32,8 @@
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="{{url('admin/proveedores/all') }}">Todos</a>
-						    <a class="dropdown-item" href="{{url('admin/proveedores/trash') }}">Papelera</a>
+						    <a class="dropdown-item" href="{{url('admin/proveedores/all') }}"><i class="fas fa-list"></i> Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/proveedores/trash') }}"><i class="fas fa-trash-alt"></i> Papelera</a>
 
 						  </div>
 					</div>
@@ -84,7 +84,7 @@
 							@if(kvfj(Auth::user()->permisos, 'proveedores_eliminar'))
 								@if(is_null($p->deleted_at))
 									<a href="#" data-path="admin/proveedores" data-action="delete" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm btn-deleted">
-									<i class="fas fa-trash"></i>
+									<i class="fas fa-trash-alt"></i>
 									</a> 
 								@else
 									<a href="{{ url('/admin/proveedores/'.$p->id.'/restore') }}" data-action="restore" data-path="admin/proveedores" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn btn-success btn-sm btn-deleted">

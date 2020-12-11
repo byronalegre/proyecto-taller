@@ -1,13 +1,13 @@
 @extends ('admin.master')
 
-@section ('title','Tareas')
+@section ('title','Ordenes de pedido')
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/all') }}"><i class="fas fa-cart-plus"></i> Tareas</a>
+	<a href="{{url('/admin/ordenespedido/all') }}"><i class="fas fa-file-invoice"></i> Ordenes de Pedido</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/'.$t->id.'/detalle') }}"><i class="fas fa-info-circle"></i> Detalle tarea: {{$t->codigo}}</a>
+	<a href="{{url('/admin/ordenespedido/'.$op->id.'/detalle') }}"><i class="fas fa-info-circle"></i> Detalle Orden de Pedido: {{$op->codigo}}</a>
 </li>
 
 @endsection
@@ -20,16 +20,17 @@
 			<h2 class="title"><i class="fas fa-info-circle"></i> Detalle</h2>
 		</div>
 		<div class="inside">
-			<div style="text-align: right">	
-				@if($t->status != '1')		
-					@if(kvfj(Auth::user()->permisos, 'tareas_editar'))						
-						<a class="btn btn-primary btn-sm" href="{{url('admin/tareas/'.$t->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
+
+			<div style="text-align: right">
+				@if($op->status != '1')		
+					@if(kvfj(Auth::user()->permisos, 'pedidos_editar'))
+						<a class="btn btn-primary btn-sm" href="{{url('admin/ordenespedido/'.$op->id.'/edit') }}"data-toggle="tooltip" data-placement="top" title="Editar">
 						<i class="fas fa-edit"></i>
-						</a>						
+						</a>
 					@endif
 				@endif
-				@if(kvfj(Auth::user()->permisos, 'detalle_tarea_pdf'))
-					<a href="{{url('admin/tareas/'.$t->id.'/detalle/tarea_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm" target="_blank">
+				@if(kvfj(Auth::user()->permisos, 'detalle_pedido_pdf'))
+					<a href="{{url('admin/ordenespedido/'.$op->id.'/detalle/ordenpedido_pdf')}}" data-toggle="tooltip" data-placement="top" title="Generar PDF" class="btn btn-danger btn-sm" target="_blank">
 						<i class="far fa-file-pdf"></i>
 						PDF
 					</a>
@@ -37,40 +38,38 @@
 			</div>
 			
 			<div class="mtop16">
-				<b>TAREA:</b>
-				<a>{{$t->work->name}}</a>
-			</div>
-			<div>
 				<b>CODIGO:</b>
-				<a>ODT-{{$t->codigo}}</a>
+				<a>ODP-{{$op->codigo}}</a>
 			</div>
-			<hr>
+
 			<div>
-				<b>FECHA SOLICITUD:</b>
-				<a>{{$t->created_at->format('d/m/Y')}}</a>
+				<b>RESPONSABLE:</b>
+				<a>{{substr($op->responsable,4)}}</a>
 			</div>
+
 			<div>
-				<b>FECHA PROGRAMADA:</b>
-				<a>{{date('d/m/Y', strtotime($t->fecha_prog))}}</a>
+				<b>FECHA:</b>
+				<a>{{$op->created_at->format('d/m/Y')}}</a>
 			</div>
-			<hr>
-			<div>
-				<b>DESCRIPCIÓN:</b>
-				<a>{{($t->descripcion)}}</a>
-			</div>
-			<hr>
-			@if($t->status == '0')
+
+			@if($op->status == '0')
 				<div class="progress mtop16">
 				  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="Pendiente">				  	
 				  </div>
 				</div>
 			@endif
-			@if($t->status == '1')
+			@if($op->status == '1')
 				<div class="progress mtop16">
 				  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="Completada">				  	
 				  </div>
 				</div>
-			@endif											
+			@endif
+			@if($op->status == '2')
+				<div class="progress mtop16">
+				  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="Rechazada">				  	
+				  </div>
+				</div>
+			@endif
 
 			<table class="table mtop16">
                 <thead class="table-dark">                	
@@ -79,14 +78,15 @@
 	                    <td>CANTIDAD</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                 	@foreach($a as $value)
-						<tr>
+							<tr>
 							<td>{{$value['producto']}}</td>
 							<td>{{$value['cantidad']}}</td>
-						</tr>
+							</tr>
 					@endforeach
-                </tbody>                
+                </tbody>
+                
             </table>
 		</div>
 	</div>

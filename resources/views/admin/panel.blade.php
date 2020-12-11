@@ -4,51 +4,43 @@
 
 @section('content')
  
-<div class="container-fluid">
+<div class="container-fluid" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
 @if(kvfj(Auth::user()->permisos, 'estadisticas_rapidas'))	
 	<div class="panel shadow">
 		<div class="header">
 			<h2 class="title"><i class="fas fa-chart-line"></i> Estadísticas rápidas</h2>
 		</div>
 		<div class="inside">			
-			<div class="btn-group btn-group-lg" role="group">				
-				@if(kvfj(Auth::user()->permisos, 'e_admin'))	
-						<a href="{{url('/admin/usuarios/all')}}" type="button" class="btn btn-primary shadow info" data-toggle="tooltip" data-placement="top" title="Usuarios">
-							<i class="fas fa-users fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Usuarios"></i>
-							<span class="big-count badge rounded-pill bg-dark mtop16">
-								{{count($users)}}							    
-							</span>
-						</a>
-				@endif	
+			<div class="btn-group btn-group-lg" role="group">			
 
 				@if(kvfj(Auth::user()->permisos, 'e_tareas'))		
-						<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-success shadow info" data-toggle="tooltip" data-placement="top" title="Piezas activas">
-							<i class="fas fa-cogs fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Piezas activas"></i>
-							<span class="big-count badge rounded-pill bg-dark mtop16">
+						<a href="{{url('/admin/piezas/1')}}" type="button" class="btn btn-primary shadow info" data-toggle="tooltip" data-placement="top" title="Piezas activas">
+							<i class="fas fa-cogs fa-3x mtop16" data-toggle="tooltip" data-placement="top" title="Piezas activas"></i>
+							<span class="big-count badge rounded-pill mtop16">
 								{{$piezas_act}}
 							</span>
 						</a>
-						<a href="{{url('/admin/tareas/0')}}" type="button" class="btn btn-secondary shadow info" data-toggle="tooltip" data-placement="top" title="Tareas pendientes">
-							<i class="fas fa-clipboard-list fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Tareas pendientes"></i>
-							<span class="big-count badge rounded-pill bg-dark mtop16">
+						<a href="{{url('/admin/tareas/0')}}" type="button" class="btn btn-success shadow info" data-toggle="tooltip" data-placement="top" title="Tareas pendientes">
+							<i class="fas fa-clipboard-list fa-3x mtop16" data-toggle="tooltip" data-placement="top" title="Tareas pendientes"></i>
+							<span class="big-count badge rounded-pill mtop16">
 								{{$pendiente}}
 							</span>
 						</a>
 				@endif
 
 				@if(kvfj(Auth::user()->permisos, 'e_compras'))					
-						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info" data-toggle="tooltip" data-placement="top" title="Compras realizadas">
-							<i class="fas fa-cart-plus fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Compras realizadas"></i>
-							<span class="big-count badge rounded-pill bg-dark mtop16">
-								{{count($compras)}}
+						<a href="{{url('/admin/compras/all')}}" type="button" class="btn btn-info shadow info" data-toggle="tooltip" data-placement="top" title="Compras realizadas este mes">
+							<i class="fas fa-cart-plus fa-3x mtop16" data-toggle="tooltip" data-placement="top" title="Compras realizadas este mes"></i>
+							<span class="big-count badge rounded-pill mtop16">
+								{{$compras_mes}}
 							</span>
 						</a>
 
 						<a type="button" class="btn btn-danger active shadow info" data-toggle="tooltip" data-placement="top" title="Gastos del último mes">
-							<i class="fas fa-dollar-sign fa-4x mtop16" data-toggle="tooltip" data-placement="top" title="Gastos del último mes"></i>
-							<span class="big-count badge rounded-pill bg-dark mtop16">
+							<i class="fas fa-dollar-sign fa-3x mtop16" data-toggle="tooltip" data-placement="top" title="Gastos del último mes"></i>
+							<span class="big-count badge rounded-pill mtop16">
 								<input type="hidden" id="all_prods" value="{{$compras}}"> 						
-								<h5>$ </h5>								
+								<h3 style="font-weight: bold">$ </h3>								
 							</span>
 						</a>
 				@endif
@@ -61,7 +53,7 @@
 					<h2 class="title"><i class="fas fa-chart-pie"></i> Gráficos</h2>
 				</div>
 			<div class="inside">
-				<div class="row">
+				<div style="justify-content: center" class="row">
 					<!--DESDE ACA LOS GRAFICOS-->
 							<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 						    <script type="text/javascript">
@@ -69,89 +61,105 @@
 						      google.charts.setOnLoadCallback(drawChart);
 
 						     function drawChart() {
-						     	@if(kvfj(Auth::user()->permisos, 'e_admin'))
-						         var data = google.visualization.arrayToDataTable([
-						          ['Tipo', 'Cantidad'],
-						          ['Usuarios activos',    {{$u_reg}} ],
-						          ['Usuarios suspendidos',    {{$u_susp}} ],
-						        ]);
 
-						        var options = {
-						          title: 'Usuarios total: {{count($users)}}',
-						          slices: {
-								            0: { color: '#21856d', offset: 0.1},
-								            1: { color: '#212121' }
-								          },
-								  is3D: true
-						        };
+						     	@if(kvfj(Auth::user()->permisos, 'e_tareas'))
+							       var data = google.visualization.arrayToDataTable([
+							          ['Tipo', 'Cantidad'],
+							          ['Pendientes', {{$pendiente}}],
+							          ['Completadas', {{$completada}}],
+							        ]);
 
-						        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+							        var options = {
+							          title: 'Tareas total: {{count($tareas)}}',
+							          slices: {
+									            0: { color: '#21856d', offset: 0.1},
+									            1: { color: '#212121' }
+									          },
+									  is3D: true
+							        };
 
-						        chart.draw(data, options);
-						      @endif
-						      @if(kvfj(Auth::user()->permisos, 'e_tareas'))
-						        var data2 = google.visualization.arrayToDataTable([
-						          ['Piezas', 'Cantidad'],
-						          ['Piezas activas',     {{$piezas_act}}],
-						          ['Piezas inactivas',     {{$piezas_inact}}],
-						        ]);
+							        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-						        var options2 = {
-						          title: 'Piezas total: {{count($piezas)}}',
-						          slices: {
-								            0: { color: '#21856d', offset: 0.1},
-								            1: { color: '#212121' }
-								          },
-								  is3D: true
-						        };
+							        chart.draw(data, options);
+							      
+							        var data2 = google.visualization.arrayToDataTable([
+							          ['Piezas', 'Cantidad'],
+							          ['Piezas activas',     {{$piezas_act}}],
+							          ['Piezas inactivas',     {{$piezas_inact}}],
+							        ]);
 
-						        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+							        var options2 = {
+							          title: 'Piezas total: {{count($piezas)}}',
+							          slices: {
+									            0: { color: '#21856d', offset: 0.1},
+									            1: { color: '#212121' }
+									          },
+									  is3D: true
+							        };
 
-						        chart.draw(data2, options2);
-						        @endif
+							        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+							        chart.draw(data2, options2);
+						        @endif					        
+						        
+						      }
+						    </script>
+
+						    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+						    <script type="text/javascript">
+						      google.charts.load('current', {'packages':['bar']});
+						      google.charts.setOnLoadCallback(drawChart);
+
+						      function drawChart() {
 						        @if(kvfj(Auth::user()->permisos, 'e_compras'))
 						        var data3 = google.visualization.arrayToDataTable([
-						          ['Compras', 'Cantidad por año'],
-						          ['2019',     {{$compra_19}}],
-						          ['2020',     {{$compra_20	}}],
-						          ['2021',     {{$compra_21}}],
-						          ['2022',     {{$compra_22}}]
+						          ['Compras', 'Cantidad del mes'],
+						          ['Enero', {{$compra_1}}],
+						          ['Febrero', {{$compra_2}}],
+						          ['Marzo', {{$compra_3}}],
+						          ['Abril', {{$compra_4}}],
+						          ['Mayo', {{$compra_5}}],
+						          ['Junio', {{$compra_6}}],
+						          ['Julio', {{$compra_7}}],
+						          ['Agosto', {{$compra_8}}],
+						          ['Septiembre', {{$compra_9}}],
+						          ['Octubre', {{$compra_10}}],
+						          ['Noviembre', {{$compra_11}}],
+						          ['Diciembre', {{$compra_12}}],
+
 						        ]);
 
 						        var options3 = {
-						          animation:{
+						          /*animation:{
 						          	startup: true,
 							        duration: 1500,
 							        easing: 'in',
-							      },
+							      },*/
 						          title: 'Total de compras: {{count($compras)}}',
 						          vAxis: {minValue: 0},
 						          hAxis: {titleTextStyle: {color: '#21856d'}},							         
 						          colors: ['#21856d'],
-						         /* chartArea:{
-						          	backgroundColor: '212121'
-						          },*/
 						          is3D: true
 						          
 						        };
 
-						        var chart = new google.visualization.AreaChart(document.getElementById('compra_anual'));
+						        var chart = new google.charts.Bar(document.getElementById('compra_anual'));
 
-						        chart.draw(data3, options3);
+						        chart.draw(data3, google.charts.Bar.convertOptions(options3));
 						        @endif
 						      }
 						    </script>
 						   
 						    @if(kvfj(Auth::user()->permisos, 'e_compras'))
-						    <div id="compra_anual" style="width: 1000px; height: 300px; min-width: 250px"></div>		    
-						    <hr>
+						    <div class="col-md-12" id="compra_anual" style="width: 1000px; height: 300px; min-width: 250px"></div> 
 						    @endif
-						    @if(kvfj(Auth::user()->permisos, 'e_admin'))
-						    <div id="piechart" style="width: 500px; height: 250px;"></div>
-						   	@endif
-						   	@if(kvfj(Auth::user()->permisos, 'e_tareas'))
-						    <div id="piechart2" style="width: 500px; height: 250px;"></div>	
+						    <hr class="mtop16">
+						    @if(kvfj(Auth::user()->permisos, 'e_tareas'))						    
+						    <div class="col-md-3" id="piechart2" style="width: 500px; height: 300px;"></div>	
+						    <div class="col-md-3" id="piechart" style="width: 500px; height: 300px;"></div>
 						    @endif
+
+						    
 					<!--HASTA ACA-->
 				</div>
 			</div>

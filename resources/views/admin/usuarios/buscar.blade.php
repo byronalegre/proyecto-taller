@@ -34,15 +34,23 @@
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="{{url('admin/usuarios/all') }}">Todos</a>
-						    <a class="dropdown-item" href="{{url('admin/usuarios/1') }}">Activos</a>
-						    <a class="dropdown-item" href="{{url('admin/usuarios/100') }}">Suspendidos</a>
+						    <a class="dropdown-item" href="{{url('admin/usuarios/all') }}"><i class="fas fa-list"></i> Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/usuarios/1') }}"><i class="fas fa-user-check"></i> Activos</a>
+						    <a class="dropdown-item" href="{{url('admin/usuarios/100') }}"><i class="fas fa-user-clock"></i> Suspendidos</a>
 
 						  </div>
 					</div>
 				
 			</div>
 
+			<div class="btns">		
+			@if(kvfj(Auth::user()->permisos, 'usuarios_register'))			
+				<a href="{{url('admin/usuarios/register') }}" class="btn btn-success btn-sm">
+					<i class="fas fa-plus-circle"></i> Registrar usuario
+				</a>	
+			@endif						
+			</div>
+			
 			<table class="table table-hover mtop16">
 				<thead class="table-dark">
 					<tr>

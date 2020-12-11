@@ -5,7 +5,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-cogs"></i> Piezas</a>
+	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-cog"></i> Piezas</a>
 </li>
 @endsection
 
@@ -14,7 +14,7 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 			<div class="header">
-				<h2 class="title"><i class="fas fa-cogs"></i> Piezas</h2>
+				<h2 class="title"><i class="fas fa-cog"></i> Piezas</h2>
 			</div>										
 			<div class="inside">
 				<div class="nav justify-content-end">
@@ -32,10 +32,10 @@
 						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Filtrar </button>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="{{url('admin/piezas/all') }}">Todos</a>
-						    <a class="dropdown-item" href="{{url('admin/piezas/1') }}">Activos</a>
-						    <a class="dropdown-item" href="{{url('admin/piezas/0') }}">Inactivos</a>
-						    <a class="dropdown-item" href="{{url('admin/piezas/trash') }}">Papelera</a>
+						    <a class="dropdown-item" href="{{url('admin/piezas/all') }}"><i class="fas fa-list"></i> Todos</a>
+						    <a class="dropdown-item" href="{{url('admin/piezas/1') }}"><i class="fas fa-check"></i> Activos</a>
+						    <a class="dropdown-item" href="{{url('admin/piezas/0') }}"><i class="fas fa-times"></i> Inactivos</a>
+						    <a class="dropdown-item" href="{{url('admin/piezas/trash') }}"><i class="fas fa-trash-alt"></i> Papelera</a>
 
 						  </div>
 					</div>
@@ -48,8 +48,9 @@
 						</a>
 					@endif
 					@if(kvfj(Auth::user()->permisos, 'piezas_pdf'))
-					<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('piezas_pdf') }}" class="btn btn-sm btn-danger">PDF 
+					<a data-toggle="tooltip" data-placement="top" title="Generar PDF" href="{{ route('piezas_pdf') }}" class="btn btn-sm btn-danger" target="_blank">
 	           			<i data-toggle="tooltip" data-placement="top" title="Generar PDF" class="far fa-file-pdf"></i>
+	           			PDF 
 	       			</a>
 	       			@endif
 				</div> 
@@ -100,7 +101,7 @@
 								@if(kvfj(Auth::user()->permisos, 'piezas_eliminar'))
 									@if(is_null($p->deleted_at))
 										<a href="#" data-path="admin/piezas" data-action="delete" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Eliminar" class="btn btn-danger btn-sm btn-deleted">
-										<i class="fas fa-trash"></i>
+										<i class="fas fa-trash-alt"></i>
 										</a> 
 									@else
 										<a href="{{ url('/admin/piezas/'.$p->id.'/restore') }}" data-action="restore" data-path="admin/piezas" data-object="{{ $p->id }}" data-toggle="tooltip" data-placement="top" title="Restaurar" class="btn btn-success btn-sm btn-deleted">
@@ -109,7 +110,7 @@
 									@endif
 								@endif								
 							</td>
-							<td>
+							<td style="text-align: center;">
 								@if ($p->cantidad < $p->cantidad_min)
 									<p><i data-toggle="tooltip" title="Alerta stock" class="fas fa-exclamation-triangle fa-2x"></i></p>
 								@endif

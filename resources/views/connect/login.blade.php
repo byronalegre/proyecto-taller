@@ -6,7 +6,7 @@
 <div class="box shadow">
 	<div class="header shadow">
 		<a href="{{ url('/')}}">
-			<img style="width:250px; height:80px;" src="{{url('static/images/logo.png') }}">
+			<img style="width:250px;" src="{{url('static/images/logo.png') }}">
 		</a>
 	</div>		
 	<div class="inside"> 
@@ -54,8 +54,8 @@
 		@endif
 
 		<div class="footer mtop16">
-			<font size="4px"><a href="{{url('/register')}}">Registrarse</a></font>
-			<a style="margin-left: 20px; margin-right: 20px;"> | </a>
+			<!--<font size="4px"><a href="{{url('/register')}}">Registrarse</a></font>
+			<a style="margin-left: 20px; margin-right: 20px;"> | </a>-->
 			<font size="4px"><a href="{{url('/recover')}}"> Recuperar contraseña</a></font>
 		</div>
 	</div>

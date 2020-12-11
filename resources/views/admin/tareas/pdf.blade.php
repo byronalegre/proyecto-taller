@@ -49,19 +49,33 @@
 				</tr>
 				
 			</table>
-
+			
 			<table style=" width: 100%; text-align: center; border: 2px solid black; border-top: 0px">
-				<tr style="background-color: #c0c0c0; font-weight: bold;">
-					<td>PRODUCTO</td>
-                    <td>CANTIDAD</td>
-				</tr>
-				<tbody style="font-family: courier; background: #D7D7D7; border-top: 1px solid black;">
-					
-						@foreach($a as $value)
-						<tr>
+				
+				<thead style="background-color: #c0c0c0; font-weight: bold;">
+					<tr>
+						<td>PRODUCTO</td>
+	                    <td>CANTIDAD</td>
+					</tr>
+				</thead>
+
+				<tbody style="font-family: courier; border-top: 1px solid black;">					
+					@foreach($a as $value)
+					<tr>
 						<td>{{$value['producto']}}</td>
-						<td>{{$value['cantidad']}}</td>					
-						@endforeach						
-				</tbody> 				
+						<td>{{$value['cantidad']}}</td>		
+					</tr>			
+					@endforeach						
+				</tbody> 	
+			</table>		
+
+			<script type="text/php">
+			    if ( isset($pdf) ) {
+			        $pdf->page_script('
+			            $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+			            $pdf->text(270, 730, "Página $PAGE_NUM de $PAGE_COUNT", $font, 10);
+			        ');
+			    }
+			</script>	
 	</body>
 </html>

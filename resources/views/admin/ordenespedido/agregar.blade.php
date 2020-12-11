@@ -1,14 +1,14 @@
 @extends ('admin.master')
 
-@section ('title','Nueva tarea')
+@section ('title','Nueva orden')
 
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/all') }}"><i class="fas fa-tasks"></i> Tareas</a>
+	<a href="{{url('/admin/ordenespedido/all') }}"><i class="fas fa-file-invoice"></i> Ordenes de Pedido</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/tareas/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva tarea</a>
+	<a href="{{url('/admin/ordenespedido/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva orden</a>
 </li>
 @endsection
  
@@ -18,21 +18,13 @@
 <div class="container-fluid" oncontextmenu="return false"><!-- ONCONTEXTMENU DESACTIVA F12-->
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva tarea</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva orden</h2>
 		</div>
 		<div class="inside">			
-			{!! Form::open(['url' => '/admin/tareas/agregar','files'=>true]) !!}	
+			{!! Form::open(['url' => '/admin/ordenespedido/agregar','files'=>true]) !!}	
 				<div class="row">
-					<div class="col-md-4">
-							<label for="tarea">Tarea:</label>
-							<div class="input-group">								
-							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-tasks"></i>
-							   		</span>							   
-						    	{!!Form::select('tarea', $tarea, null, ['class' =>'form-select']) !!}
-						    </div>
-					</div>
-					<div class="col-md-4">
+					
+					<div class="col-md-6">
 							<label for="codigo">Código:</label>
 								<div class="input-group">									
 							   		<span class="input-group-text" id="basic-addon1">
@@ -41,7 +33,8 @@
 						    	{!!Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'XXXX'] ) !!}
 						    	</div>
 					</div>
-					<div class="col-md-4">
+
+					<div class="col-md-6">
 							<label for="status">Estado:</label>
 								<div class="input-group">									
 								   		<span class="input-group-text" id="basic-addon1">
@@ -50,18 +43,9 @@
 							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Completada'],0, ['class' =>'form-select']) !!}	
 								</div>
 					</div>
+
 				</div>
-				<div class="row mtop16">
-					<div class="col-md-4">
-							<label for="fecha_programada">Fecha programada:</label>
-								<div class="input-group">									
-							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-calendar-day"></i>
-							   		</span>								    
-						    	{!!Form::date('fecha_programada', now(), ['class' => 'form-control'] ) !!}
-						    	</div>
-					</div>
-				</div>
+
 				<div class="row mtop16">
 					<div class="col-md-12">
 						<label for="descripcion">Descripción:</label>
@@ -79,7 +63,7 @@
 						
 						<div class="row">
 							<div class="col-md-5">
-								<label for="producto">Producto:</label>
+								<label for="producto">Producto con alerta de stock:</label>
 									<div class="input-group">								
 								   		<span class="input-group-text">
 								   			<i class="fas fa-boxes"></i>
@@ -92,7 +76,7 @@
 								<label for="cantidad">Cantidad:</label>
 									<div class="input-group">									
 								   		<span class="input-group-text">
-								   			<i class="fas fa-minus"></i>
+								   			<i class="fas fa-plus"></i>
 								   		</span>	
 								   		<input type="number" class="form-control" min="1" name="cantidad" id="cantidad" required="true"> 
 							    	</div>

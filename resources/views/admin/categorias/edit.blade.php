@@ -1,6 +1,6 @@
 @extends ('admin.master')
 
-@section ('title','Categorias')
+@section ('title','Editar categoria')
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
@@ -43,7 +43,7 @@
 
 					    <label for="descripcion" class="mtop16">Descripción:</label>
 						<div class="input-group">
-						 	{!!Form::textarea('descripcion', $cat->descripcion, ['class' => 'form-control']) !!}
+						 	{!!Form::textarea('descripcion', $cat->descripcion, ['class' => 'form-control', 'rows'=>4]) !!}
 					    </div>
 
 					{!!Form::submit('Guardar', ['class' => 'btn btn-success mtop16'])!!}

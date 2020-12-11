@@ -5,7 +5,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-tools"></i> Piezas</a>
+	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-cog"></i> Piezas</a>
 </li>
 <li class="breadcrumb-item">
 	<a href="{{url('/admin/piezas/1') }}"><i class="fas fa-edit"></i> Editar pieza</a>

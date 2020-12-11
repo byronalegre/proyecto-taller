@@ -59,16 +59,18 @@
 				</div>
 
 				<div class="inside">
-					
-					<div class="nav">
-						@foreach(getSeccionArray() as $m => $k)				
-							<li class="breadcrumb-item">
-								<a href="{{url('/admin/categorias/'.$m) }}">
-									{{ $k }}
-									<i class="fas fa-caret-down"></i>
-								</a>
-							</li>							
-						@endforeach
+					<div class="dropright">
+						  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <h7></h7> </button>
+
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">						    
+						    	@foreach(getSeccionArray() as $m => $k)				
+									<li>
+										<a class="dropdown-item" href="{{url('/admin/categorias/'.$m) }}" id="cats">
+											{{ $k }}
+										</a>
+									</li>							
+								@endforeach
+						  </div>
 					</div>
 
 					<table class="table table-hover mtop16">
@@ -77,7 +79,7 @@
 								<td hidden="true">ID</td>
 								<td>Nombre</td>
 								<td>Descripción</td>
-								<td width="100px"></td>
+								<td width="90"></td>
 							</tr>
 						</thead>
 						<tbody>

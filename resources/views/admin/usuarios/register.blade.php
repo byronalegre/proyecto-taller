@@ -1,14 +1,14 @@
 @extends ('admin.master')
 
-@section ('title','Agregar proveedor')
+@section ('title','Registrar usuario')
 
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/proveedores/all') }}"><i class="fas fa-truck"></i> Proveedores</a>
+	<a href="{{url('/admin/usuarios/all') }}"><i class="fas fa-users"></i> Usuarios</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/proveedores/agregar') }}"><i class="fas fa-plus-circle"></i> Agregar proveedor</a>
+	<a href="{{url('/admin/usuarios/register') }}"><i class="fas fa-plus-circle"></i> Registrar usuario</a>
 </li>
 @endsection
  
@@ -17,16 +17,17 @@
 
 <div class="container-fluid">
 	<div class="panel shadow">
+
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Agregar proveedor</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Registrar usuario</h2>
 		</div>
+
 		<div class="inside">
-			{!! Form::open(['url' => '/admin/proveedores/agregar','files'=>true]) !!} 
-			
-				<div class="row">
+			{!! Form::open(['url' => '/admin/usuarios/register']) !!}
+			<div class="row">
 
 					<div class="col-md-6">
-						<label for="title">Nombre de proveedor:</label>
+						<label for="title">Nombre:</label>
 						<div class="input-group">
 						   		<span class="input-group-text" id="basic-addon1">
 						   			<i class="fas fa-keyboard"></i>
@@ -35,47 +36,36 @@
 					    </div>
 					</div>
 
-					<div class="col-md-3">
-							<label for="cuit">CUIT:</label>
+					<div class="col-md-6">
+							<label for="cuit">Apellido:</label>
 								<div class="input-group">
 								   		<span class="input-group-text" id="basic-addon1">
 								   			<i class="far fa-id-card"></i>
 								   		</span>
-						    	{!!Form::number('cuit', null, ['class' => 'form-control', 'placeholder'=>'XX-XXXXXXXX-X'] ) !!}
+						    	{!! Form::text('lastname', null, ['class' => 'form-control']) !!}
 						    	</div>
-					</div>
-
-					<div class="col-md-3">
-						<label for="telefono">Teléfono:</label>
-							<div class="input-group">
-							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-phone-alt"></i>
-							   		</span>
-					    	{!!Form::number('telefono', null, ['class' => 'form-control'] ) !!}
-					    	</div>
-					</div>
-
+					</div>					
 				</div>
 
 				<div class="row mtop16">
 
 					<div class="col-md-6">
-						<label for="direccion">Dirección:</label>
-						<div class="input-group">
-						   		<span class="input-group-text" id="basic-addon1">
-						   			<i class="fas fa-map-marked-alt"></i>
-						   		</span>
-					    	{!!Form::text('direccion', null, ['class' => 'form-control']) !!}
-					    </div>
-					</div>
-
-					<div class="col-md-6">
-						<label for="correo">Correo Eléctronico:</label>
+						<label for="email">Correo Eléctronico:</label>
 						<div class="input-group">
 						   		<span class="input-group-text" id="basic-addon1">
 						   			<i class="fas fa-at"></i>
 						   		</span>
-					    	{!!Form::text('correo', null, ['class' => 'form-control']) !!}
+					    	{!!Form::text('email', null, ['class' => 'form-control']) !!}
+					    </div>
+					</div>	
+
+					<div class="col-md-6">
+						<label for="password">Contraseña:</label>
+						<div class="input-group">
+						   		<span class="input-group-text" id="basic-addon1">
+						   			<i class="fas fa-at"></i>
+						   		</span>
+					    	{!!Form::password('password', ['class' => 'form-control']) !!}
 					    </div>
 					</div>	
 				</div>

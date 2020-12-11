@@ -27,7 +27,7 @@
 
 	<nav class="navbar navbar-expand-lg shadow">
 	 	<div class="container-fluid">
-		    <a class="navbar-brand" href="{{url('/')}}" ><img src="{{url('static/images/logo.png')}}" width="230" height="60" alt="" loading="lazy">
+		    <a class="navbar-brand" href="{{url('/')}}" ><img src="{{url('static/images/logo.png')}}" width="250" alt="" loading="lazy">
 		    </a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			≡
@@ -35,16 +35,13 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
 					@if(Auth::guest())
+				
 					<li class="nav-item">
-						<a href="{{ url('https://www.bionogoya.com.ar/#empresa') }}" class="nav-link"><i class="fas fa-info-circle"></i> Sobre nosotros</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ url('/login') }}" class="btn btn-sm shadow"><i class="far fa-user-circle"></i> Ingresar</a>
-					
-						<a href="{{ url('/register') }}" class="btn btn-sm shadow"><i class="fas fa-user-circle"></i> Registrarse</a>
+						<a href="{{ url('/login') }}" class="btn btn-sm shadow"><i class="far fa-user-circle"></i> Ingresar</a>					
+						<!--<a href="{{ url('/register') }}" class="btn btn-sm shadow"><i class="fas fa-user-circle"></i> Registrarse</a>-->
 					</li>
 					@else
-					@if((Auth::user()->role == "1")||(Auth::user()->role == "2")||(Auth::user()->role == "3"))
+					@if((Auth::user()->role == "1")||(Auth::user()->role == "2")||(Auth::user()->role == "3")|(Auth::user()->role == "4"))
 					<li class="nav-item">
 						<a href="{{ url('/admin') }}" class="nav-link"><i class="fas fa-user-tie"></i> Administración</a>
 					</li>
@@ -94,7 +91,7 @@
 
 	<nav class="navbar fixed-bottom navbar-dark bg-dark">
 	  <div class="container-fluid">
-	    <a style="font-size: 10px;" class="navbar-brand">Desarrollado por Agustin Alegre & Mariano Wasinger ©</a>
+	    <a style="font-size: 10px;" class="navbar-brand">Desarrollado por Agustin Alegre & Mariano Wasinger con motivo académico para la carrera Lic. en Sistemas de Información | FCyT | UADER. ©</a>
 	  </div>
 	</nav>	
 

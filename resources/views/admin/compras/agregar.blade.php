@@ -1,37 +1,38 @@
 @extends ('admin.master')
 
-@section ('title','Nueva compra')
+@section ('title','Nuevo remito')
 
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/all') }}"><i class="fas fa-cart-plus"></i> Compras</a>
+	<a href="{{url('/admin/compras/all') }}"><i class="fas fas fa-file-invoice-dollar"></i> Remitos</a>
 </li>
 <li class="breadcrumb-item">
-	<a href="{{url('/admin/compras/agregar') }}"><i class="fas fa-plus-circle"></i> Nueva compra</a>
+	<a href="{{url('/admin/compras/agregar') }}"><i class="fas fa-plus-circle"></i> Nuevo remito</a>
 </li>
 @endsection
  
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid" oncontextmenu="return false"><!-- ONCONTEXTMENU DESACTIVA F12-->
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus-circle"></i> Nueva compra</h2>
+			<h2 class="title"><i class="fas fa-plus-circle"></i> Nuevo remito</h2>
 		</div>
 		<div class="inside">
 			{!! Form::open(['url' => '/admin/compras/agregar','files'=>true,'id'=>'formulario']) !!}	
 				<div class="row">
 					<div class="col-md-4">
-							<label for="proveedor">Proveedor:</label>
+							<label for="orden_id">Corresponde a Orden de Compra:</label>
 							<div class="input-group">								
 							   		<span class="input-group-text" id="basic-addon1">
-							   			<i class="fas fa-truck"></i>
+							   			<i class="fas fa-hashtag"></i>
 							   		</span>							   
-						    	{!!Form::select('proveedor', $provs, null, ['class' =>'form-select']) !!}
+						    	{!!Form::select('orden_id', $orden, null, ['class' =>'form-select']) !!}
 						    </div>
 					</div>
+
 					<div class="col-md-4">
 							<label for="codigo">Código:</label>
 								<div class="input-group">									
@@ -41,16 +42,17 @@
 						    	{!!Form::text('codigo', null, ['class' => 'form-control', 'placeholder'=>'XXXX'] ) !!}
 						    	</div>
 					</div>
-
+					
 					<div class="col-md-4">
-							<label for="status">Estado:</label>
-								<div class="input-group">									
-								   		<span class="input-group-text" id="basic-addon1">
-								   			<i class="fas fa-hand-paper"></i>
-								   		</span>								   
-							    	{!!Form::select('status', ['0'=>'Pendiente','1'=>'Aprobado'],0, ['class' =>'form-select']) !!}	
-								</div>
+							<label for="proveedor">Proveedor:</label>
+							<div class="input-group">								
+							   		<span class="input-group-text" id="basic-addon1">
+							   			<i class="fas fa-truck"></i>
+							   		</span>							   
+						    	{!!Form::select('proveedor', $provs, null, ['class' =>'form-select']) !!}
+						    </div>
 					</div>
+										
 					<div class="col-md-12">
 						<label for="descripcion" class="mtop16">Descripción:</label>
 						<div class="input-group">
@@ -63,8 +65,7 @@
 					<div class="header mtop16">
 						<h2 class="title">Agregar producto</h2>
 					</div>
-					<div class="inside">
-						
+					<div class="inside">						
 						<div class="row">
 							<div class="col-md-4">
 								<label for="producto">Producto:</label>
