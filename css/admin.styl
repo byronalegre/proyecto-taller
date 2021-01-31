@@ -1,8 +1,11 @@
 body
 	background-color rgba(0, 0, 0,0.17) //#21856d2e//blanco con tonalidad gris #e8e8e8
 	font-size 14px
-	font-family: 'Roboto', sans-serif;		
-
+	font-family: 'Roboto', sans-serif;	
+		
+// body::-webkit-scrollbar//ESTO OCULTA EL SCROLL
+// 	display none
+	
 h2,h3,h4,h5,ul,body,html
 	padding 0px
 	margin 0px
@@ -15,21 +18,22 @@ a
 	margin-top 16px	
 
 .wrapper
-	//min-height 100vh
+	min-height 100vh
 	overflow hidden
 	.col1
 		float left
-		position relative
+		position fixed
 		z-index 999
 		widht 20%
 	.col2
 		float left
+		margin-left 248px
 		width 80%
-.close
+.btn-close
 	display none		
 .sidebar
 	background-color #212121//#343a40//#fff
-	min-height 120vh //Altura del sidebar
+	min-height 145vh //Altura del sidebar
 	min-width 250px
 	.section-top
 		background-color #21856d//verde-> #00ad27a6
@@ -51,16 +55,20 @@ a
 				color red
 	.user
 		color #21856d//verde #005403 !important
-		padding 25px
+		padding 10px 20px 10px 20px
 		
+	.main::-webkit-scrollbar//ESTO OCULTA EL SCROLL
+		display none
 	.main
+		height 500px
+		overflow-y auto
 		ul
 			li
 				margin-bottom 4px
 				a
 					color #fff//#000 !important
-					display block
-					font-size 1.1em
+					display block		
+					font-size 1em
 					padding 12px 12px
 					i
 						margin-right 10px
@@ -85,19 +93,40 @@ a
 	border-radius 0 0 5px 0
 	padding-left 1rem
 	font-weight bold
-	background-color #212121//#343a40//#fff //#fd7e1494
-	//border-bottom 2px solid #e8e8e8
-	a
-		color #fff//#005403/*#b35100*/ !important
-		&:hover
-			color #21856d	
+	background-color #212121
+	.btn
+		color #fff
+		font-weight bold
+		&:focus
+			outline none
+			box-shadow none
+	.dropdown-menu	
+		background-color #000	
+		min-width 9rem	
+		padding 0.5em
+		li
+			/*&:hover
+				color #000
+				background-color #21856d*/		
+			a
+				color #fff
+				font-size 14px
+				&:hover
+					background-color #000
+					color #21856d
+				
+
 .page
 	padding-top 16px
 	padding-bottom 16px
-	.breadcrumb
+	.breadcrumb			
+		border-radius 5px
 		background-color #fff
 	.breadcrumb-item
 		a
+			font-size 1.1em
+			vertical-align middle
+			margin-left 16px
 			color #21856d
 			font-weight bold
 			&:hover
@@ -131,8 +160,8 @@ a
 				font-weight bold
 				text-align center
 				font-size 1.5em
-			.btn-group	
-				display flex			
+			// .btn-group	
+			// 	display flex			
 									
 .opts
 	a
@@ -158,40 +187,72 @@ a
 			margin-bottom 16px
 	.btn
 		width 100%
-
-.dropdown
-	.dropdown-menu
-		padding-bottom 0px
-		padding-top 0px
-		a.dropdown-item
-			font-size 14px
-			&:hover
-				color #fff
-				background-color #21856d
+.panel
+	.dropdown
+		.dropdown-menu
+			padding-bottom 0px
+			padding-top 0px
+			a
+				font-size 14px
+				&:hover
+					color #fff
+					background-color #21856d
 .dropright
 	.dropdown-menu
 		padding-bottom 0px
 		padding-top 0px
-		a.dropdown-item
+		a
 			font-size 14px
 			&:hover
 				color #fff
 				background-color #21856d
-				
+.footer
+	position relative	
+	bottom 0
+	background-color #000
+	color #fff
+	text-align center
+	font-size 10px    
+.table
+	vertical-align middle
+.more_info
+	width 70%
+	background-color grey
+	opacity 0.8
+	font-size 12px
+	border-radius 2px
+	margin-left auto
+	margin-right auto
+
 @media only screen and (max-width 1267px)			
 	.wrapper
-		.col1
+		.col1			
+			position relative	
+			font-size 10px
 			display none
 			float none
 			text-align center
-			.sidebar
-				min-height 100vh
+			.sidebar				
+				min-height 10vh
+				width 500px	
+				position relative
+				border-radius 10px
+				border-top 10px
+				margin auto
+				margin-top 100px
+				ul
+					list-style-type none
+				.main
+					height auto
+					overflow-y hidden
+			.section-top
+				border-radius 10px 10px 0px 0px
 		.col2
+			margin-left 0px
 			float none
 			width 100%	
 	.navbar		
 		border-radius 0px 0px 5px 5px
-		
 	.nav
 		.row
 			--bs-gutter-x 0px
@@ -204,16 +265,29 @@ a
 			&:focus
 				outline none		
 				box-shadow none
-	.close
+	.btn-close
 		display block
 		margin-left auto
 		margin-right auto
-		font-size 50px
+		font-size 30px
 	.panel 
 		margin-top 16px
 	.breadcrumb
 		margin-bottom 0px
-		
+	.main
+		ul			
+			li
+				display inline-grid
+				margin-bottom 4px
+				a
+					color #fff//#000 !important
+					display block
+					font-size 1.1em
+					padding 12px 12px
+					i
+						font-size 2em
+						margin-right 10px
+						
 @media only screen and (max-width 728px)
 	.wrapper
 		.col1
@@ -221,12 +295,24 @@ a
 			float none
 			text-align center
 			.sidebar
-				min-height 100vh
+				width 500px
+				position relative
+				border-radius 10px
+				border-top 10px
+				margin auto
+				margin-top 100px
+				ul
+					list-style-type none
+				.section-top
+					border-radius 10px
+				.main
+					height auto
+					overflow-y hidden			
 		.col2
 			float none
 			width 100%	
-	.btn-group
-		display grid !important
+	// .btn-group
+	// 	display grid !important
 	.info
 		border-radius 0px !important
 		
@@ -248,12 +334,25 @@ a
 		&:focus
 			outline none		
 			box-shadow none
-	.close
+	.btn-close
 		display block
 		margin-left auto
 		margin-right auto
-		font-size 50px
+		font-size 30px
 	.panel 
 		margin-top 16px
 	.breadcrumb
 		margin-bottom 0px
+	.main
+		ul			
+			li
+				display inline-grid
+				margin-bottom 4px
+				a
+					color #fff//#000 !important
+					display block
+					font-size 1.1em
+					padding 12px 12px
+					i
+						font-size 2em
+						margin-right 10px
