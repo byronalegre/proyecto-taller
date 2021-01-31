@@ -1,25 +1,24 @@
 <?php
 
 namespace App\Http\Models;
-
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrdenCompra extends Model
-{
+class Remito extends Model
+{    
 		use SoftDeletes;
 
-	    protected $dates = ['deleted_at'];
-	    protected $table = 'ordenes_compra';
-	    protected $hidden = ['updated_at','created_at'];
-
+	    protected $dates = ['deleted_at','created_at'];
+	    protected $table = 'remitos';
+	    protected $hidden = ['updated_at'];
+	    
 	    public function provs(){
 	    	return $this->hasOne(Proveedor::class, 'id', 'proveedor_id');
 	    }
 
 	    public function detalle(){
-	    	return $this->hasMany(Detalle_producto::class, 'orden_id', 'id')->where('orden_tipo','0');
+	    	return $this->hasMany(Detalle_producto::class, 'orden_id', 'id')->where('orden_tipo','1');
 	    }
 
 	    public function user(){
@@ -27,6 +26,7 @@ class OrdenCompra extends Model
 	    }
 
 	    public function orden(){
-	    	return $this->hasOne(Compra_Pedidos::class, 'ordencompra_id', 'id')->join('ordenes_pedido','ordenes_pedido.id','=','compra_pedidos.ordenpedido_id');
+	    	return $this->hasOne(Compra_Remitos::class, 'remito_id', 'id')->join('ordenes_compra','ordenes_compra.id','=','compra_remitos.orden_id');
 	    }
+
 }

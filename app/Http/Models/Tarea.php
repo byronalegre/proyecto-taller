@@ -9,9 +9,9 @@ class Tarea extends Model
 {
     use SoftDeletes;
 
-    protected $dates = ['deleted_at','created_at'];
-    protected $table = 'tareas';
-    protected $hidden = ['updated_at'];
+    protected $dates = ['created_at'];
+    protected $table = 'ordenes_trabajo';
+    protected $hidden = ['deleted_at','updated_at'];
 
     public function prods(){
     	return $this->hasOne(Pieza::class,'id', 'productos');

@@ -20,9 +20,9 @@ class ProveedoresController extends Controller
 
     public function getHome($status){
     	if($status == 'all'):
-            $provs = Proveedor::orderBy('id','Desc')->paginate(config('settings.pag'));    
+            $provs = Proveedor::all();
         elseif($status == 'trash'): 
-            $provs = Proveedor::onlyTrashed()->orderBy('id','desc')->paginate(config('settings.pag'));
+            $provs = Proveedor::onlyTrashed()->get();
         endif;
     	
     	$data = ['provs'=> $provs];
@@ -38,20 +38,26 @@ class ProveedoresController extends Controller
 
     public function postProveedorAgregar(Request $request){
         $rules =[
-            'name'=>'required',
-            'cuit'=>'required',
-            'direccion'=>'required',
-            'telefono'=>'required',
-            'correo'=>'required'
+            'name'=>'required|max:50',
+            'cuit'=>'required|digits:11',
+            'direccion'=>'required|max:50',
+            'telefono'=>'required|digits_between:7,15',
+            'correo'=>'required|email|unique:proveedores,correo',
 
         ];
 
         $messages =[
-            'name.required'=>'El nombre del proveedor es requerido.',
+            'name.required'=>'El nombre del proveedor es requerido',
+            'name.max' => 'El nombre debe tener menos de 50 caracteres',
             'cuit.required'=>'El CUIT es requerido',
-            'direccion.required'=>'La dirección es requerida.',
-            'telefono.required'=>'El teléfono es requerido.',
-            'correo.required'=>'El correo es requerido'         
+            'cuit.digits' => 'El CUIT debe tener 11 digitos',
+            'direccion.required'=>'La dirección es requerida',
+            'direccion.max' => 'La dirección debe tener menos de 50 caracteres',
+            'telefono.required'=>'El teléfono es requerido',
+            'telefono.digits_between' => 'El telefono debe ser numérico, tener como mínimo 7 digitos y como máximo 15',
+            'correo.required'=>'El correo es requerido',
+            'correo.email'=>'El correo es inválido',
+            'correo.unique'=>'El correo ya existe'         
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -85,20 +91,25 @@ class ProveedoresController extends Controller
 
      public function postProveedorEdit(Request $request, $id){
         $rules =[
-            'name'=>'required',
-            'cuit'=>'required',
-            'direccion'=>'required',
-            'telefono'=>'required',
-            'correo'=>'required'
+            'name'=>'required|max:50',
+            'cuit'=>'required|max:11',
+            'direccion'=>'required|max:50',
+            'telefono'=>'required|digits_between:7,15',
+            'correo'=>'required|email'
 
         ];
 
         $messages =[
-            'name.required'=>'El nombre del proveedor es requerido.',
+            'name.required'=>'El nombre del proveedor es requerido',
+            'name.max' => 'El nombre debe tener menos de 50 caracteres',
             'cuit.required'=>'El CUIT es requerido',
-            'direccion.required'=>'La dirección es requerida.',
-            'telefono.required'=>'El teléfono es requerido.',
-            'correo.required'=>'El correo es requerido'         
+            'cuit.max' => 'El CUIT debe tener 10 caracteres',
+            'direccion.required'=>'La dirección es requerida',
+            'direccion.max' => 'La dirección debe tener menos de 50 caracteres',
+            'telefono.required'=>'El teléfono es requerido',
+            'telefono.digits_between' => 'El telefono debe ser numérico, tener como mínimo 7 digitos y como máximo 15',
+            'correo.required'=>'El correo es requerido',
+            'correo.email'=>'El correo es inválido'         
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -122,44 +133,45 @@ class ProveedoresController extends Controller
         endif;
     }   
        
-     public function postProveedorBuscar(Request $request){
-        $rules =[
-            'buscar'=>'required'
-        ];
+    //  public function postProveedorBuscar(Request $request){
+    //     $rules =[
+    //         'buscar'=>'required|max:20'
+    //     ];
 
-        $messages =[
-            'buscar.required'=>'Es necesario ingresar algo para buscar.'
-        ];
+    //     $messages =[
+    //         'buscar.required'=>'Es necesario ingresar algo para buscar',
+    //         'buscar.max'=>'Búsqueda demasiado extensa'
+    //     ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+    //     $validator = Validator::make($request->all(), $rules, $messages);
         
-        if($validator->fails()):
-            return redirect('/admin/proveedores/all')->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger')->withInput();
-        else:
-            switch ($request->input('filtro')){
+    //     if($validator->fails()):
+    //         return redirect('/admin/proveedores/all')->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger')->withInput();
+    //     else:
+    //         switch ($request->input('filtro')){
                 
-                case '0':
-                    $provs = Proveedor::where('id',$request->input('buscar'))->orderBy('id','desc')->get();
-                    break;
-                case '1':
-                    $provs = Proveedor::where('name','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
-                    break;
-                case '2':
-                    $provs = Proveedor::where('cuit',$request->input('buscar'))->orderBy('id','desc')->get();
-                    break;
-                case '3':
-                    $provs = Proveedor::where('direccion','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
-                    break;
-                case '4':
-                    $provs = Proveedor::where('telefono',$request->input('buscar'))->orderBy('id','desc')->get();
-                    break;
+    //             case '0':
+    //                 $provs = Proveedor::where('id',$request->input('buscar'))->orderBy('id','desc')->get();
+    //                 break;
+    //             case '1':
+    //                 $provs = Proveedor::where('name','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;
+    //             case '2':
+    //                 $provs = Proveedor::where('cuit','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;
+    //             case '3':
+    //                 $provs = Proveedor::where('direccion','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;
+    //             case '4':
+    //                 $provs = Proveedor::where('telefono','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;
    
-            }
+    //         }
 
-            $data = ['provs' => $provs];
-            return view('admin.proveedores.buscar', $data);
-        endif;
-    }
+    //         $data = ['provs' => $provs];
+    //         return view('admin.proveedores.buscar', $data);
+    //     endif;
+    // }
 
     public function getProveedorDelete($id){
     	$c = Proveedor::findOrFail($id);

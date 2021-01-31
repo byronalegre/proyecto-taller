@@ -19,9 +19,9 @@ class UsuariosController extends Controller
 
     public function getUsuarios($status){
     	if($status == 'all'):
-    		$users= User::orderBy('id','Desc')->paginate(config('settings.pag'));
+    		$users= User::orderBy('id','Desc')->get();
     	else:
-    		$users= User::where('status', $status)->orderBy('id','Desc')->paginate(config('settings.pag'));
+    		$users= User::where('status', $status)->orderBy('id','Desc')->get();
     	endif;
 
     	$data= ['users'=> $users];
@@ -42,7 +42,7 @@ class UsuariosController extends Controller
         //Si es 1 (ADMIN)- tendra permiso a todo
         //Si es 2 (E. DEPOSITO)- solo podra realizar acciones relacionadas a piezas(A-M), categorias(A-M), tareas(A-M), backup
         //Si es 3 (E. COMPRAS)- solo podra realizar acciones relacionadas a proveedores(A-M), compras(A-M), backup 
-        //Si es 4 (E. TAREAS)-
+        //Si es 4 (E. TAREAS)- solor realiza tareas
             if($request->input('rol_user') == "1"):  
                 $u->permisos = null;         
                 if(is_null($u->permisos)):
@@ -74,11 +74,12 @@ class UsuariosController extends Controller
                         "estadisticas_rapidas"=>true,
                         "e_tareas"=>true,                    
                         "graficos"=>true,
-                        "piezas"=>true, "piezas_agregar"=>true, "piezas_editar"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
+                        "piezas"=>true, "piezas_agregar"=>true, "piezas_editar"=>true, "piezas_eliminar"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
                         "categorias"=>true, "categorias_agregar"=>true,"categorias_editar"=>true,                         
                         "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
-                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,
-                        "backup"=>true, "backup_create"=>true
+                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,
+                        "pedidos"=>true, "pedidos_agregar"=>true, "pedidos_editar"=>true, "pedido_detalle"=>true, "detalle_pedido_pdf"=>true,
+                        "remitos"=>true, "remitos_agregar"=>true, "remitos_eliminar"=>true, "remito_detalle"=>true, "detalle_remito_pdf"=>true,
                     ];
                 $permisos = json_encode($permisos);
                 $u->permisos = $permisos;
@@ -95,9 +96,8 @@ class UsuariosController extends Controller
                         "graficos"=>true,
                         "piezas"=>true, "piezas_buscar"=>true, "piezas_pdf"=>true,  
                         "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
-                        "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
-                        "compras"=>true, "compras_agregar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
-                        "backup"=>true, "backup_create"=>true
+                        "proveedores"=>true, "proveedores_agregar"=>true, "proveedores_editar"=>true, "proveedores_eliminar"=>true, "proveedores_buscar"=>true, "proveedores_pdf"=>true,
+                        "compras"=>true, "compras_agregar"=>true, "compras_eliminar"=>true, "compra_detalle"=>true, "detalle_compra_pdf"=>true,
                     ];
                 $permisos = json_encode($permisos);
                 $u->permisos = $permisos;
@@ -114,8 +114,7 @@ class UsuariosController extends Controller
                         "e_tareas"=>true,                    
                         "graficos"=>true,                         
                         "micuenta_editar"=>true, "micuenta_password"=>true, "micuenta_info"=>true,
-                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,       
-                        "backup"=>true, "backup_create"=>true               
+                        "tareas"=>true, "tareas_agregar"=>true, "tareas_editar"=>true, "tareas_eliminar"=>true, "tarea_detalle"=>true, "detalle_tarea_pdf"=>true,            
                         
                     ];
                 $permisos = json_encode($permisos);
@@ -169,36 +168,37 @@ class UsuariosController extends Controller
     	endif;
     }
 
-    public function postUsuarioBuscar(Request $request){
-         $rules =[
-            'buscar'=>'required'
-        ];
+    // public function postUsuarioBuscar(Request $request){
+    //     $rules =[
+    //         'buscar'=>'required|max:20'
+    //     ];
 
-        $messages =[
-            'buscar.required'=>'Es necesario ingresar algo para buscar.'
-        ];
+    //     $messages =[
+    //         'buscar.required'=>'Es necesario ingresar algo para buscar',
+    //         'buscar.max'=>'Búsqueda demasiado extensa'
+    //     ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+    //     $validator = Validator::make($request->all(), $rules, $messages);
         
-        if($validator->fails()):
-            return redirect('/admin/usuarios/all')->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger')->withInput();
-        else:
-            switch ($request->input('filtro')){
-                case '0':
-                    $users = User::where('id',$request->input('buscar'))->orderBy('id','desc')->get();
-                    break;
-                case '1':
-                    $users = User::where('name','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
-                    break;
-                case '2':
-                    $users = User::where('lastname','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
-                    break;   
-            }
+    //     if($validator->fails()):
+    //         return redirect('/admin/usuarios/all')->withErrors($validator)->with('message','Se ha producido un error: ')->with('typealert','danger')->withInput();
+    //     else:
+    //         switch ($request->input('filtro')){
+    //             case '0':
+    //                 $users = User::where('id',$request->input('buscar'))->orderBy('id','desc')->get();
+    //                 break;
+    //             case '1':
+    //                 $users = User::where('name','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;
+    //             case '2':
+    //                 $users = User::where('lastname','LIKE','%'.$request->input('buscar').'%')->orderBy('id','desc')->get();
+    //                 break;   
+    //         }
 
-            $data = ['users' => $users];
-            return view('admin.usuarios.buscar', $data);
-        endif;
-    }
+    //         $data = ['users' => $users];
+    //         return view('admin.usuarios.buscar', $data);
+    //     endif;
+    // }
 
     public function getMiCuentaEdit(){
         return view('admin.cuenta.edit');
@@ -212,12 +212,12 @@ class UsuariosController extends Controller
         ];
 
         $messages = [
-            'old_password.required'=> 'Por favor escriba su contraseña actual.',
+            'old_password.required'=> 'Por favor escriba su contraseña actual',
             'old_password.min'=> 'Debe tener al menos 8 caracteres',
             'password.required'=> 'Por favor escriba su nueva contraseña',
             'password.min'=> 'Debe tener al menos 8 caracteres',
             'cpassword.required'=> 'Confirme su nueva contraseña',
-            'cpassword.min'=> 'La confirmacion debe tener al menos 8 caracteres',
+            'cpassword.min'=> 'La confirmación debe tener al menos 8 caracteres',
             'cpassword.same'=> 'Las contraseñas no coinciden'
         ];
         
@@ -239,13 +239,15 @@ class UsuariosController extends Controller
 
     public function postMiCuentaInfo(Request $request){
         $rules = [
-            'name'=> 'required',
-            'lastname' => 'required'
+            'name'=> 'required|max:15',
+            'lastname' => 'required|max:15'
         ];
 
         $messages = [
             'name.required'=> 'Su nombre es requerido',
-            'lastname.required'=> 'Su apellido es requerido'
+            'name.max'=> 'El nombre debe tener menos de 15 caracteres',
+            'lastname.required'=> 'Su apellido es requerido',
+            'lastname.max'=> 'El apellido debe tener menos de 15 caracteres',
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -268,17 +270,19 @@ class UsuariosController extends Controller
 
     public function postRegister(Request $request){
         $rules = [
-            'name'=> 'required',
-            'lastname' => 'required',
+            'name'=> 'required|max:20',
+            'lastname' => 'required|max:20',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
         ];
 
         $messages = [
-            'name.required'=> 'Su nombre es requerido',
-            'lastname.required'=> 'Su apellido es requerido',
-            'email.required'=> 'Su correo es requerido',
-            'email.email'=> 'Su correo es invalido',
+            'name.required'=> 'El nombre es requerido',
+            'lastname.required'=> 'El apellido es requerido',
+            'name.max'=> 'El nombre debe tener menos de 20 caracteres',
+            'lastname.max'=> 'El apellido debe tener menos de 20 caracteres',
+            'email.required'=> 'El correo es requerido',
+            'email.email'=> 'El correo es invalido',
             'email.unique'=> 'Este correo ya existe',
             'password.required'=> 'Por favor escriba una contraseña',
             'password.min'=> 'Debe tener al menos 8 caracteres'

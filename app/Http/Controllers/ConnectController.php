@@ -94,7 +94,7 @@ class ConnectController extends Controller
     Auth::logout();
 
     if($status == "100"):
-        return redirect('/login')->with('message', 'Su usuario ha sido suspendido.')->with('typealert', 'danger');
+        return redirect('/login')->with('message', 'Usuario deshabilitado.')->with('typealert', 'danger');
     else:
         return redirect('/');
     endif;
@@ -106,17 +106,13 @@ class ConnectController extends Controller
     }
 
     public function postRecover(Request $request){
-        $rules = [
-           
-            'email' => 'required|email'
-            
+        $rules = [           
+            'email' => 'required|email'            
         ];
 
-        $messages = [
-            
+        $messages = [            
             'email.required'=> 'Su correo es requerido',
-            'email.email'=> 'Su correo es inválido'
-           
+            'email.email'=> 'Su correo es inválido'           
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -148,19 +144,15 @@ class ConnectController extends Controller
     }
 
     public function postReset(Request $request){
-     $rules = [
-           
+     $rules = [           
             'email' => 'required|email',
-            'code' => 'required'
-            
+            'code' => 'required'            
         ];
 
-        $messages = [
-            
+        $messages = [            
             'email.required'=> 'Su correo es requerido',
             'email.email'=> 'Su correo es inválido',
-            'code.required'=> 'El código de recuperación es requerido.'
-           
+            'code.required'=> 'El código de recuperación es requerido.'           
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -180,7 +172,7 @@ class ConnectController extends Controller
                          return redirect('/login')->with('message', 'La contraseña fue reestablecida con éxito. Por favor, inicie sesión con la contraseña que se le ha enviado al correo.')->with('typealert', 'success');
                     endif;
             else:
-                return back()->with('message','El correo o el código son incorrectos.')->with('typealert','danger');   
+                return back()->with('message','El correo o código son incorrectos.')->with('typealert','danger');   
             endif;
         endif;
     }

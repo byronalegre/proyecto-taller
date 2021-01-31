@@ -1,7 +1,7 @@
 <?php
 return [
 'name' => 'BioNogoyá',
-'telefono' => '3434123456',
-'pag' => '5',
+'telefono' => '3435440735',
+'img' => 'motor-electrico.png',
 ]
 ?>

@@ -43,13 +43,13 @@ class ComprasController extends Controller
 
     public function postCompraAgregar(Request $request){
     	$rules =[
-            'proveedor'=>'required',
-            'codigo'=>'required'
+            'orden_id'=>'required',
+            'proveedor'=>'required'
         ];
 
         $messages =[
-            'proveedor.required'=>'El nombre del proveedor es requerido.',
-            'codigo.required'=>'El código es requerido.'
+            'orden_id.required'=>'Debe corresponder a una Orden de Compra',
+            'proveedor.required'=>'El nombre del proveedor es requerido.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -63,7 +63,7 @@ class ComprasController extends Controller
            // $input -> status ='0';
             $input -> orden_id = e($request->input('orden_id'));
             $input -> proveedor_id = e($request->input('proveedor'));
-            $input -> codigo = e($request->input('codigo'));
+            $input -> codigo = 0;
             $input -> descripcion = e($request->input('descripcion'));
             $productos = e($request->input('productos'));
             $productos = html_entity_decode($productos);         			 
@@ -83,6 +83,8 @@ class ComprasController extends Controller
             //------------------ 
             
      		if($input->save()):
+                $input-> codigo = 'RC-'.Compra::all()->last()->id;
+                $input->save();
             	return redirect('/admin/compras/all')->with('message','Remito guardado.')->with('typealert','success');
             endif;
 

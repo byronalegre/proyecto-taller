@@ -19,19 +19,22 @@ class CategoriasController extends Controller
     }
 
     public function getHome($seccion){//esto se usa para cambiar el orden que muestra las cats
-    	$cats = Categoria::where('seccion', $seccion)->orderBy('id','Asc')->paginate(config('settings.pag'));
+    	$cats = Categoria::where('seccion', $seccion)->orderBy('id','Asc')->get();
     	$data = ['cats'=> $cats];
     	return view('admin.categorias.home', $data);
     }
 
     public function postCategoriaAgregar(Request $request){
     	$rules = [
-    		'name' => 'required',
-    		'seccion' => 'required'
+    		'name' => 'required|max:50',
+    		'seccion' => 'required',
+            'descripcion'=> 'max:300'
     	];
     	$messages = [
-    		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'seccion.required' => 'Se requiere una sección para la categoría.'
+    		'name.required' => 'Se requiere un nombre para la categoría',
+            'name.max' => 'El nombre debe tener menos de 50 caracteres',
+    		'seccion.required' => 'Se requiere una sección para la categoría',
+            'descripcion.max'=>'Descripción demasiado extensa'
     	];
 
 
@@ -62,12 +65,15 @@ class CategoriasController extends Controller
 
      public function postCategoriaEdit(Request $request, $id){
     	$rules = [
-    		'name' => 'required',
-    		'seccion' => 'required'
+    		'name' => 'required|max:50',
+    		'seccion' => 'required',
+            'descripcion'=> 'max:300'
     	];
     	$messages = [
-    		'name.required' => 'Se requiere un nombre para la categoría.',
-    		'seccion.required' => 'Se requiere una sección para la categoría.'
+    		'name.required' => 'Se requiere un nombre para la categoría',
+            'name.max' => 'El nombre debe tener menos de 50 caracteres',
+    		'seccion.required' => 'Se requiere una sección para la categoría',
+            'descripcion.max'=>'Descripción demasiado extensa'
     	];
 
 

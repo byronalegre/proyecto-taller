@@ -15,14 +15,17 @@ class CreatePiezasTable extends Migration
     {
         Schema::create('piezas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('codigo')->unique();
             $table->integer('status');
-            $table->string('name');
-            $table->string('codigo');
+            $table->string('name');            
             $table->string('slug');
             $table->integer('categoria_id');
             $table->string('file_path');
             $table->string('image');
-            $table->integer('cantidad');
+            $table->integer('cantidad_min');
+            $table->integer('cantidad');            
+            $table->string('marca');
+            $table->integer('deposito');
             $table->text('content');
             $table->softDeletes();
             $table->timestamps();
