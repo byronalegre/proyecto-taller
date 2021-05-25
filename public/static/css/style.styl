@@ -1,0 +1,51 @@
+color1 = #21856d
+
+body
+	background-color rgba(0, 0, 0,0.17)
+	font-size 16px
+	font-family 'Roboto',san-seriff;	
+nav
+	background-color #21856d
+	padding-top 0px !important
+	padding-bottom 0px !important
+	.navbar-nav
+		li.nav-item					
+			a.nav-link
+				border-radius 4px
+				color #fff
+				font-size .9em
+				font-weight bold
+				margin-right 4px
+				padding 5px 16px !important	
+		    ul.dropdown-menu
+				padding-top 0em !important		
+				padding-bottom 0em !important	
+				min-width auto	
+				li
+					a.dropdown-item
+						background-color #212129
+						color #fff
+						right 10px
+						font-size 14px						
+						&:hover
+							background-color #fff
+							color #000
+.btn
+	background-color color1
+	color #fff
+	&:hover
+		color #fff
+		background-color #212121
+
+@media only screen and (max-width 992px)
+	body
+		background-repeat repeat
+	.navbar-nav
+		font-size 20px
+		flex-direction inherit
+		justify-content flex-end
+	.navbar-toggler
+		font-size 50px
+		&:focus
+			outline none
+			box-shadow none
